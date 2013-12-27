@@ -1,33 +1,32 @@
 #  [Insert title here]
+
+**NOTE: This is clearly not developed yet. As such, this README will eventually
+contain information about what it does and how to use/deploy it; but until that
+information becomes clear, it will mostly log progress.**
+
 [insert title here] is an integrated code submission and grading platform
-designed for use in CS106 classes.
+designed for use in Stanford CS106 classes.  It is in early development stages
+as a collaboration between 4 Stanford section leaders, as a senior project.
 
-#  Project Goals
-###Basic Goals (near-Paperless baseline):
-* View the students and section leaders in a class
-* View the students assigned to a section leader
-* Enable students to submit code in a simple manner
-* Gracefully integrate with cs198.stanford.edu
-* Graders can enter inline comments on students code
-* Enable graders to download their students submissions
-* Support Eclipse code submission tool for 106A
+[insert title here]'s overarching goals, by Spring 2014, are the following:
 
-###Advanced Goals (non-Autograding):
-* Automate the reporting of a students bucket grade (style/functionality)
-* Automate the counting of late days
-* Verify that a students code builds correctly when they submit
-* Support MOSS integration and simplify plagiarism detection
-
-###Advanced Goals (Autograding):
-* Define a simple format for autograder scripts
-* Support automatically building and running students code with the autograder
-* Show students why they missed autograders points (maybe)
-* Allow a section leader to change student code and re-run the autograder
-
-###General:
 * Successfully deploy in a CS106\* class by Spring 2014
 * Structure project for easy updates and changes once authors graduate
 * Communicate the purpose of this project with section leaders
 
-#  Timeline
-TBD pending hangout
+# Wiki links
+
+* [Wiki (home to unstructured documentation)](https://github.com/rawatson/namepending/wiki)
+* [Project goals](https://github.com/rawatson/namepending/wiki/Project-goals)
+* [Project roadmap](https://github.com/rawatson/namepending/wiki/Project-roadmap)
+
+# Progress
+
+* (2013-12-27) Wiki established and sparsely populated
+
+# Team
+
+* [Reid Watson](https://github.com/rawatson)
+* [Anthony Mainero](https://github.com/anthonymainero)
+* [Maesen Churchill](https://github.com/maesenc)
+* [Omar Diab](https://github.com/osdiab)
