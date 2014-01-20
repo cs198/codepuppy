@@ -1,0 +1,10 @@
+# dev db default cloud host. Use environment variable DATABASE_URL to override
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: d27dft43105bjo
+  pool: 5
+  username: akssikvksoadrn
+  password: nsClsGzKJ3eL4FFaB688vOHxEn
+  host: ec2-54-235-246-73.compute-1.amazonaws.com
+  port: 5432
