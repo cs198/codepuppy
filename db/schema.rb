@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140127093535) do
+ActiveRecord::Schema.define(version: 20140127211408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,30 +35,6 @@ ActiveRecord::Schema.define(version: 20140127093535) do
   add_index "comments", ["file_location"], name: "index_comments_on_file_location", using: :btree
   add_index "comments", ["submission_id_id"], name: "index_comments_on_submission_id_id", using: :btree
 
-  create_table "course_term_admins", force: true do |t|
-    t.integer "course_term_id"
-    t.integer "person_id"
-  end
-
-  add_index "course_term_admins", ["course_term_id"], name: "index_course_term_admins_on_course_term_id", using: :btree
-  add_index "course_term_admins", ["person_id"], name: "index_course_term_admins_on_person_id", using: :btree
-
-  create_table "course_term_leaders", force: true do |t|
-    t.integer "course_term_id"
-    t.integer "person_id"
-  end
-
-  add_index "course_term_leaders", ["course_term_id"], name: "index_course_term_leaders_on_course_term_id", using: :btree
-  add_index "course_term_leaders", ["person_id"], name: "index_course_term_leaders_on_person_id", using: :btree
-
-  create_table "course_term_students", force: true do |t|
-    t.integer "course_term_id"
-    t.integer "person_id"
-  end
-
-  add_index "course_term_students", ["course_term_id"], name: "index_course_term_students_on_course_term_id", using: :btree
-  add_index "course_term_students", ["person_id"], name: "index_course_term_students_on_person_id", using: :btree
-
   create_table "course_terms", force: true do |t|
     t.string  "course_name"
     t.string  "term_name"
@@ -68,6 +44,17 @@ ActiveRecord::Schema.define(version: 20140127093535) do
   end
 
   add_index "course_terms", ["course_id"], name: "index_course_terms_on_course_id", using: :btree
+
+  create_table "course_terms_people", force: true do |t|
+    t.string  "role"
+    t.integer "course_term_id"
+    t.integer "person_id"
+  end
+
+  add_index "course_terms_people", ["course_term_id", "role"], name: "index_course_terms_people_on_course_term_id_and_role", using: :btree
+  add_index "course_terms_people", ["course_term_id"], name: "index_course_terms_people_on_course_term_id", using: :btree
+  add_index "course_terms_people", ["person_id"], name: "index_course_terms_people_on_person_id", using: :btree
+  add_index "course_terms_people", ["role"], name: "index_course_terms_people_on_role", using: :btree
 
   create_table "courses", force: true do |t|
     t.string "course_system_id"
