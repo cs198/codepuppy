@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140127093049) do
+ActiveRecord::Schema.define(version: 20140127093535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,16 @@ ActiveRecord::Schema.define(version: 20140127093049) do
   end
 
   add_index "assignments", ["course_term_id"], name: "index_assignments_on_course_term_id", using: :btree
+
+  create_table "comments", force: true do |t|
+    t.string  "file_location"
+    t.integer "line_number"
+    t.string  "comment"
+    t.integer "submission_id_id"
+  end
+
+  add_index "comments", ["file_location"], name: "index_comments_on_file_location", using: :btree
+  add_index "comments", ["submission_id_id"], name: "index_comments_on_submission_id_id", using: :btree
 
   create_table "course_term_admins", force: true do |t|
     t.integer "course_term_id"
