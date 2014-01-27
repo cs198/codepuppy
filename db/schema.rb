@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140127092414) do
+ActiveRecord::Schema.define(version: 20140127092718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "assignments", force: true do |t|
+    t.integer  "number"
+    t.datetime "date_assigned"
+    t.datetime "date_due"
+    t.integer  "course_term_id"
+  end
+
+  add_index "assignments", ["course_term_id"], name: "index_assignments_on_course_term_id", using: :btree
 
   create_table "course_term_admins", force: true do |t|
     t.integer "course_term_id"
