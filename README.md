@@ -8,7 +8,7 @@ information becomes clear, it will mostly log progress.**
 
 ### Mac/Unix
 
-1. Install Rails 2.1.0.
+1. Install Ruby 2.1.0.
 2. Clone the repository.
 3. Enter the directory.
 4. Run `bundle install`
@@ -20,7 +20,7 @@ Voilà!
 
 Uhhh yeah... not yet.
 
-## Installing Rails 2.1.0
+## Installing Ruby 2.1.0
 
 These are instructions on how to do it with `rvm`.
 
