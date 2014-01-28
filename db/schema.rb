@@ -69,14 +69,6 @@ ActiveRecord::Schema.define(version: 20140127093535) do
 
   add_index "people", ["user_system_id"], name: "index_people_on_user_system_id", unique: true, using: :btree
 
-  create_table "section_students", force: true do |t|
-    t.integer "student_id"
-    t.integer "section_id"
-  end
-
-  add_index "section_students", ["section_id"], name: "index_section_students_on_section_id", using: :btree
-  add_index "section_students", ["student_id"], name: "index_section_students_on_student_id", using: :btree
-
   create_table "sections", force: true do |t|
     t.integer "course_term_id"
     t.integer "leader_id"
@@ -84,6 +76,15 @@ ActiveRecord::Schema.define(version: 20140127093535) do
 
   add_index "sections", ["course_term_id"], name: "index_sections_on_course_term_id", using: :btree
   add_index "sections", ["leader_id"], name: "index_sections_on_leader_id", using: :btree
+
+  create_table "sections_people", force: true do |t|
+    t.integer "person_id"
+    t.integer "section_id"
+    t.boolean "student"
+  end
+
+  add_index "sections_people", ["person_id"], name: "index_sections_people_on_person_id", using: :btree
+  add_index "sections_people", ["section_id"], name: "index_sections_people_on_section_id", using: :btree
 
   create_table "submissions", force: true do |t|
     t.integer  "student_id"
