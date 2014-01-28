@@ -11,50 +11,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140127211408) do
+ActiveRecord::Schema.define(version: 20140127093535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "assignments", force: true do |t|
+    t.integer  "course_term_id"
     t.integer  "number"
     t.datetime "date_assigned"
     t.datetime "date_due"
-    t.integer  "course_term_id"
   end
 
   add_index "assignments", ["course_term_id"], name: "index_assignments_on_course_term_id", using: :btree
 
   create_table "comments", force: true do |t|
+    t.integer "submission_id"
     t.string  "file_location"
     t.integer "line_number"
     t.string  "comment"
-    t.integer "submission_id_id"
   end
 
   add_index "comments", ["file_location"], name: "index_comments_on_file_location", using: :btree
-  add_index "comments", ["submission_id_id"], name: "index_comments_on_submission_id_id", using: :btree
+  add_index "comments", ["submission_id"], name: "index_comments_on_submission_id", using: :btree
 
   create_table "course_terms", force: true do |t|
+    t.integer "course_id"
     t.string  "course_name"
     t.string  "term_name"
     t.string  "period"
     t.boolean "active"
-    t.integer "course_id"
   end
 
   add_index "course_terms", ["course_id"], name: "index_course_terms_on_course_id", using: :btree
 
   create_table "course_terms_people", force: true do |t|
-    t.string  "role"
     t.integer "course_term_id"
     t.integer "person_id"
   end
 
-  add_index "course_terms_people", ["course_term_id", "role"], name: "index_course_terms_people_on_course_term_id_and_role", using: :btree
   add_index "course_terms_people", ["course_term_id"], name: "index_course_terms_people_on_course_term_id", using: :btree
   add_index "course_terms_people", ["person_id"], name: "index_course_terms_people_on_person_id", using: :btree
-  add_index "course_terms_people", ["role"], name: "index_course_terms_people_on_role", using: :btree
 
   create_table "courses", force: true do |t|
     t.string "course_system_id"
@@ -89,13 +86,15 @@ ActiveRecord::Schema.define(version: 20140127211408) do
   add_index "sections", ["leader_id"], name: "index_sections_on_leader_id", using: :btree
 
   create_table "submissions", force: true do |t|
+    t.integer  "student_id"
+    t.integer  "assignment_id"
     t.string   "location"
     t.datetime "date_submitted"
     t.boolean  "feedback_released"
-    t.integer  "student_id"
-    t.integer  "assignment_id"
   end
 
+  add_index "submissions", ["assignment_id"], name: "index_submissions_on_assignment_id", using: :btree
   add_index "submissions", ["student_id", "assignment_id"], name: "index_submissions_on_student_id_and_assignment_id", using: :btree
+  add_index "submissions", ["student_id"], name: "index_submissions_on_student_id", using: :btree
 
 end
