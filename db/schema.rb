@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20140127093535) do
     t.integer "submission_id"
     t.string  "file_location"
     t.integer "line_number"
+    t.integer "num_lines"
     t.string  "comment"
   end
 
@@ -48,6 +49,7 @@ ActiveRecord::Schema.define(version: 20140127093535) do
   create_table "course_terms_people", force: true do |t|
     t.integer "course_term_id"
     t.integer "person_id"
+    t.string  "role"
   end
 
   add_index "course_terms_people", ["course_term_id"], name: "index_course_terms_people_on_course_term_id", using: :btree
@@ -80,7 +82,7 @@ ActiveRecord::Schema.define(version: 20140127093535) do
   create_table "sections_people", force: true do |t|
     t.integer "person_id"
     t.integer "section_id"
-    t.boolean "student"
+    t.string  "role"
   end
 
   add_index "sections_people", ["person_id"], name: "index_sections_people_on_person_id", using: :btree

@@ -4,6 +4,7 @@ class CreateComment < ActiveRecord::Migration
       t.belongs_to :submission, index: true
       t.string :file_location
       t.integer :line_number
+      t.integer :num_lines
       t.string :comment
     end
 
