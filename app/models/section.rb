@@ -3,10 +3,10 @@ class Section < ActiveRecord::Base
   has_many :sections_people
   has_many :people, through: :sections_people do
     def students
-      where('sections_people.student = ?', true)
+      where('sections_people.role = ?', 'student')
     end
     def leaders
-      where('sections_people.student = ?', false)
+      where('sections_people.role = ?', 'leader')
     end
   end
 end
