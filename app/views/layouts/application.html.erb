@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Namepending</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js'></script>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<html ng-app="codepuppy">
+  <head>
+    <title>Namepending</title>
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body ng-view>
+    <%= yield %>
 
-<%= yield %>
-
-</body>
+    <script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js'></script>
+    <script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-route.js'></script>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  </body>
 </html>
