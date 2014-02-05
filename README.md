@@ -4,31 +4,13 @@
 contain information about what it does and how to use/deploy it; but until that
 information becomes clear, it will mostly log progress.**
 
-## Setup
+## Setup and running the server.
 
-### Mac/Unix
+[Setup instructions are
+here](https://github.com/rawatson/namepending/wiki/Setup)
 
-1. Install Ruby 2.1.0.
-2. Clone the repository.
-3. Enter the directory.
-4. Run `bundle install`
-5. Run `rails server`
-
-Voilà!
-
-### Windows
-
-Uhhh yeah... not yet.
-
-## Installing Ruby 2.1.0
-
-These are instructions on how to do it with `rvm`.
-
-1. Install RVM, as described []on the project website](http://rvm.io/).
-2. Run `rvm install ruby-2.1.0`
-3. Run `rvm use 2.1.0`.
-
-You're done!
+To run the development server, just enter `rails server` in the project
+directory. Yay!
 
 ## Description
 
