@@ -1,29 +1,29 @@
 <!DOCTYPE html>
 <html ng-app="codepuppy">
-  <head>
-    <title>Namepending</title>
-    <%= stylesheet_link_tag    "application", media: "all" %>
-    <%= csrf_meta_tags %>
-  </head>
-  <body ng-controller="rootController">
+<head>
+<title>Namepending</title>
+<%= stylesheet_link_tag    "application", media: "all" %>
+<%= csrf_meta_tags %>
+</head>
+<body ng-controller="RootCtrl">
 
-  <hr/>
-  <p>CLASSES:</p>
-  <ul>
-    <li ng-repeat="i in classes"><a href="#{{i}}">{{i}}</a></li>
-  </ul>
-  <p>ASSIGNMENTS:</p>
-  <ul>
-    <li ng-repeat="j in assignments"><a href="#cs106x/{{j}}">{{j}}</a></li>
-  </ul>
-  <hr/>
+<hr/>
+<p>CLASSES:</p>
+<ul>
+<li ng-repeat="i in classes"><a href="#{{i}}">{{i}}</a></li>
+</ul>
+<p>ASSIGNMENTS:</p>
+<ul>
+<li ng-repeat="j in assignments"><a href="#cs106x/{{j}}">{{j}}</a></li>
+</ul>
+<hr/>
 
-  <div ng-view>
-   <%= yield %>
-  </div> 
- 
-    <script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js'></script>
-    <script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-route.js'></script>
-    <%= javascript_include_tag "application" %>
-  </body>
+<div ng-view>
+<%= yield %>
+</div> 
+
+<script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js'></script>
+<script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-route.js'></script>
+<%= javascript_include_tag "application" %>
+</body>
 </html>
