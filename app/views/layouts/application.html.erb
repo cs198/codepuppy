@@ -16,10 +16,22 @@
 <div ng-if="selectedClass != null">
 <p>ASSIGNMENTS:</p>
 <ul>
-<li ng-if="selectedAssignment==null" ng-repeat="j in assignments"><a href="#{{selectedClass}}/{{j}}">{{j}}</a></li>
+<li ng-if="selectedAssignment == null" ng-repeat="j in assignments"><a href="#{{selectedClass}}/{{j}}">{{j}}</a></li>
 <li ng-if="selectedAssignment != null"><a href="#{{selectedClass}}/{{selectedAssignment}}">{{selectedAssignment}}</a></li>
 </ul>
 </div>
+<!-- 
+<div ng-if="selectedAssignment != null">
+
+
+<p>SUBMISSIONS:</p>
+<ul>
+<li ng-if="selectedSubmission == null" ng-repeat="j in assignments"><a href="#{{selectedClass}}/{{j}}">{{j}}</a></li>
+<li ng-if="selectedSubmission != null"><a href="#{{selectedClass}}/{{selectedAssignment}}">{{selectedAssignment}}</a></li>
+</ul>
+</div>
+
+--> 
 
 <hr/>
 
