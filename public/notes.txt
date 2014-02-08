@@ -1,0 +1,12 @@
+pretty name => url
+
+for things above the currently lowest level, indicate which is selected
+
+
+
+
+classes = {keys: { 'cs106a': /cs106a, 'cs106b': /cs106b}, selected: cs106a}
+
+assignments =  {keys: { 'One': /cs106a/1, 'Two': /cs106a/2}, selected: Assignment One}
+
+submissions = {keys: { 'rawatson_1': /cs106a/1/rawatson_1, 'rawatson_2': /cs106a/1/rawatson_1}, selected: null}
