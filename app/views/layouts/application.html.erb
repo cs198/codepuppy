@@ -14,23 +14,20 @@
 <!-- Classes -->
 <p>CLASSES:</p>
 <ul>
-<li ng-if="selectedClass == null" ng-repeat="i in classes"><a href="#{{i}}">{{i}}</a></li>
-<li ng-if="selectedClass != null" ><a href="#{{selectedClass}}">{{selectedClass}}</a></li>
+  <li ng-repeat="i in classes" 
+    ng-class="{selected: i == selectedClass, hidden: selectedClass != null && selectedClass != i}">
+    <a href="#{{i}}">{{i}}</a>
+  </li>
 </ul>
 
 <!-- Assignments -->
 <div ng-if="selectedClass != null">
 <p>ASSIGNMENTS:</p>
 <ul>
-  <li ng-if="selectedAssignment == null" ng-repeat="j in assignments">
-    <a href="#{{selectedClass}}/{{j}}">
-      {{j}}
-    </a>
+  <li ng-repeat="j in assignments" 
+    ng-class="{selected: j == selectedAssignment, hidden: selectedAssignment != null && selectedAssignment != j}">
+    <a href="#{{selectedClass}}/{{j}}">{{j}}</a>
   </li>
-  <li ng-if="selectedAssignment != null">
-    <a href="#{{selectedClass}}/{{selectedAssignment}}">
-      {{selectedAssignment}}
-  </a></li>
 </ul>
 </div>
 
@@ -38,15 +35,9 @@
 <div ng-if="selectedAssignment != null">
 <p>SUBMISSIONS:</p>
 <ul>
-  <li ng-if="selectedSubmission == null" ng-repeat="j in submissions">
-    <a href="#{{selectedClass}}/{{selectedAssignment}}/{{j}}">
-      {{j}}
-    </a>
-  </li>
-  <li ng-if="selectedSubmission != null">
-    <a href="#{{selectedClass}}/{{selectedAssignment}}/{{selectedSubmission}}">
-      {{selectedSubmission}}
-    </a>
+  <li ng-repeat="k in submissions"
+    ng-class="{selected: k == selectedSubmission, hidden: selectedSubmission != null && selectedSubmission != k}">
+    <a href="#{{selectedClass}}/{{selectedAssignment}}/{{k}}">{{k}}</a>
   </li>
 </ul>
 </div>
