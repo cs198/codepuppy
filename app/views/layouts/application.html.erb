@@ -8,30 +8,46 @@
 <body ng-controller="RootCtrl">
 
 <hr/>
+
+<!-- Classes -->
 <p>CLASSES:</p>
 <ul>
 <li ng-if="selectedClass == null" ng-repeat="i in classes"><a href="#{{i}}">{{i}}</a></li>
 <li ng-if="selectedClass != null" ><a href="#{{selectedClass}}">{{selectedClass}}</a></li>
 </ul>
+
+<!-- Assignments -->
 <div ng-if="selectedClass != null">
 <p>ASSIGNMENTS:</p>
 <ul>
-<li ng-if="selectedAssignment == null" ng-repeat="j in assignments"><a href="#{{selectedClass}}/{{j}}">{{j}}</a></li>
-<li ng-if="selectedAssignment != null"><a href="#{{selectedClass}}/{{selectedAssignment}}">{{selectedAssignment}}</a></li>
+  <li ng-if="selectedAssignment == null" ng-repeat="j in assignments">
+    <a href="#{{selectedClass}}/{{j}}">
+      {{j}}
+    </a>
+  </li>
+  <li ng-if="selectedAssignment != null">
+    <a href="#{{selectedClass}}/{{selectedAssignment}}">
+      {{selectedAssignment}}
+  </a></li>
 </ul>
 </div>
-<!-- 
+
+<!-- Submissions -->
 <div ng-if="selectedAssignment != null">
-
-
 <p>SUBMISSIONS:</p>
 <ul>
-<li ng-if="selectedSubmission == null" ng-repeat="j in assignments"><a href="#{{selectedClass}}/{{j}}">{{j}}</a></li>
-<li ng-if="selectedSubmission != null"><a href="#{{selectedClass}}/{{selectedAssignment}}">{{selectedAssignment}}</a></li>
+  <li ng-if="selectedSubmission == null" ng-repeat="j in submissions">
+    <a href="#{{selectedClass}}/{{selectedAssignment}}/{{j}}">
+      {{j}}
+    </a>
+  </li>
+  <li ng-if="selectedSubmission != null">
+    <a href="#{{selectedClass}}/{{selectedAssignment}}/{{selectedSubmission}}">
+      {{selectedSubmission}}
+    </a>
+  </li>
 </ul>
 </div>
-
---> 
 
 <hr/>
 
