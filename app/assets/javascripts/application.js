@@ -22,6 +22,10 @@ codepuppy.config(function($routeProvider) {
       templateUrl : '/assets/assignment.html',
       controller  : 'AssignmentCtrl'
     })
+    .when('/:classID/:assignmentID/:submissionID', {
+      templateUrl : '/assets/submission.html',
+      controller  : 'SubmissionCtrl'
+    })
 
 //} else if ($user == 'section leader') {
 //     more stuff
