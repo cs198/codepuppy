@@ -11,33 +11,33 @@
 
 <hr/>
 
-<!-- Classes -->
-<p>CLASSES:</p>
+<!-- Course -->
+<p>COURSES:</p>
 <ul>
-  <li ng-repeat="i in classes" 
-    ng-class="{selected: i == selectedClass, hidden: selectedClass != null && selectedClass != i}">
+  <li ng-repeat="i in courses"
+    ng-class="{selected: i == selectedCourse, hidden: selectedCourse != null && selectedCourse != i}">
     <a href="#{{i}}">{{i}}</a>
   </li>
 </ul>
 
 <!-- Assignments -->
-<div ng-if="selectedClass != null">
+<div ng-if="selectedCourse !== null">
 <p>ASSIGNMENTS:</p>
 <ul>
-  <li ng-repeat="j in assignments" 
+  <li ng-repeat="j in assignments"
     ng-class="{selected: j == selectedAssignment, hidden: selectedAssignment != null && selectedAssignment != j}">
-    <a href="#{{selectedClass}}/{{j}}">{{j}}</a>
+    <a href="#{{selectedCourse}}/{{j}}">{{j}}</a>
   </li>
 </ul>
 </div>
 
 <!-- Submissions -->
-<div ng-if="selectedAssignment != null">
+<div ng-if="selectedAssignment !== null">
 <p>SUBMISSIONS:</p>
 <ul>
   <li ng-repeat="k in submissions"
     ng-class="{selected: k == selectedSubmission, hidden: selectedSubmission != null && selectedSubmission != k}">
-    <a href="#{{selectedClass}}/{{selectedAssignment}}/{{k}}">{{k}}</a>
+    <a href="#{{selectedCourse}}/{{selectedAssignment}}/{{k}}">{{k}}</a>
   </li>
 </ul>
 </div>

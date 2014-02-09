@@ -14,15 +14,15 @@ codepuppy.config(function($routeProvider) {
       templateUrl : '/assets/home.html',
       controller  : 'MainCtrl'
     })
-    .when('/:classID', {
-      templateUrl : '/assets/class.html',
-      controller  : 'ClassCtrl'
+    .when('/:courseID', {
+      templateUrl : '/assets/course.html',
+      controller  : 'CourseCtrl'
     })
-    .when('/:classID/:assignmentID', {
+    .when('/:courseID/:assignmentID', {
       templateUrl : '/assets/assignment.html',
       controller  : 'AssignmentCtrl'
     })
-    .when('/:classID/:assignmentID/:submissionID', {
+    .when('/:courseID/:assignmentID/:submissionID', {
       templateUrl : '/assets/submission.html',
       controller  : 'SubmissionCtrl'
     })
