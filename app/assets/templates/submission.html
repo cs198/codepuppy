@@ -1,6 +1,536 @@
 <div class="jumbotron text-center">
 <h1>Submission Page</h1>
 
-<p>{{ message }}</p>
+<pre class="brush: cpp">
+/*
+ * File: life.cpp
+ * --------------
+ * Omar Diab
+ * Note: There seems to be problems with efficiency
+ * in drawing the grid onto the screen, causing the
+ * program to operate very slowly.  See the bookmarks
+ * for test code.
+ */
 
+#include "lifeGraphics.h"
+#include "queue.h"
+#include "genlib.h"
+#include "extgraph.h"
+#include "simpio.h"
+#include "random.h"
+#include "grid.h"
+#include &lt;iostream>
+#include &lt;fstream>
+#include &lt;string>
+#include "strutils.h"
+
+void InitGrid(Grid&lt;int>& grid);
+void Welcome();
+void LogChoices(string& fileName, int& simSpeed, string& gameType, Grid&lt;int>& grid);
+bool UserFileLoad(string& fileName, Grid&lt;int>& grid, ifstream& infile);
+bool UserGameType(string& gameType);
+Queue&lt;string> LoadFile(string& fileName, ifstream& infile);
+void SetGrid(Grid&lt;int>& grid, ifstream& infile, Queue&lt;string>& queue);
+void RandomGrid(Grid&lt;int>& grid);
+void DrawNewGrid(Grid&lt;int>& grid);
+bool PlayGame(int& simSpeed, string& gameType, Grid&lt;int>& grid);
+void EnactTurn(int& simSpeed, string& gameType, Grid&lt;int>& grid);
+int CheckNeighbors(string& gameType, Grid&lt;int>& grid, int& dy, int& row, int& col);
+bool CheckCell(int& rowToCheck, int& colToCheck, Grid&lt;int>& grid);
+int UpdateAge(int& row, int& col, int& totalNeighbors, Grid&lt;int>& grid);
+void PauseTurn(int& simSpeed);
+bool CheckLife(Grid&lt;int>& grid);
+bool CheckStable(Grid&lt;int>& grid);
+bool EndSim();
+
+    const int NUM_ROWS = 50;
+    const int NUM_COLS = 60;
+    const int MIN_AGE = 1;
+
+    const double SPEED_TWO = .125;
+    const double SPEED_THREE = 1;
+
+int main()
+{
+    string fileName;
+    int simSpeed;
+    string edgeBehavior;
+    Grid&lt;int> grid;
+    InitGrid(grid);
+
+    SetWindowTitle("Life!");
+    SetWindowSize(9, 7.5);
+    InitGraphics();
+    Welcome();
+    while(true){
+        LogChoices(fileName, simSpeed, edgeBehavior, grid);
+        if(!(PlayGame(simSpeed, edgeBehavior, grid))) break;
+    }
+    return 0;
+}
+
+/* Function: InitGrid
+ * ------------------
+ * Initializes int grids to be filled
+ * with the value "0" in all cells.
+ */
+
+void InitGrid(Grid&lt;int>& grid){
+    //Iterate thru all rows and columns
+    for(int row = 0; row &lt; grid.numRows(); row++){
+        for(int col = 0; col &lt; grid.numCols(); col++){
+            grid[row][col] = 0;
+        }
+    }
+}
+
+/* Function: Welcome
+ * ------------------
+ * Initial information presented to the user.
+ */
+void Welcome()
+{
+    SetPointSize(48);
+    MovePen(GetWindowWidth()/2-TextStringWidth("Welcome To Life!")/2,GetWindowHeight()/2);
+    DrawTextString("Welcome To Life!");
+    UpdateDisplay();
+    cout &lt;&lt; "Welcome to the game of Life, a simulation of the lifecycle of a bacteria colony." &lt;&lt; endl;
+    cout &lt;&lt; "Cells live and die by the following rules:" &lt;&lt; endl;
+    cout &lt;&lt; "\tA cell with 1 or fewer neighbors dies of loneliness" &lt;&lt; endl;
+    cout &lt;&lt; "\tLocations with 2 neighbors remain stable" &lt;&lt; endl;
+    cout &lt;&lt; "\tLocations with 3 neighbors will spontaneously create life" &lt;&lt; endl;
+    cout &lt;&lt; "\tLocations with 4 or more neighbors die of overcrowding" &lt;&lt; endl;
+    cout &lt;&lt; "In the animation, new cells are dark and lighten as they age." &lt;&lt; endl;
+    cout &lt;&lt; "Hit RETURN when ready: ";
+    GetLine();
+}
+
+/* Function: LogChoices
+ * ------------------
+ * Presents choices to the user and passes relevant variables
+ * to appropriate functions.
+ */
+
+void LogChoices(string& fileName, int& simSpeed, string& gameType, Grid&lt;int>& grid)
+{
+    ifstream infile;
+
+    cout &lt;&lt; "You can start your colony with random cells or read from a prepared file." &lt;&lt; endl;
+    bool success = false; //This boolean is used to determine if a valid choice has been made.
+
+    while(!success){ //While loop continues until the user selects a valid file.
+        success = UserFileLoad(fileName, grid, infile);
+    }
+
+    success = false; //Reinitialize the variable for the next questions.
+
+    cout &lt;&lt; endl &lt;&lt; "You choose how fast to run the simulation." &lt;&lt; endl;
+    cout &lt;&lt; "\t1 = As fast as this chip can go!" &lt;&lt; endl;
+    cout &lt;&lt; "\t2 = Not too fast, this is a school zone." &lt;&lt; endl;
+    cout &lt;&lt; "\t3 = Nice and slow so I can watch everything that happens." &lt;&lt; endl;
+    cout &lt;&lt; "\t4 = Wait for user to hit enter between generations." &lt;&lt; endl;
+    cout &lt;&lt; "Your Choice: ";
+
+    simSpeed = GetInteger();
+    while(simSpeed &lt; 1 || simSpeed > 4){
+        cout &lt;&lt; "Acceptable answers are 1 to 4!" &lt;&lt; endl;
+        cout &lt;&lt; "Your Choice: ";
+        simSpeed = GetInteger();
+    }
+
+    cout &lt;&lt; "You choose how cells on the edges count their neighbors." &lt;&lt; endl;
+    cout &lt;&lt; "\tP = Plateau Mode (cells on edges just have fewer neighbors)" &lt;&lt; endl;
+    cout &lt;&lt; "\tD = Donut Mode (cells on edge wrap around to find neighbors)" &lt;&lt; endl;
+    cout &lt;&lt; "\tM = Mirror Mode (cells on edge reflect back to find neighbors)" &lt;&lt; endl;
+
+    while(!success){
+        success = UserGameType(gameType);
+    }
+}
+
+/* Function: UserFileLoad
+ * ------------------
+ * Handles user interaction in choosing to load a file.
+ */
+bool UserFileLoad(string& fileName, Grid&lt;int>& grid, ifstream& infile)
+{
+    cout &lt;&lt; "Do you have a file in mind? ";
+    string loadStr = GetLine();
+    loadStr = ConvertToLowerCase(loadStr);
+    if(loadStr[0] == 'y'){ //anything that starts with 'y' is interpreted as "Yes"
+        cout &lt;&lt; "Enter the filename: ";
+        fileName = GetLine();
+        SetGrid(grid, infile, LoadFile(fileName, infile));
+        return true;
+    }else if(loadStr[0] == 'n'){ //same with 'n' and "No"
+        InitLifeGraphics(NUM_ROWS, NUM_COLS);
+        RandomGrid(grid);
+        return true;
+    }else{
+        cout &lt;&lt; "Please answer yes or no." &lt;&lt; endl;
+        return false;
+    }
+}
+
+
+/* Function: UserGameType
+ * ------------------
+ * Handles user interaction in choosing edge behavior.
+ */
+
+bool UserGameType(string& gameType)
+{
+    cout &lt;&lt; "Your Choice: ";
+    gameType = GetLine();
+    gameType = ConvertToLowerCase(gameType);
+    if(gameType != "p" && gameType != "d" && gameType != "m"){
+        cout &lt;&lt; "Acceptable answers are P, D, or M!" &lt;&lt; endl;
+        return false;
+    }
+    else return true;
+}
+
+/* Function: LoadFile
+ * ------------------
+ * Loads a data file, determines if it is really a file,
+ * and returns a Queue with all the lines of text
+ * ready to be manipulated.
+ */
+
+Queue&lt;string> LoadFile(string& fileName, ifstream& infile)
+{
+    Queue&lt;string> queue;
+    queue.clear();
+
+    //Loads the file
+    bool loadSuccess = false;
+    while(!loadSuccess){
+        infile.open(fileName.c_str());
+        if(infile.fail()){
+            infile.clear();
+            cout &lt;&lt; "Invalid file." &lt;&lt; endl;
+            cout &lt;&lt; "Enter the filename: ";
+            fileName = GetLine();
+        }else loadSuccess = true;
+    }
+
+    //Writes the queue
+    while(true){
+        string line;
+        getline(infile, line);
+        if(infile.fail()) break;
+        queue.enqueue(line);
+    }
+
+    return queue;
+}
+
+/* Function: SetGrid
+ * ------------------
+ * Makes a grid showing all the cells on the board
+ * based on the data file loaded.
+ */
+
+void SetGrid(Grid&lt;int>& grid, ifstream& infile, Queue&lt;string>& queue)
+{
+    int rowCount = -2; /* initialized to -2 because the first two lines
+                        * describe the number of rows and columns */
+    int numCols = 0;
+    int numRows = 0;
+    Randomize();
+
+    while(!(queue.isEmpty())){                          //continue until end of file
+        string line = queue.dequeue();
+        if(line[0] != '#'){                             //ignore comment lines
+            if(rowCount == -2){                         //first parameter is rows
+                numRows = StringToInteger(line);
+            }else if (rowCount == -1){                  //second is columns
+                numCols = StringToInteger(line);
+                grid.resize(numRows, numCols);
+                InitGrid(grid);
+            }else{                                      //iterate over all rows and columns
+                for(int col = 0; col &lt; numCols; col++){
+                    if (line[col] == 'X'){              //finds cells to map.
+                        grid[rowCount][col] = RandomInteger(MIN_AGE, MaxAge);
+                    }
+                }
+            }
+            rowCount++; //count up to the last row.
+        }
+    }
+
+    InitLifeGraphics(numRows, numCols);
+    DrawNewGrid(grid); //draw the cells onto the graphics pane.
+}
+
+/* Function: RandomGrid
+ * ------------------
+ * Creates a boolean grid with randomly assorted values.
+ */
+
+void RandomGrid(Grid&lt;int>& grid)
+{
+    grid.resize(NUM_ROWS, NUM_COLS);
+    InitGrid(grid); //Reset grid
+    Randomize(); //Reset seed
+
+    for(int row = 0; row &lt; NUM_ROWS; row++){
+        for(int col = 0; col &lt; NUM_COLS; col++){
+            if(RandomChance(.5)){
+                grid[row][col] = RandomInteger(MIN_AGE, MaxAge);
+            }
+        }
+    }
+
+    InitLifeGraphics(NUM_ROWS, NUM_COLS);
+    DrawNewGrid(grid);
+}
+
+/* Function: DrawNewGrid
+ * ------------------
+ * Places data stored on the grid into the graphics window.
+ * This function appears to be causing issues with speed
+ * of the simulation; but I can't figure out why.
+ */
+
+void DrawNewGrid(Grid&lt;int>& grid)
+{
+    for(int row = 0; row &lt; grid.numRows(); row++){
+        for(int col = 0; col &lt; grid.numCols(); col++){
+            DrawCellAt(row, col, grid[row][col]);
+        }
+    }
+}
+
+/* Function: PlayGame
+ * ------------------
+ * Contains algorithms of the Game of Life.
+ * Returns a boolean telling whether or not the
+ * player wants to play again after the simulation
+ * has ended.
+ */
+
+bool PlayGame(int& simSpeed, string& gameType, Grid&lt;int>& grid)
+{
+    if(simSpeed != 4){
+        cout &lt;&lt; "Press and hold the mouse button to end this simulation." &lt;&lt; endl;
+        while(!(MouseButtonIsDown()) && !(CheckStable(grid))){ //checks either for mouse press or a stable colony.
+            EnactTurn(simSpeed, gameType, grid);
+            PauseTurn(simSpeed);
+                ///* Code used for debugging
+                // * Even if the checking algorithms are completely
+                // * commented out, the game runs slow--problem with drawing.
+                // */
+                //for (int row = 0; row &lt; grid.numRows(); row++){
+                //  for (int col = 0; col &lt; grid.numCols(); col++){
+                //      grid[row][col] = RandomInteger(0, 12);
+                //  }
+                //}
+                //DrawNewGrid(grid);
+                //cout &lt;&lt; "cycle complete" &lt;&lt; endl;
+                //UpdateDisplay();
+                ////End test code
+        }
+
+        bool repeat = EndSim(); //asks whether or not a new game should start.
+        return repeat;
+    }else{                      //behavior for Speed 4 (RETURN between turns)
+        while(true){
+            cout &lt;&lt; "Press RETURN to continue, or type \"quit\" to end the simulation: " &lt;&lt; endl;
+            string line = GetLine();
+            line = ConvertToLowerCase(line);
+            if(line[0] == 'q') break;
+            else EnactTurn(simSpeed, gameType, grid);
+        }
+        bool repeat = EndSim(); //Asks if the user wants to start a new simulation.
+        return repeat;
+    }
+}
+
+/* Function: CheckStable
+ * ------------------
+ * Determines if the game board will continue to
+ * evolve or if the simulation is over.
+ */
+
+bool CheckStable(Grid&lt;int>& grid)
+{
+    bool aged = true;
+
+    for(int row = 0; row &lt; grid.numRows(); row++){
+        if(!aged) break;
+        for(int col = 0; col &lt; grid.numCols(); col++){
+            if(grid[row][col] &lt; MaxAge && grid[row][col] != 0){
+                aged = false;
+                break;
+            }
+        }
+    }
+
+    if(aged) cout &lt;&lt; "The game is now stable." &lt;&lt; endl;
+    return aged;
+}
+
+/* Function: EnactTurn
+ * ------------------
+ * Runs algorithms for checking the number of neighbors
+ * in each cell of the grid, and redrawing the grid accordingly.
+ */
+
+void EnactTurn(int& simSpeed, string& gameType, Grid&lt;int>& grid)
+{
+    int dy = 0;
+    Grid&lt;int> newGrid = grid; //Copied to a new grid first, so that the generations grow independently.
+
+    for (int row = 0; row &lt; grid.numRows(); row++){
+        for (int col = 0; col &lt; grid.numCols(); col++){
+            int topNeighbors = 0;
+            int midNeighbors = 0;
+            int bottomNeighbors = 0;
+
+            /* Neighbors are counted by checking each three-celled row
+             * above, through, and below the cell to be checked.
+             * Doing so simplifies dealing with boundary conditions.
+             */
+
+            //-------Top Row
+            if(row != 0) dy = -1;
+            else {                                              //game type-specific behavior.
+                if(gameType == "d") dy = grid.numRows() - 1;
+                else if(gameType == "m") dy = 0;
+            }
+
+            if(!(row == 0 && gameType == "p")) topNeighbors = CheckNeighbors(gameType, grid, dy, row, col);
+
+            //-------Middle Row
+            dy = 0;
+            midNeighbors = CheckNeighbors(gameType, grid, dy, row, col);
+
+            //-------Bottom Row (Same general form as the top row)
+            if(row != grid.numRows() - 1) dy = 1;
+            else {
+                if(gameType == "d") dy = -(grid.numRows() - 1);
+                else if(gameType == "m") dy = 0;
+            }
+
+            if(!(row == grid.numRows() - 1 && gameType == "p")) bottomNeighbors = CheckNeighbors(gameType, grid, dy, row, col);
+
+            int totalNeighbors = topNeighbors + midNeighbors + bottomNeighbors;
+
+            int newAge = UpdateAge(row, col, totalNeighbors, grid); //This enacts the rules of the Game of Life.
+
+            newGrid[row][col] = newAge; //Copied to a new grid first, so that the generations grow independently.
+        }
+    }
+
+    DrawNewGrid(newGrid);
+    //cout &lt;&lt; "cycle complete" &lt;&lt; endl;
+        /* This line used for debugging.
+         * If the new grid is not actually drawn, the cycle runs way faster.
+         * That makes me think that the problem with speed is not based in
+         * my checking algorithms, but in the function that draws to the window.
+         */
+
+    UpdateDisplay();
+    grid = newGrid;
+}
+
+int CheckNeighbors(string& gameType, Grid&lt;int>& grid, int& dy, int& row, int& col)
+{
+    int neighbors = 0;
+    int rowToCheck = row + dy;
+    int colToCheck = col;
+
+    //--------Left Cell
+    if(col != 0){
+        colToCheck = col - 1;
+    }else{
+        if(gameType == "d") colToCheck = grid.numCols() - 1;
+        else if(gameType == "m") colToCheck = col;
+    }
+    if(!(col == 0 && gameType == "p")){
+        if(CheckCell(rowToCheck, colToCheck, grid)) neighbors++;
+    }
+
+    //--------Middle Cell
+    //This complex if statement is used for the mirror game type, as that one is a little tricky.
+    if(dy != 0 || (gameType == "m" && (row == 0 || row == grid.numRows() - 1) && !(col == 0 || col == grid.numCols() - 1))){
+        colToCheck = col;
+        if(CheckCell(rowToCheck, colToCheck, grid)) neighbors++;
+    }
+
+    //--------Right Cell
+    if(col != grid.numCols() - 1){
+        colToCheck = col + 1;
+    }else{
+        if(gameType == "d") colToCheck = 0;
+        else if(gameType == "m") colToCheck = col;
+    }
+
+    if(!(col == grid.numCols() - 1 && gameType == "p")){
+        if(CheckCell(rowToCheck, colToCheck, grid)) neighbors++;
+    }
+
+    return neighbors;
+}
+
+/* Function: CheckCell
+ * ------------------
+ * Tells us if a cell exists at that location.
+ */
+
+bool CheckCell(int& rowToCheck, int&colToCheck, Grid&lt;int>& grid)
+{
+    if(grid[rowToCheck][colToCheck] > 0) return true;
+    else return false;
+}
+
+/* Function: UpdateAge
+ * ------------------
+ * Enacts the rules of the Game of Life.
+ */
+
+int UpdateAge(int& row, int& col, int& totalNeighbors, Grid&lt;int>& grid)
+{
+    int age = 0;
+
+    if(totalNeighbors == 2){
+        if (grid[row][col] != 0)age = grid[row][col] + 1;
+    }else if(totalNeighbors == 3){
+        age = grid[row][col] + 1;
+    }else{
+        age = 0;
+    }
+
+    return age;
+}
+
+void PauseTurn(int& simSpeed){
+    if(simSpeed == 2) Pause(SPEED_TWO);
+    else if(simSpeed == 3) Pause(SPEED_THREE);
+}
+
+/* Function: EndSim
+ * ------------------
+ * Prompts the user to decide if a new simulation should start.
+ * Returns a boolean that expresses the user's choice.
+ */
+
+bool EndSim()
+{
+    cout &lt;&lt; "\nWould you like to try again?" &lt;&lt; endl;
+    while(true){
+        string choice;
+        cout &lt;&lt; "Your choice: ";
+        choice = GetLine();
+        choice = ConvertToLowerCase(choice);
+        if (choice[0] == 'n') return false;
+        else if (choice[0] == 'y') return true;
+        else cout &lt;&lt; "Please answer yes or no." &lt;&lt; endl;
+    }
+}
+</pre>
+<script type="text/javascript">
+     SyntaxHighlighter.highlight()
+</script>
 </div>

@@ -13,15 +13,17 @@
 
 <!-- Course -->
 <p>COURSES:</p>
-<ul>
-  <li ng-repeat="i in courses"
-    ng-class="{selected: i == selectedCourse, hidden: selectedCourse != null && selectedCourse != i}">
-    <a href="#{{i}}">{{i}}</a>
-  </li>
-</ul>
+<div class='nav courses'>
+  <ul>
+    <li ng-repeat="i in courses" class='course'
+      ng-class="{selected: i == selectedCourse, hidden: selectedCourse != null && selectedCourse != i}">
+      <a href="#{{i}}">{{i}}</a>
+    </li>
+  </ul>
+</div>
 
 <!-- Assignments -->
-<div ng-if="selectedCourse !== null">
+<div class='nav assignments' ng-if="selectedCourse !== null">
 <p>ASSIGNMENTS:</p>
 <ul>
   <li ng-repeat="j in assignments"
@@ -32,7 +34,7 @@
 </div>
 
 <!-- Submissions -->
-<div ng-if="selectedAssignment !== null">
+<div class='nav submissions' ng-if="selectedAssignment !== null">
 <p>SUBMISSIONS:</p>
 <ul>
   <li ng-repeat="k in submissions"
@@ -48,11 +50,12 @@
 <%= yield %>
 </div>
 
+<%= javascript_include_tag 'http://code.jquery.com/jquery-1.11.0.min.js' %>
 <%= javascript_include_tag '//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js' %>
 <%= javascript_include_tag '//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-route.js' %>
 <%= javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.min.js' %>
 <%- # TODO: include language-specific syntax highlighting brushes dynamically in angular service %>
-<%= javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushJava.min.js' %>
+<%= javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushCpp.min.js' %>
 <%= javascript_include_tag 'application' %>
 </body>
 </html>
