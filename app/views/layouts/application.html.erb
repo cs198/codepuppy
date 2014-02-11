@@ -9,45 +9,62 @@
 </head>
 <body ng-controller="RootCtrl">
 
-<hr/>
+<div id='header'>
+  <a href='/'>
+    <img id='logo' src='/assets/codepuppy.png' />
+  </a>
+  <div class='user_pane'>
+    <img class='person' id='active_user' src='/assets/omar.jpg' />
+    <span class='user_name'>odiab</span>
+    <a href='#'>Logout</a>
+  </div>
+</div>
 
-<!-- Course -->
-<p>COURSES:</p>
-<div class='nav courses'>
-  <ul>
-    <li ng-repeat="i in courses" class='course'
-      ng-class="{selected: i == selectedCourse, hidden: selectedCourse != null && selectedCourse != i}">
-      <a href="#{{i}}">{{i}}</a>
+<div id='nav_pane'>
+  <!-- Course -->
+  <div class='nav_hdr'>
+    <span>Courses</span>
+  </div>
+  <div class='nav courses'>
+    <ul class='nav_list'>
+      <li ng-repeat="i in courses" class='course'
+        ng-class="{selected: i == selectedCourse, hidden: selectedCourse != null && selectedCourse != i}">
+        <a href="#{{i}}">{{i}}</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Assignments -->
+  <div class='nav assignments' ng-if="selectedCourse !== null">
+  <div class='nav_hdr'>
+    <span>Assignment</span>
+  </div>
+  <ul class='nav_list'>
+    <li ng-repeat="j in assignments"
+      ng-class="{selected: j == selectedAssignment, hidden: selectedAssignment != null && selectedAssignment != j}">
+      <a href="#{{selectedCourse}}/{{j}}">{{j}}</a>
     </li>
   </ul>
+  </div>
+
+  <!-- Submissions -->
+  <div class='nav submissions' ng-if="selectedAssignment !== null">
+  <div class='nav_hdr'>
+    <span>Submissions</span>
+  </div>
+  <ul class='nav_list'>
+    <li ng-repeat="k in submissions"
+      ng-class="{selected: k == selectedSubmission, hidden: selectedSubmission != null && selectedSubmission != k}">
+      <a href="#{{selectedCourse}}/{{selectedAssignment}}/{{k}}">{{k}}</a>
+    </li>
+  </ul>
+  </div>
 </div>
 
-<!-- Assignments -->
-<div class='nav assignments' ng-if="selectedCourse !== null">
-<p>ASSIGNMENTS:</p>
-<ul>
-  <li ng-repeat="j in assignments"
-    ng-class="{selected: j == selectedAssignment, hidden: selectedAssignment != null && selectedAssignment != j}">
-    <a href="#{{selectedCourse}}/{{j}}">{{j}}</a>
-  </li>
-</ul>
-</div>
-
-<!-- Submissions -->
-<div class='nav submissions' ng-if="selectedAssignment !== null">
-<p>SUBMISSIONS:</p>
-<ul>
-  <li ng-repeat="k in submissions"
-    ng-class="{selected: k == selectedSubmission, hidden: selectedSubmission != null && selectedSubmission != k}">
-    <a href="#{{selectedCourse}}/{{selectedAssignment}}/{{k}}">{{k}}</a>
-  </li>
-</ul>
-</div>
-
-<hr/>
-
-<div ng-view>
-<%= yield %>
+<div id='content_wrapper'>
+  <div id='content' ng-view>
+  <%= yield %>
+  </div>
 </div>
 
 <%= javascript_include_tag 'http://code.jquery.com/jquery-1.11.0.min.js' %>
