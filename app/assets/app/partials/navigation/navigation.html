@@ -1,0 +1,43 @@
+<div class="navigation" ng-controller="NavigationCtrl">
+  <!-- Courses -->
+  <p>Courses:</p>
+  <ul>
+    <li ng-if="selectedCourse == null" ng-repeat="i in courses"><a href="#{{i}}">{{i}}</a></li>
+    <li ng-if="selectedCourse != null" ><a href="#{{selectedCourse}}">{{selectedCourse}}</a></li>
+  </ul>
+
+  <!-- Assignments -->
+  <div ng-if="selectedCourse != null">
+    <p>Assignments:</p>
+    <ul>
+      <li ng-if="selectedAssignment == null" ng-repeat="j in assignments">
+      <a href="#{{selectedCourse}}/{{j}}">
+        {{j}}
+      </a>
+      </li>
+      <li ng-if="selectedAssignment != null">
+      <a href="#{{selectedCourse}}/{{selectedAssignment}}">
+        {{selectedAssignment}}
+      </a></li>
+    </ul>
+  </div>
+
+  <!-- Submissions -->
+  <div ng-if="selectedAssignment != null">
+    <p>Submissions:</p>
+    <ul>
+      <li ng-if="selectedSubmission == null" ng-repeat="j in submissions">
+      <a href="#{{selectedCourse}}/{{selectedAssignment}}/{{j}}">
+        {{j}}
+      </a>
+      </li>
+      <li ng-if="selectedSubmission != null">
+      <a href="#{{selectedCourse}}/{{selectedAssignment}}/{{selectedSubmission}}">
+        {{selectedSubmission}}
+      </a>
+      </li>
+    </ul>
+  </div>
+
+  <hr/>
+</div>

@@ -3,58 +3,15 @@
 <head>
 <title>Namepending</title>
 <%= stylesheet_link_tag 'application', media: 'all' %>
+<%= stylesheet_link_tag 'app', media: 'all' %>
 <%= stylesheet_link_tag '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCore.min.css' %>
 <%= stylesheet_link_tag '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shThemeDefault.min.css' %>
 <%= csrf_meta_tags %>
 </head>
-<body ng-controller="RootCtrl">
+<body>
 
-<hr/>
 
-<!-- Classes -->
-<p>CLASSES:</p>
-<ul>
-<li ng-if="selectedClass == null" ng-repeat="i in classes"><a href="#{{i}}">{{i}}</a></li>
-<li ng-if="selectedClass != null" ><a href="#{{selectedClass}}">{{selectedClass}}</a></li>
-</ul>
-
-<!-- Assignments -->
-<div ng-if="selectedClass != null">
-<p>ASSIGNMENTS:</p>
-<ul>
-  <li ng-if="selectedAssignment == null" ng-repeat="j in assignments">
-    <a href="#{{selectedClass}}/{{j}}">
-      {{j}}
-    </a>
-  </li>
-  <li ng-if="selectedAssignment != null">
-    <a href="#{{selectedClass}}/{{selectedAssignment}}">
-      {{selectedAssignment}}
-  </a></li>
-</ul>
-</div>
-
-<!-- Submissions -->
-<div ng-if="selectedAssignment != null">
-<p>SUBMISSIONS:</p>
-<ul>
-  <li ng-if="selectedSubmission == null" ng-repeat="j in submissions">
-    <a href="#{{selectedClass}}/{{selectedAssignment}}/{{j}}">
-      {{j}}
-    </a>
-  </li>
-  <li ng-if="selectedSubmission != null">
-    <a href="#{{selectedClass}}/{{selectedAssignment}}/{{selectedSubmission}}">
-      {{selectedSubmission}}
-    </a>
-  </li>
-</ul>
-</div>
-
-<hr/>
-
-<div ng-view>
-<%= yield %>
+<div ng-view class="page">
 </div>
 
 <%= javascript_include_tag '//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js' %>
@@ -63,5 +20,6 @@
 <%- # TODO: include language-specific syntax highlighting brushes dynamically in angular service %>
 <%= javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushJava.min.js' %>
 <%= javascript_include_tag 'application' %>
+<%= javascript_include_tag 'app' %>
 </body>
 </html>
