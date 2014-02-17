@@ -1,23 +1,23 @@
 class Person < ActiveRecord::Base
   has_many :course_terms_people
   has_many :course_terms, through: :course_terms_people do
-    def taking
+    def course_terms_taking
       where('course_terms_people.role = ?', 'student')
     end
-    def administrating
+    def coures_terms_administrating
       where('course_terms_people.role = ?', 'admin')
     end
-    def leading
+    def course_terms_leading
       where('course_terms_people.role = ?', 'leader')
     end
   end
 
   has_many :sections_people
   has_many :sections, through: :sections_people do
-    def taking
+    def sections_taking
       where('sections_people.student = ?', true)
     end
-    def leading
+    def sections_leading
       where('sections_people.student = ?', false)
     end
   end
