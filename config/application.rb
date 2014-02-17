@@ -8,8 +8,8 @@ Bundler.require(:default, Rails.env)
 
 module Namepending
   class Application < Rails::Application
-    config.assets.enabled = true
-    config.assets.paths << "#{Rails.root}/app/assets/templates"
+    config.assets.paths << "#{Rails.root}/app/assets/partials"
+    config.assets.paths << "#{Rails.root}/app/assets/pages"
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

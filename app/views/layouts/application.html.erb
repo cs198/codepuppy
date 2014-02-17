@@ -1,29 +1,25 @@
 <!DOCTYPE html>
 <html ng-app="codepuppy">
 <head>
-<title>Namepending</title>
-<%= stylesheet_link_tag    "application", media: "all" %>
+<title>Codepuppy</title>
+<%= stylesheet_link_tag 'application', media: 'all' %>
+<%= stylesheet_link_tag 'app', media: 'all' %>
+<%= stylesheet_link_tag '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCore.min.css' %>
+<%= stylesheet_link_tag '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shThemeDefault.min.css' %>
 <%= csrf_meta_tags %>
 </head>
-<body ng-controller="RootCtrl">
+<body>
 
-<hr/>
-<p>CLASSES:</p>
-<ul>
-<li ng-repeat="i in classes"><a href="#{{i}}">{{i}}</a></li>
-</ul>
-<p>ASSIGNMENTS:</p>
-<ul>
-<li ng-repeat="j in assignments"><a href="#cs106x/{{j}}">{{j}}</a></li>
-</ul>
-<hr/>
 
-<div ng-view>
-<%= yield %>
-</div> 
+<div ng-view class="page">
+</div>
 
-<script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js'></script>
-<script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-route.js'></script>
-<%= javascript_include_tag "application" %>
+<%= javascript_include_tag '//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js' %>
+<%= javascript_include_tag '//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-route.js' %>
+<%= javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.min.js' %>
+<%- # TODO: include language-specific syntax highlighting brushes dynamically in angular service %>
+<%= javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shBrushJava.min.js' %>
+<%= javascript_include_tag 'application' %>
+<%= javascript_include_tag 'app' %>
 </body>
 </html>
