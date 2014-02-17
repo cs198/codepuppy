@@ -1,7 +1,18 @@
 class CommentsController < ApplicationController
 
+  respond_to :html, :xml, :json
+
   def create
     Comment.create(comment_params)
+  end
+
+  def show
+    begin
+      comment = Comment.find(params[:id])
+      respond_with(comment)
+    rescue ActiveRecord::RecordNotFound
+      raise 'Comment not found'
+    end
   end
 
   private
