@@ -140,4 +140,8 @@ echo
 
 cp pre-commit ../.git/hooks/pre-commit
 
-echo "Success! Happy coding!"
+if [ $? -ne 0 ]; then
+  echo "Could not copy the pre-commit script to your git hooks directory. Please copy pre-commit in this directory to <project root>/.git/hooks/pre-commit ."
+else
+  echo "Success! Happy coding!"
+fi
