@@ -4,7 +4,7 @@ angular.module('codepuppy').directive('navigationSelector', function() {
     scope: {
       'title': '=title',
       'elements': '=elements', // Array of hashes with :name, :url
-      'selected': '=selected',
+      'selected': '=selected'
     },
     templateUrl: '/assets/partials/navigationSelector/navigationSelector.html'
   };
