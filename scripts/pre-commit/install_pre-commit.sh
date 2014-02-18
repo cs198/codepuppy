@@ -138,7 +138,7 @@ echo "All checkers needed are installed."
 echo "Now, the pre-commit script will be installed into your git repo."
 echo
 
-cp pre-commit ../.git/hooks/pre-commit
+cp pre-commit ../../.git/hooks/pre-commit
 
 if [ $? -ne 0 ]; then
   echo "Could not copy the pre-commit script to your git hooks directory. Please copy pre-commit in this directory to <project root>/.git/hooks/pre-commit ."
