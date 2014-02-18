@@ -1,6 +1,8 @@
 <div class="navigation" ng-controller="NavigationCtrl">
   <div ng-repeat="navigationSelector in navigationSelectors">
     <navigation-selector title='navigationSelector.title'
-    elements='navigationSelector.elements' />
+      elements='navigationSelector.elements'
+      selected='navigationSelector.selected'>
+    </navigation-selector>
   </div>
 </div>
