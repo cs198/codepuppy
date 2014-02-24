@@ -4,28 +4,28 @@ title: 'Response status codes'
 layout: nil
 ---
 
-### Success
+## Success
 
 Successes differ from errors in that their body may not be a simple response object with a code and a message. The headers however are consistent across all calls:
 
 * `GET`, `PUT`, `DELETE` returns `200 OK` on success,
 * `POST ` returns 201 on success,
 
-When [retrieving stuff](#get-stuff) for example:
+When [retrieving a person](#get-person) for example:
 
 ```Status: 200 OK```
-```{
-    {
-        id: thing_1,
-        name: 'My first thing'
-    },
-    {
-        id: thing_2,
-        name: 'My second thing'
-    }
-}```
+```
+{
+  {
+    id: 2,
+    given_name: "Omar",
+    family_name: "Diab",
+    user_system_id: "odiab"
+  }
+}
+```
 
-### Error
+## Error
 
 Error responses are simply returning [standard HTTP error codes](http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) along with some additional information:
 
