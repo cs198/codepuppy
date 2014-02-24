@@ -9,7 +9,10 @@ layout: default
 <section id='content'>
   {% for post in site.posts %}
     {% if post.category == null %}
-      <article class='{{ post.type }}'>
+      <article class='{{ post.type }}
+        {% if post.unimplemented %}
+          UNIMPLEMENTED
+        {% endif %}'>
         <a name='{{ post.url }}' href='#{{ post.url }}'>
           <h2>
             {% if post.type %}
@@ -37,7 +40,10 @@ layout: default
     {% for posts in category %}
       {% for post in posts %}
         {% if post.url %}
-          <article class='{{ post.type }}'>
+          <article class='{{ post.type }}
+            {% if post.unimplemented %}
+              UNIMPLEMENTED
+            {% endif %}'>
             <a name='{{ post.url }}' href='#{{ post.url }}'>
               <h2>
                 {% if post.type %}

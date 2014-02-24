@@ -612,6 +612,14 @@ code {
   background: #e02a10;
 }
 
+#content article.UNIMPLEMENTED > a {
+  background: #666;
+}
+
+#content article.UNIMPLEMENTED > a:hover {
+  background: #888;
+}
+
 #content article a h2 code b.UNIMPLEMENTED {
   background: #220000;
   color: #FF0000;
