@@ -1,5 +1,4 @@
 class SectionsController < ApplicationController
-
   respond_to :html, :xml, :json
 
   def create
@@ -7,37 +6,29 @@ class SectionsController < ApplicationController
   end
 
   def show
-    begin
-      section = Section.find(params[:id])
-      respond_with(section)
-    rescue ActiveRecord::RecordNotFound
-      raise 'Section not found'
-    end
+    section = Section.find(params[:id])
+    respond_with(section)
+  rescue ActiveRecord::RecordNotFound
+    raise 'Section not found'
   end
 
   def leaders
-    begin
-      section = Section.find(params[:id])
-      respond_with(section.leaders)
-    rescue ActiveRecord::RecordNotFound
-      raise 'Section not found'
-    end
+    section = Section.find(params[:id])
+    respond_with(section.leaders)
+  rescue ActiveRecord::RecordNotFound
+    raise 'Section not found'
   end
 
   def students
-    begin
-      section = Section.find(params[:id])
-      respond_with(section.students)
-    rescue ActiveRecord::RecordNotFound
-      raise 'Section not found'
-    end
+    section = Section.find(params[:id])
+    respond_with(section.students)
+  rescue ActiveRecord::RecordNotFound
+    raise 'Section not found'
   end
-
 
   private
 
-    def section_params
-      params.require(:section).permit(:course_term_id, :leader_id)
-    end
-
+  def section_params
+    params.require(:section).permit(:course_term_id, :leader_id)
+  end
 end
