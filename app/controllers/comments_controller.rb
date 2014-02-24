@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-
   respond_to :html, :xml, :json
 
   def create
@@ -7,18 +6,21 @@ class CommentsController < ApplicationController
   end
 
   def show
-    begin
-      comment = Comment.find(params[:id])
-      respond_with(comment)
-    rescue ActiveRecord::RecordNotFound
-      raise 'Comment not found'
-    end
+    comment = Comment.find(params[:id])
+    respond_with(comment)
+  rescue ActiveRecord::RecordNotFound
+    raise 'Comment not found'
   end
 
   private
 
-    def comment_params
-      params.require(:comment).permit(:submission_id, :file_location, :line_number, :num_lines, :comment)
-    end
-
+  def comment_params
+    params.require(:comment).permit(
+      :submission_id,
+      :file_location,
+      :line_number,
+      :num_lines,
+      :comment
+    )
+  end
 end
