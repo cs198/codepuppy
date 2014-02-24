@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.1.0'
 
-gem 'jekyll'
+gem 'github-pages'
 
 # gem 'unicorn'
 # gem 'debugger', group: [:development, :test]
