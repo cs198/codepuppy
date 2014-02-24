@@ -11,9 +11,19 @@ layout: default
     {% if post.category == null %}
       <article class='{{ post.type }}'>
         <a name='{{ post.url }}' href='#{{ post.url }}'>
-          <h2>{% if post.type %}
-            <code><b>{{ post.type }}</b> {{ post.path }}</code>
-          {% endif %}{{ post.title }}</h2>
+          <h2>
+            {% if post.type %}
+              <code>
+                <b>{{ post.type }}</b> {{ post.path }}
+              </code>
+            {% endif %}
+            {% if post.unimplemented %}
+              <code>
+                <b class="UNIMPLEMENTED">Not implemented</b>
+              </code>
+            {% endif %}
+            {{ post.title }}
+          </h2>
         </a>
         <section class='body'>
           {{ post.content }}
@@ -28,11 +38,21 @@ layout: default
       {% for post in posts %}
         {% if post.url %}
           <article class='{{ post.type }}'>
-          <a name='{{ post.url }}' href='#{{ post.url }}'>
-            <h2>{% if post.type %}
-              <code><b>{{ post.type }}</b> {{ post.path }}</code>
-            {% endif %}{{ post.title }}</h2>
-          </a>
+            <a name='{{ post.url }}' href='#{{ post.url }}'>
+              <h2>
+                {% if post.type %}
+                  <code>
+                    <b>{{ post.type }}</b> {{ post.path }}
+                  </code>
+                {% endif %}
+                {% if post.unimplemented %}
+                  <code>
+                    <b class="UNIMPLEMENTED">"Not implemented"</b>
+                  </code>
+                {% endif %}
+                {{ post.title }}
+              </h2>
+            </a>
             <section class='body'>
               {{ post.content }}
             </section>

@@ -612,6 +612,10 @@ code {
   background: #e02a10;
 }
 
+#content article a h2 code b.UNIMPLEMENTED {
+  background: #e02a10;
+}
+
 /* Reference's body */
 #content h3 {
 }
