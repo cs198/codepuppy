@@ -613,7 +613,8 @@ code {
 }
 
 #content article a h2 code b.UNIMPLEMENTED {
-  background: #e02a10;
+  background: #220000;
+  color: #FF0000;
 }
 
 /* Reference's body */
@@ -633,11 +634,9 @@ code {
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   color: #546974;
-  padding: 0 1px;
+  padding: 1px;
 }
 
-#content .body p > code {
+#content .body pre code {
   display: block;
-  padding: 15px;
-  white-space: pre;
 }
