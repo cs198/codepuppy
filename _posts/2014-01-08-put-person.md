@@ -16,7 +16,7 @@ Update a user's information, like their `given_name` or `user_system_id`.
 
 * **`:id`** the id the person to update.
 
-### Parameters
+### Body
 
 At least one of the following, to denote what is being edited:
 
@@ -25,7 +25,7 @@ At least one of the following, to denote what is being edited:
 * `user_system_id` (`string`, required): The new person's system ID (in
   Stanford, this is the SUnet ID)
 
-#### Example
+Example:
 
 ```
 {

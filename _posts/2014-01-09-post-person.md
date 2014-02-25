@@ -14,13 +14,14 @@ Create a new person
 ### Header
 None yet
 
-### Parameters
+### Body
 * `given_name` (`string`, required): The new person's "first" name.
 * `family_name` (`string`, required): The new person's "last" name.
 * `user_system_id` (`string`, required): The new person's system ID (in
   Stanford, this is the SUnet ID)
 
-#### Example:
+Example:
+
 ```
 {
   given_name: "Omar",

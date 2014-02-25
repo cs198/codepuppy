@@ -15,10 +15,10 @@ Retrieve course terms (like CS106A winter) that a person is a student in.
 
 * Requred: Valid ID of a person in URL.
 
-### Parameters
+### Body
 
-* (optional) `role`: Role in the course_term, from `{"student", "admin",
-  "leader"}`
+* `role` (`string`, optional) : Role in the course_term, from `["student", "admin",
+  "leader"]`
 
 ### Headers
 
@@ -28,7 +28,9 @@ Currently, none
 
 Sends back an array of `course_term` objects.
 
-```Status: 200 OK```
+```
+Status: 200 OK
+```
 ```
 {
   {
