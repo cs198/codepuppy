@@ -13,5 +13,15 @@
   <!--[if lt IE 9]><script src='http://html5shim.googlecode.com/svn/trunk/html5.js'></script><![endif]-->
   <script src='assets.js' type='text/javascript'></script>
   <script>require('boot');</script>
+  <script>
+    var trimCode = function() {
+      var codeElems = document.getElementsByTagName('code');
+      for (var i = 0; i < codeElems.length; ++i) {
+        var elem = codeElems[i];
+        elem.innerHTML = elem.innerHTML.trim();
+      }
+    };
+    trimCode();
+  </script>
 </body>
 </html>
