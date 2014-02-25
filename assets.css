@@ -648,3 +648,9 @@ code {
 #content .body pre code {
   display: block;
 }
+
+#content article section h2 {
+  width: 100%;
+  border-bottom: 1px solid #CCC;
+  padding-bottom: .3em;
+}
