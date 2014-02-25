@@ -34,8 +34,12 @@ Error responses are simply returning [standard HTTP error codes](http://www.w3.o
 
 For a call with an invalid authentication token for example:
 
-```Status: 401 Access denied```
-```{
-    code: 401,
-    message: 'Access denied: invalid authentication token.'
-}```
+```
+Status: 401 Access denied
+```
+```
+{
+  code: 401,
+  message: 'Access denied: invalid authentication token.'
+}
+```
