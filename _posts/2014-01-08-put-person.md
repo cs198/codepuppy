@@ -12,12 +12,20 @@ Update a user's information, like their `given_name` or `user_system_id`.
 
 ## Request
 
-* **`:id`** is the id the thing to update.
-* **The body can't be empty** and must include at least one editable field from
-  this list:
-  * `given_name` (`string`)
-  * `family_name` (`string`)
-  * `user_system_id` (`string`)
+### URI
+
+* **`:id`** the id the person to update.
+
+### Parameters
+
+At least one of the following, to denote what is being edited:
+
+* `given_name` (`string`, required): The new person's "first" name.
+* `family_name` (`string`, required): The new person's "last" name.
+* `user_system_id` (`string`, required): The new person's system ID (in
+  Stanford, this is the SUnet ID)
+
+#### Example
 
 ```
 {

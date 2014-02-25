@@ -7,4 +7,4 @@ unimplemented: true
 layout: nil
 ---
 
-Authenticate a user.
+Authenticate a user. Not yet implemented.

@@ -13,7 +13,7 @@ Retrieve course terms (like CS106A winter) that a person is a student in.
 
 ### URI
 
-* Valid ID of a person in URL.
+* Requred: Valid ID of a person in URL.
 
 ### Parameters
 
