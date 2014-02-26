@@ -1,13 +1,15 @@
 class Person < ActiveRecord::Base
   has_many :course_terms_people
   has_many :course_terms, through: :course_terms_people do
-    def course_terms_taking
+    def taking
       where('course_terms_people.role = ?', 'student')
     end
-    def coures_terms_administrating
+
+    def administrating
       where('course_terms_people.role = ?', 'admin')
     end
-    def course_terms_leading
+
+    def leading
       where('course_terms_people.role = ?', 'leader')
     end
   end

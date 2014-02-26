@@ -19,9 +19,7 @@ Namepending::Application.routes.draw do
   end
 
   resources :people do
-    get 'course_terms_taking'
-    get 'course_terms_adminstrating'
-    get 'course_terms_leading'
+    get 'course_terms'
   end
 
   resources :sections do
@@ -35,7 +33,7 @@ Namepending::Application.routes.draw do
 
   resources :comments
 
-  
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
