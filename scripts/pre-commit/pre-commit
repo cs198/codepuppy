@@ -90,7 +90,7 @@ command -v jshint >/dev/null 2>&1 || {
 
 # rubocop
 git diff --cached --name-only --diff-filter=ACM | while read FILE; do
-  if [[ "$FILE" =~ ^.+(rb)$ ]]; then
+  if [[ "$FILE" =~ ^.+(\.rb)$ ]]; then
     output=$(rubocop "$FILE")
     if [ $? -ne 0 ]; then
       echo "$output"
@@ -102,7 +102,7 @@ done || exit $?
 
 # jshint
 git diff --cached --name-only --diff-filter=ACM | while read FILE; do
-  if [[ "$FILE" =~ ^.+(js)$ ]]; then
+  if [[ "$FILE" =~ ^.+(\.js)$ ]]; then
     output=$(jshint "$FILE")
     if [ $? -ne 0 ]; then
       echo "$output"
