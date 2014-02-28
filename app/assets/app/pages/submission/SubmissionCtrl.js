@@ -3,18 +3,25 @@ angular.module('codepuppy').controller('SubmissionCtrl', function($scope, $route
     $scope.message+= " and assignment " + $routeParams.assignmentID;
     $scope.message+= " and submission " + $routeParams.submissionID;
 
-    
+    $scope.comments = [];
 
     $scope.submissionClicked = function() {
-
+		$scope.commentBody = {};
+		$scope.commentBody.comment = "Hello!";
 		var commentModal = $modal.open({
 		templateUrl: '/assets/partials/commentModal/commentModal.html',
-		controller: CommentModalCtrl
+		controller: CommentModalCtrl,
+		resolve: {
+			commentBody: function()  {
+				return $scope.commentBody;
+			}
+		}
 		});
 
-		commentModal.result.then(function (commentBody) {
+		commentModal.result.then(function (comment) {
 			// TODO: Create a comment directive, set its text to commentBody.
-			$scope.commentBody = commentBody;
+			$scope.commentBody.comment = comment;
+			$scope.comments.push($scope.commentBody);
 		});
 	};
 

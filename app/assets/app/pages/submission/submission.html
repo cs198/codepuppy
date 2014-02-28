@@ -2,5 +2,7 @@
 <div class="submission" ng-click="submissionClicked()">
   <h1>Submission Page</h1>
   <p>{{ message }}</p>
-  <p>{{ commentBody }}</p>
+  <ul ng-repeat="comment in comments" >
+    <p>{{comment.comment}}</p>
+  </ul>
 </div>

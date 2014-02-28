@@ -1,16 +1,18 @@
-var CommentModalCtrl = function($scope, $modalInstance) {
+var CommentModalCtrl = function($scope, $modalInstance, commentBody) {
 
-    $scope.commentBody = {};
+    $scope.commentBody = commentBody;
+    $scope.initialValue = commentBody.comment;
 
     //TODO: Set initial value to value of comment clicked on.
-    $scope.commentBody.comment = "Initial value";
+    // $scope.commentBody.comment = "Initial value";
     
     $scope.ok = function() {
        $modalInstance.close($scope.commentBody.comment);
     };
 
     $scope.cancel = function() {
-       $modalInstance.dismiss('cancel');
+		$scope.commentBody.comment = $scope.initialValue;
+		$modalInstance.dismiss('cancel');
     };
 
 };
