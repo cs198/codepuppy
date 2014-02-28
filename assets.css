@@ -654,3 +654,22 @@ code {
   border-bottom: 1px solid #CCC;
   padding-bottom: .3em;
 }
+
+.section-hdr {
+  width: 100%;
+  border-bottom: 1px solid #CCC;
+  padding-top: 1em;
+  padding-bottom: .2em;
+}
+
+.resource-hdr {
+
+}
+
+.page-hdr {
+  font-size: 3em;
+  font-weight: normal;
+  margin: 1em 0;
+  text-align: center;
+  line-height: 150%;
+}

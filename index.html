@@ -7,6 +7,14 @@ layout: default
 </nav>
 
 <section id='content'>
+  <h1 class="page-hdr">Codepuppy API Documentation</h1>
+
+  Below is all the documentation for the Codepuppy API. If something is out of
+  date, <a href="mailto://osdiab@cs.stanford.edu">
+    send Omar an email</a>.
+
+  <h2 class="section-hdr">General API information</h2>
+
   {% for post in site.posts %}
     {% if post.category == null %}
       <article class='{{ post.type }}
@@ -35,8 +43,10 @@ layout: default
     {% endif %}
   {% endfor %}
 
+  <h2 class="section-hdr">Resources</h2>
+
   {% for category in site.categories %}
-    <h2>{{ category | first }}</h2>
+    <h3 class="resource-hdr">{{ category | first }}</h3>
     {% for posts in category %}
       {% for post in posts %}
         {% if post.url %}
