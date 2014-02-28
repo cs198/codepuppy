@@ -1,5 +1,5 @@
 ---
-category: People
+category: Courses
 path: '/people/:id'
 title: 'Update a person'
 type: 'PUT'
