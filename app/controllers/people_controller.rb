@@ -1,8 +1,12 @@
 class PeopleController < ApplicationController
+  skip_before_filter :verify_authenticity_token
   respond_to :html, :xml, :json
 
   def create
-    Person.create(person_params)
+    person = Person.create(person_params)
+    respond_with(person)
+  rescue ActiveRecord::RecordInvalid => invalid
+    puts invalid.record.errors
   end
 
   def show
@@ -26,7 +30,7 @@ class PeopleController < ApplicationController
   private
 
   def person_params
-    params.require(:person).permit(:user_system_id, :given_name, :family_name)
+    params.permit(:user_system_id, :given_name, :family_name)
   end
 
   def course_terms_builder_all(person)

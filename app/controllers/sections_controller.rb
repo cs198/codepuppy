@@ -1,8 +1,12 @@
 class SectionsController < ApplicationController
+  skip_before_filter :verify_authenticity_token
   respond_to :html, :xml, :json
 
   def create
-    Section.create(section_params)
+    section = Section.create(section_params)
+    respond_with(section)
+  rescue ActiveRecord::RecordInvalid => invalid
+    puts invalid.record.errors
   end
 
   def show
@@ -29,6 +33,6 @@ class SectionsController < ApplicationController
   private
 
   def section_params
-    params.require(:section).permit(:course_term_id, :leader_id)
+    params.permit(:course_term_id, :leader_id)
   end
 end

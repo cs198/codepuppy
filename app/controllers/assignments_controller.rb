@@ -1,8 +1,12 @@
 class AssignmentsController < ApplicationController
+  skip_before_filter :verify_authenticity_token
   respond_to :html, :xml, :json
 
   def create
-    Assignment.create(assignment_params)
+    assignment = Assignment.create(assignment_params)
+    respond_with(assignment)
+  rescue ActiveRecord::RecordInvalid => invalid
+    puts invalid.record.errors
   end
 
   def show
@@ -22,7 +26,7 @@ class AssignmentsController < ApplicationController
   private
 
   def assignment_params
-    params.require(:assignment).permit(
+    params.permit(
       :course_term_id,
       :number,
       :date_assigned,
