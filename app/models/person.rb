@@ -25,4 +25,8 @@ class Person < ActiveRecord::Base
   end
 
   has_many :submissions
+
+  validates_presence_of :user_system_id
+  validates_presence_of :given_name
+  validates_presence_of :family_name
 end
