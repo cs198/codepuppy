@@ -1,8 +1,12 @@
 class CourseTermsController < ApplicationController
+  skip_before_filter :verify_authenticity_token
   respond_to :html, :xml, :json
 
   def create
-    CourseTerm.create(course_terms_params)
+    course_term = CourseTerm.create(course_terms_params)
+    respond_with(course_term)
+  rescue ActiveRecord::RecordInvalid => invalid
+    puts invalid.record.errors
   end
 
   def show
@@ -55,7 +59,7 @@ class CourseTermsController < ApplicationController
   private
 
   def course_terms_params
-    params.require(:course_term).permit(
+    params.permit(
       :course_id,
       :course_name,
       :term_name,

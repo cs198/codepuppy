@@ -1,8 +1,12 @@
 class CoursesController < ApplicationController
+  skip_before_filter :verify_authenticity_token
   respond_to :html, :xml, :json
 
   def create
-    Course.create(course_params)
+    course = Course.create(course_params)
+    respond_with(course)
+  rescue ActiveRecord::RecordInvalid => invalid
+    puts invalid.record.errors
   end
 
   def show
@@ -22,6 +26,6 @@ class CoursesController < ApplicationController
   private
 
   def course_params
-    params.require(:course).permit(:course_system_id)
+    params.permit(:course_system_id)
   end
 end

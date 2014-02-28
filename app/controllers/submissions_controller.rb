@@ -1,33 +1,32 @@
 class SubmissionsController < ApplicationController
+  skip_before_filter :verify_authenticity_token
 
   respond_to :html, :xml, :json
 
   def create
-    Submission.create(submission_params)
+    submission = Submission.create(submission_params)
+    respond_with(submission)
+   rescue ActiveRecord::RecordInvalid => invalid
+    puts invalid.record.errors
   end
 
   def show
-    begin
-      submission = Submission.find(params[:id])
-      respond_with(submission)
-    rescue ActiveRecord::RecordNotFound
-      raise 'Submission not found'
-    end
+    submission = Submission.find(params[:id])
+    respond_with(submission)
+  rescue ActiveRecord::RecordNotFound
+    raise 'Submission not found'
   end
 
   def comments
-    begin
-      comments = Comment.find_all_by_submission_id(params[:submission_id])
-      respond_with(comments)
-    rescue ActiveRecord::RecordNotFound
-      raise 'Submission not found'
-    end
+    comments = Comment.find_all_by_submission_id(params[:submission_id])
+    respond_with(comments)
+  rescue ActiveRecord::RecordNotFound
+    raise 'Submission not found'
   end
 
-  private 
+  private
 
-    def submission_params
-      params.require(:submission).permit(:student_id, :assignment_id, :location, :feedback_released)
-    end
-
+  def submission_params
+    params.permit(:student_id, :assignment_id, :location, :feedback_released)
+  end
 end

@@ -1,8 +1,12 @@
 class CommentsController < ApplicationController
+  skip_before_filter :verify_authenticity_token
   respond_to :html, :xml, :json
 
   def create
-    Comment.create(comment_params)
+    comment = Comment.create(comment_params)
+    respond_with(comment)
+  rescue ActiveRecord::RecordInvalid => invalid
+    puts invalid.record.errors
   end
 
   def show
@@ -15,7 +19,7 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(
+    params.permit(
       :submission_id,
       :file_location,
       :line_number,
