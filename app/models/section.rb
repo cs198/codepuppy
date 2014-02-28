@@ -9,4 +9,7 @@ class Section < ActiveRecord::Base
       where('sections_people.role = ?', 'leader')
     end
   end
+
+  validates_presence_of :course_term_id
+  validates_presence_of :leader_id
 end
