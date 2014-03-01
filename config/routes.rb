@@ -11,7 +11,7 @@ Namepending::Application.routes.draw do
     get 'students'
     get 'admins'
     get 'leaders'
-    resource 'assignments'
+    resources :assignments
   end
 
   resources :assignments do
