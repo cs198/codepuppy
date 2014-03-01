@@ -45,7 +45,7 @@ class PeopleController < ApplicationController
     course_terms_with_roles = []
     course_terms_without_roles(person, role).each do |course_term|
       course_terms_with_roles.push(
-        'course_term' => course_term, 'role' => role
+        :course_term => course_term, :role => role
       )
     end
     course_terms_with_roles
