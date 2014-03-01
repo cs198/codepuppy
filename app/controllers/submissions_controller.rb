@@ -5,7 +5,12 @@ class SubmissionsController < ApplicationController
 
   def index
     submissions = Submission.find_all_by_assignment_id(params[:assignment_id])
-    respond_with(submissions)
+    person_submissions = []
+    submissions.each do |submission|
+      student = Person.find(submission.student_id)
+      person_submissions.push('student' => student, 'submission' => submission)
+    end
+    respond_with(person_submissions)
   rescue ActiveRecord::RecordNotFound
     raise 'Assignment not found'
   end
@@ -19,7 +24,9 @@ class SubmissionsController < ApplicationController
 
   def show
     submission = Submission.find(params[:id])
-    respond_with(submission)
+    student = Person.find(submission.student_id)
+    person_submission = { 'student' => student, 'submission' => submission }
+    respond_with(person_submission)
   rescue ActiveRecord::RecordNotFound
     raise 'Submission not found'
   end
