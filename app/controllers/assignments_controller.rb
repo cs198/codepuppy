@@ -2,6 +2,15 @@ class AssignmentsController < ApplicationController
   skip_before_filter :verify_authenticity_token
   respond_to :html, :xml, :json
 
+  def index
+    assignments = Assignment.find_all_by_course_term_id(
+      params[:course_term_id]
+    )
+    respond_with(assignments)
+  rescue ActiveRecord::RecordNotFound
+    raise 'Course term not found'
+  end
+
   def create
     assignment = Assignment.create(assignment_params)
     respond_with(assignment)
@@ -12,13 +21,6 @@ class AssignmentsController < ApplicationController
   def show
     assignment = Assignment.find(params[:id])
     respond_with(assignment)
-  rescue ActiveRecord::RecordNotFound
-    raise 'Assignment not found'
-  end
-
-  def submissions
-    submissions = Submission.find_all_by_assignment_id(params[:assignment_id])
-    respond_with(submissions)
   rescue ActiveRecord::RecordNotFound
     raise 'Assignment not found'
   end

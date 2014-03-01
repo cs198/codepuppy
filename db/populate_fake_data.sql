@@ -14,6 +14,18 @@ DELETE FROM course_terms;
 DELETE FROM courses;
 DELETE FROM people;
 
+ALTER SEQUENCE comments_id_seq RESTART;
+ALTER SEQUENCE submissions_id_seq RESTART;
+ALTER SEQUENCE assignments_id_seq RESTART;
+
+ALTER SEQUENCE sections_people_id_seq RESTART;
+ALTER SEQUENCE sections_id_seq RESTART;
+
+ALTER SEQUENCE course_terms_people_id_seq RESTART;
+ALTER SEQUENCE course_terms_id_seq RESTART;
+ALTER SEQUENCE courses_id_seq RESTART;
+ALTER SEQUENCE people_id_seq RESTART;
+
 -- Create fake data.
 
 INSERT INTO people (user_system_id, given_name, family_name) VALUES 

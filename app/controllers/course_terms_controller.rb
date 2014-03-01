@@ -17,20 +17,7 @@ class CourseTermsController < ApplicationController
   end
 
   def active
-    course_terms = []
-    Course.all.each do |course|
-      course_terms.concat course.active
-    end
-    respond_with(course_terms)
-  rescue ActiveRecord::RecordNotFound
-    raise 'Course term not found'
-  end
-
-  def assignments
-    assignments = Assignment.find_all_by_course_term_id(
-      params[:course_term_id]
-    )
-    respond_with(assignments)
+    respond_with(CourseTerm.where(:active => true))
   rescue ActiveRecord::RecordNotFound
     raise 'Course term not found'
   end
