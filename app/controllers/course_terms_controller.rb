@@ -22,15 +22,6 @@ class CourseTermsController < ApplicationController
     raise 'Course term not found'
   end
 
-  def assignments
-    assignments = Assignment.find_all_by_course_term_id(
-      params[:course_term_id]
-    )
-    respond_with(assignments)
-  rescue ActiveRecord::RecordNotFound
-    raise 'Course term not found'
-  end
-
   def students
     course_term = CourseTerm.find(params[:id])
     respond_with(course_term.students)
