@@ -22,6 +22,7 @@ angular.module('codepuppy').controller('SubmissionCtrl', function($scope, $route
 			// TODO: Create a comment directive, set its text to commentBody.
 			$scope.commentBody.comment = comment;
 			$scope.comments.push($scope.commentBody);
+			console.log($scope.comments);
 		});
 	};
 
