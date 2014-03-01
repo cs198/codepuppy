@@ -3,6 +3,13 @@ class SubmissionsController < ApplicationController
 
   respond_to :html, :xml, :json
 
+  def index
+    submissions = Submission.find_all_by_assignment_id(params[:assignment_id])
+    respond_with(submissions)
+  rescue ActiveRecord::RecordNotFound
+    raise 'Assignment not found'
+  end
+
   def create
     submission = Submission.create(submission_params)
     respond_with(submission)

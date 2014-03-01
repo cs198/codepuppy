@@ -25,13 +25,6 @@ class AssignmentsController < ApplicationController
     raise 'Assignment not found'
   end
 
-  def submissions
-    submissions = Submission.find_all_by_assignment_id(params[:assignment_id])
-    respond_with(submissions)
-  rescue ActiveRecord::RecordNotFound
-    raise 'Assignment not found'
-  end
-
   private
 
   def assignment_params
