@@ -15,7 +15,7 @@ Namepending::Application.routes.draw do
   end
 
   resources :assignments do
-    resource 'submissions'
+    resources :submissions
   end
 
   resources :people do
