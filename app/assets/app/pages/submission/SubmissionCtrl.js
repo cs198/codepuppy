@@ -19,10 +19,8 @@ angular.module('codepuppy').controller('SubmissionCtrl', function($scope, $route
 		});
 
 		commentModal.result.then(function (comment) {
-			// TODO: Create a comment directive, set its text to commentBody.
 			$scope.commentBody.comment = comment;
 			$scope.comments.push($scope.commentBody);
-			console.log($scope.comments);
 		});
 	};
 
