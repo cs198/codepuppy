@@ -16,12 +16,12 @@ class PeopleController < ApplicationController
     raise 'Person not found'
   end
 
-  def course_terms
+  def courses
     person = Person.find(params[:person_id])
     if !params.key?(:role)
-      respond_with(course_terms_builder_all(person))
+      respond_with(courses_builder_all(person))
     else
-      respond_with(course_terms_builder(person, params[:role]))
+      respond_with(courses_builder(person, params[:role]))
     end
   rescue ActiveRecord::RecordNotFound
     raise 'Person not found'
@@ -33,36 +33,36 @@ class PeopleController < ApplicationController
     params.permit(:user_system_id, :given_name, :family_name)
   end
 
-  def course_terms_builder_all(person)
-    course_terms_with_roles =
-      course_terms_builder(person, 'student') +
-      course_terms_builder(person, 'leader') +
-      course_terms_builder(person, 'admin')
-    course_terms_with_roles
+  def courses_builder_all(person)
+    courses_with_roles =
+      courses_builder(person, 'student') +
+      courses_builder(person, 'leader') +
+      courses_builder(person, 'admin')
+    courses_with_roles
   end
 
-  def course_terms_builder(person, role)
-    course_terms_with_roles = []
-    course_terms_without_roles(person, role).each do |course_term|
-      course_terms_with_roles.push(
-        'course_term' => course_term, 'role' => role
+  def courses_builder(person, role)
+    courses_with_roles = []
+    courses_without_roles(person, role).each do |course|
+      courses_with_roles.push(
+        'course' => course, 'role' => role
       )
     end
-    course_terms_with_roles
+    courses_with_roles
   end
 
-  def course_terms_without_roles(person, role)
-    course_terms_without_roles = []
+  def courses_without_roles(person, role)
+    courses_without_roles = []
     if role.eql?('student')
-      course_terms_without_roles = person.course_terms.taking
+      courses_without_roles = person.courses.taking
     elsif role.eql?('leader')
-      course_terms_without_roles = person.course_terms.leading
+      courses_without_roles = person.courses.leading
     elsif role.eql?('admin')
-      course_terms_without_roles = person.course_terms.administrating
+      courses_without_roles = person.courses.administrating
     else
       fail "Role requested does not exist. Inputted: #{role.to_s}; " +
            'Valid roles: student, leader, admin.'
     end
-    course_terms_without_roles
+    courses_without_roles
   end
 end

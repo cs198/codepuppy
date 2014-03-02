@@ -14,3 +14,8 @@
 # ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.acronym 'RESTful'
 # end
+#
+ActiveSupport::Inflector.inflections do |inflect|
+  inflect.uncountable 'courses_people'
+  inflect.uncountable 'sections_people'
+end

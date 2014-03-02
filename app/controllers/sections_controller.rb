@@ -33,6 +33,6 @@ class SectionsController < ApplicationController
   private
 
   def section_params
-    params.permit(:course_term_id, :leader_id)
+    params.permit(:course_id, :leader_id)
   end
 end

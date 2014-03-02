@@ -1,16 +1,14 @@
 Namepending::Application.routes.draw do
   root 'index#show'
 
-  resources :courses
-
-  resources :course_terms do
+  resources :courses do
     collection do
       get 'active'
     end
 
     get 'students'
-    get 'admins'
     get 'leaders'
+    get 'admins'
     resources :assignments
   end
 
@@ -19,7 +17,7 @@ Namepending::Application.routes.draw do
   end
 
   resources :people do
-    get 'course_terms'
+    get 'courses'
   end
 
   resources :sections do
@@ -32,8 +30,6 @@ Namepending::Application.routes.draw do
   end
 
   resources :comments
-
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

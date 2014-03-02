@@ -3,12 +3,12 @@ class AssignmentsController < ApplicationController
   respond_to :html, :xml, :json
 
   def index
-    assignments = Assignment.find_all_by_course_term_id(
-      params[:course_term_id]
+    assignments = Assignment.find_all_by_course_id(
+      params[:course_id]
     )
     respond_with(assignments)
   rescue ActiveRecord::RecordNotFound
-    raise 'Course term not found'
+    raise 'Course not found'
   end
 
   def create
@@ -29,7 +29,7 @@ class AssignmentsController < ApplicationController
 
   def assignment_params
     params.permit(
-      :course_term_id,
+      :course_id,
       :number,
       :date_assigned,
       :date_due
