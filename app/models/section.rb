@@ -1,5 +1,5 @@
 class Section < ActiveRecord::Base
-  belongs_to :course_term
+  belongs_to :course
   has_many :sections_people
   has_many :people, through: :sections_people do
     def students
@@ -10,6 +10,6 @@ class Section < ActiveRecord::Base
     end
   end
 
-  validates_presence_of :course_term_id
+  validates_presence_of :course_id
   validates_presence_of :leader_id
 end

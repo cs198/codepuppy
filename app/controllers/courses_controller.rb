@@ -3,7 +3,7 @@ class CoursesController < ApplicationController
   respond_to :html, :xml, :json
 
   def create
-    course = Course.create(course_params)
+    course = Course.create(courses_params)
     respond_with(course)
   rescue ActiveRecord::RecordInvalid => invalid
     puts invalid.record.errors
@@ -16,16 +16,41 @@ class CoursesController < ApplicationController
     raise 'Course not found'
   end
 
-  def index
-    courses = Course.all
-    respond_with(courses)
+  def active
+    respond_with(Course.where(active: true))
   rescue ActiveRecord::RecordNotFound
-    raise 'Courses not found'
+    raise 'Course not found'
+  end
+
+  def students
+    course = Course.find(params[:course_id])
+    respond_with(course.people.students)
+  end
+
+  def leaders
+    course = Course.find(params[:course_id])
+    respond_with(course.people.leaders)
+  rescue ActiveRecord::RecordNotFound
+    raise 'Course not found'
+  end
+
+  def admins
+    course = Course.find(params[:course_id])
+    respond_with(course.people.admins)
+  rescue ActiveRecord::RecordNotFound
+    raise 'Course not found'
   end
 
   private
 
-  def course_params
-    params.permit(:course_system_id)
+  def courses_params
+    params.permit(
+      :course_dept,
+      :course_code,
+      :course_name,
+      :term_name,
+      :period,
+      :active
+    )
   end
 end
