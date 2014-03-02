@@ -45,7 +45,7 @@ class PeopleController < ApplicationController
     courses_with_roles = []
     courses_without_roles(person, role).each do |course|
       courses_with_roles.push(
-        'course' => course, 'role' => role
+        course: course, role: role
       )
     end
     courses_with_roles

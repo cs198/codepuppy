@@ -26,7 +26,7 @@ Namepending::Application.routes.draw do
   end
 
   resources :submissions do
-    resources 'comments'
+    resources :comments
   end
 
   resources :comments
