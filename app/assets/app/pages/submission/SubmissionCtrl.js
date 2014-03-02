@@ -3,11 +3,12 @@ angular.module('codepuppy').controller('SubmissionCtrl', function($scope, $route
     $scope.message+= " and assignment " + $routeParams.assignmentID;
     $scope.message+= " and submission " + $routeParams.submissionID;
 
-    $scope.comments = [];
+    $scope.comments = {};
 
-    $scope.submissionClicked = function() {
+    $scope.submissionClicked = function(index) {
 		$scope.commentBody = {};
 		$scope.commentBody.comment = "Hello!";
+		$scope.commentBody.lineNumber = index;
 		var commentModal = $modal.open({
 		templateUrl: '/assets/partials/commentModal/commentModal.html',
 		controller: CommentModalCtrl,
@@ -20,8 +21,18 @@ angular.module('codepuppy').controller('SubmissionCtrl', function($scope, $route
 
 		commentModal.result.then(function (comment) {
 			$scope.commentBody.comment = comment;
-			$scope.comments.push($scope.commentBody);
+			// Used to be push
+			console.log($scope.commentBody);
+			$scope.comments[$scope.commentBody.lineNumber] = $scope.commentBody;
 		});
 	};
+
+	// TODO: Change to an API call
+	$scope.codeLines = [];
+	$.get('/assets/pages/submission/code.java', function(data) {
+		$scope.codeLines = data.split('\n');
+	});
+	
+
 
 });

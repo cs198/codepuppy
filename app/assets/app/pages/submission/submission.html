@@ -1,8 +1,13 @@
 <sidebar></sidebar>
-<div class="submission" ng-click="submissionClicked()">
+<div class="submission" >
   <h1>Submission Page</h1>
   <p>{{ message }}</p>
-  <ul ng-repeat="commentBody in comments" >
-    <li><comment-holder commentBody='commentBody'></comment-holder></li>
-  </ul>
+  <div ng-repeat="line in codeLines track by $index">
+  	<pre>
+  	<code ng-click="submissionClicked($index)" class="submission_code_line">
+  	{{line}}
+  	</code>
+  	</pre>
+  	<comment-holder ng-if="comments[$index] != undefined" commentBody='comments[$index]' />
+  </div>
 </div>
