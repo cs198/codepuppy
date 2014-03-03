@@ -31,9 +31,9 @@ class SubmissionsController < ApplicationController
     raise 'Submission not found'
   end
 
-  def comments
-    comments = Comment.find_all_by_submission_id(params[:submission_id])
-    respond_with(comments)
+  def files
+    files = SubmissionFile.find_all_by_submission_id(params[:submission_id])
+    respond_with(files)
   rescue ActiveRecord::RecordNotFound
     raise 'Submission not found'
   end

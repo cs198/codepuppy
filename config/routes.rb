@@ -1,4 +1,6 @@
 Namepending::Application.routes.draw do
+  resources :submission_files
+
   root 'index#show'
 
   resources :courses do
@@ -26,10 +28,14 @@ Namepending::Application.routes.draw do
   end
 
   resources :submissions do
-    resources :comments
+    resources :submission_files
   end
 
-  resources :comments
+  resources :submission_files do
+    resources :file_comments
+  end
+
+  resources :file_comments
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
