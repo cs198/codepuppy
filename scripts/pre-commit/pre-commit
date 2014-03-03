@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
-#
-# An example hook script to verify what is about to be committed.
-# Called by "git commit" with no arguments.  The hook should
-# exit with non-zero status after issuing an appropriate message if
-# it wants to stop the commit.
+
+git stash -q --keep-index
+
+function fail_precommit {
+  git stash pop -q
+  exit 1
+}
 
 if git rev-parse --verify HEAD >/dev/null 2>&1
 then
@@ -41,7 +43,7 @@ then
 	echo
 	echo "  git config hooks.allownonascii true"
 	echo
-	exit 1
+	fail_precommit
 fi
 
 # Check installation of checkers
@@ -52,7 +54,7 @@ command -v rubocop >/dev/null 2>&1 || {
   echo "Please install rubocop by running: "
   echo "gem install rubocop"
   echo "Then, try committing again."
-  exit 1
+  fail_precommit
 }
 
 command -v jshint >/dev/null 2>&1 || {
@@ -83,34 +85,38 @@ command -v jshint >/dev/null 2>&1 || {
   echo "sudo npm install -g jshint"
 
   echo "Then, try committing again."
-  exit 1
+  fail_precommit
 }
 
 # Run checkers
 
-# rubocop
-git diff --cached --name-only --diff-filter=ACM | while read FILE; do
-  if [[ "$FILE" =~ ^.+(\.rb)$ ]]; then
-    output=$(rubocop "$FILE")
-    if [ $? -ne 0 ]; then
-      echo "$output"
-      echo "Errors found, please fix and try committing again."
-      exit 1
-    fi
-  fi
-done || exit $?
+CHANGED_FILES=$(git diff --cached --name-only --diff-filter=ACM)
+RB_REGEX="\.r[bu]$"
+JS_REGEX="\.js$"
 
-# jshint
-git diff --cached --name-only --diff-filter=ACM | while read FILE; do
-  if [[ "$FILE" =~ ^.+(\.js)$ ]]; then
-    output=$(jshint "$FILE")
-    if [ $? -ne 0 ]; then
-      echo "$output"
-      echo "Errors found, please fix and try committing again."
-      exit 1
-    fi
+echo "$CHANGED_FILES" | grep -q "$RB_REGEX"
+if [ $? -eq 0 ]; then
+  RB_FILES=$(echo "$CHANGED_FILES" | grep "$RB_REGEX")
+  output=$(rubocop "$RB_FILES")
+
+  if [ $? -ne 0 ]; then
+    echo "$output"
+    echo "Ruby errors found, please fix and try committing again."
+    fail_precommit
   fi
-done || exit $?
+fi
+
+echo "$CHANGED_FILES" | grep -q "$JS_REGEX"
+if [ $? -eq 0 ]; then
+  JS_FILES=$(echo "$CHANGED_FILES" | grep "$JS_REGEX")
+  output=$(jshint "$JS_FILES")
+
+  if [ $? -ne 0 ]; then
+    echo "$output"
+    echo "Javascript errors found, please fix and try committing again."
+    fail_precommit
+  fi
+fi
 
 # If there are whitespace errors, print the offending file names and fail.
 exec git diff-index --check --cached $against --
