@@ -1,5 +1,5 @@
 class Course < ActiveRecord::Base
-  has_many :courses_people
+  has_many :courses_people, class_name: 'CoursesPeople'
   has_many :people, through: :courses_people do
     def students
       where('courses_people.role = ?', 'student')

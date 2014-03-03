@@ -1,5 +1,5 @@
 class Person < ActiveRecord::Base
-  has_many :courses_people
+  has_many :courses_people, class_name: 'CoursesPeople'
   has_many :courses, through: :courses_people do
     def taking
       where('courses_people.role = ?', 'student')
@@ -14,7 +14,7 @@ class Person < ActiveRecord::Base
     end
   end
 
-  has_many :sections_people
+  has_many :sections_people, class_name: 'SectionsPeople'
   has_many :sections, through: :sections_people do
     def sections_taking
       where('sections_people.student = ?', true)
