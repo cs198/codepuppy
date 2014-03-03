@@ -25,10 +25,10 @@ angular.module('codepuppy').controller('NavigationCtrl',
       var courses = [];
       for (var i = 0; i < data.length; ++i) {
         courses.push({
-          'name': data[i].course_name + " ("
-                + data[i].term_name + " "
-                + data[i].period + ")",
-          'url': "/#/" + data[i].id
+          'name': data[i].course_name + ' (' +
+            data[i].term_name + ' ' +
+            data[i].period + ')',
+          'url': '/#/' + data[i].id
         });
       }
       var courseNav = {'title': 'Courses', 'elements': courses,
@@ -38,7 +38,7 @@ angular.module('codepuppy').controller('NavigationCtrl',
       }
       $scope.navigationSelectors[0] = courseNav;
     });
-  }
+  };
 
   /* COURSE HANDLING */
   getCourses();
@@ -54,8 +54,8 @@ angular.module('codepuppy').controller('NavigationCtrl',
       var assignments = [];
       for (var i = 0; i < data.length; ++i) {
         assignments.push({
-          'name': "Assignment " + data[i].number,
-          'url': "/#/" + courseID + "/" + data[i].id
+          'name': 'Assignment ' + data[i].number,
+          'url': '/#/' + courseID + '/' + data[i].id
         });
       }
       var assignmentNav = {'title': 'Assignments', 'elements': assignments,
@@ -64,7 +64,7 @@ angular.module('codepuppy').controller('NavigationCtrl',
         computeSelected(assignmentNav, $routeParams.assignmentID);
       $scope.navigationSelectors[1] = assignmentNav;
     });
-  }
+  };
 
   getAssignments($routeParams.courseID);
 
@@ -74,14 +74,16 @@ angular.module('codepuppy').controller('NavigationCtrl',
 
   /* SUBMISSION HANDLING */
   var getSubmissions = function(courseID, assignmentID) {
-    $http({method: 'GET', url: '/assignments/' + assignmentID + '/submissions.json'})
+    $http({method: 'GET', url: '/assignments/' + assignmentID +
+          '/submissions.json'})
     .success(function(data, status, headers, config) {
       var submissions = [];
       for (var i = 0; i < data.length; ++i) {
         console.log(data[i]);
         submissions.push({
-          'name': "Submission: " + data[i].student.user_system_id,
-          'url': "/#/" + courseID + "/" + assignmentID + "/" + data[i].student.id
+          'name': 'Submission: ' + data[i].student.user_system_id,
+          'url': '/#/' + courseID + '/' + assignmentID + '/' +
+            data[i].student.id
         });
       }
       var submissionNav = {'title': 'Submissions', 'elements': submissions,
@@ -90,7 +92,7 @@ angular.module('codepuppy').controller('NavigationCtrl',
         computeSelected(submissionNav, $routeParams.submissionID);
       $scope.navigationSelectors[2] = submissionNav;
     });
-  }
+  };
 
   getSubmissions($routeParams.courseID, $routeParams.assignmentID);
 }]);
