@@ -25,17 +25,6 @@ ActiveRecord::Schema.define(version: 20140127093535) do
 
   add_index "assignments", ["course_id"], name: "index_assignments_on_course_id", using: :btree
 
-  create_table "comments", force: true do |t|
-    t.integer "submission_id"
-    t.string  "file_location"
-    t.integer "line_number"
-    t.integer "num_lines"
-    t.string  "comment"
-  end
-
-  add_index "comments", ["file_location"], name: "index_comments_on_file_location", using: :btree
-  add_index "comments", ["submission_id"], name: "index_comments_on_submission_id", using: :btree
-
   create_table "courses", force: true do |t|
     t.string  "course_dept"
     t.string  "course_code"
@@ -53,6 +42,17 @@ ActiveRecord::Schema.define(version: 20140127093535) do
 
   add_index "courses_people", ["course_id"], name: "index_courses_people_on_course_id", using: :btree
   add_index "courses_people", ["person_id"], name: "index_courses_people_on_person_id", using: :btree
+
+  create_table "file_comments", force: true do |t|
+    t.integer  "submission_file_id"
+    t.integer  "line_number"
+    t.integer  "num_lines"
+    t.string   "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "file_comments", ["submission_file_id"], name: "index_file_comments_on_submission_file_id", using: :btree
 
   create_table "people", force: true do |t|
     t.string   "user_system_id"
@@ -80,6 +80,14 @@ ActiveRecord::Schema.define(version: 20140127093535) do
 
   add_index "sections_people", ["person_id"], name: "index_sections_people_on_person_id", using: :btree
   add_index "sections_people", ["section_id"], name: "index_sections_people_on_section_id", using: :btree
+
+  create_table "submission_files", force: true do |t|
+    t.integer "submission_id"
+    t.string  "path"
+    t.text    "data"
+  end
+
+  add_index "submission_files", ["submission_id"], name: "index_submission_files_on_submission_id", using: :btree
 
   create_table "submissions", force: true do |t|
     t.integer  "student_id"
