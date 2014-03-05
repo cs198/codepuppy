@@ -1,7 +1,7 @@
 //= require_self
 //= require_tree .
 
-codepuppy = angular.module('codepuppy', ['ngRoute']);
+codepuppy = angular.module('codepuppy', ['ngRoute', 'ui.bootstrap']);
 
 codepuppy.config(function($routeProvider) {
   $routeProvider
