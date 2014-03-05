@@ -6,9 +6,15 @@ angular.module('codepuppy').controller('SubmissionCtrl', function($scope, $route
     $scope.comments = {};
 
     $scope.submissionClicked = function(index) {
+
 		$scope.commentBody = {};
-		$scope.commentBody.comment = "Hello!";
-		$scope.commentBody.lineNumber = index;
+		if($scope.comments[index] !== undefined) {
+			$scope.commentBody = $scope.comments[index];
+		} else {
+			$scope.commentBody.lineNumber = index;
+			$scope.commentBody.comment = "Hello!";
+		}
+
 		var commentModal = $modal.open({
 		templateUrl: '/assets/partials/commentModal/commentModal.html',
 		controller: CommentModalCtrl,
