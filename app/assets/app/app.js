@@ -1,7 +1,8 @@
 //= require_self
 //= require_tree .
 
-codepuppy = angular.module('codepuppy', ['ngRoute', 'ui.bootstrap']);
+codepuppy = angular.module('codepuppy', ['ngRoute', 'ui.bootstrap', 
+  'angularFileUpload']);
 
 codepuppy.config(function($routeProvider) {
   $routeProvider
