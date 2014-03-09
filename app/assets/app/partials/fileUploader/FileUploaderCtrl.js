@@ -1,9 +1,12 @@
 angular.module('codepuppy').controller('FileUploaderCtrl',
 ['$scope', '$routeParams', '$fileUploader', function($scope, $routeParams, $fileUploader) {
   
-  console.log("reached");
   var uploader = $scope.uploader = $fileUploader.create({
-      scope: $scope,                         
+      scope: $scope,
+      // POST TO : submission_files.   
+      // Note which assignment/class this is.
+      // Generate submission token.
+      // Add form data -- this submission token.                 
   });
   
   uploader.bind('afteraddingfile', function (event, item) {
@@ -32,6 +35,7 @@ angular.module('codepuppy').controller('FileUploaderCtrl',
 
   uploader.bind('error', function (event, xhr, item, response) {
       console.info('Error', xhr, item, response);
+      // TODO: handle error
   });
 
   uploader.bind('complete', function (event, xhr, item, response) {
