@@ -5,6 +5,5 @@ class Submission < ActiveRecord::Base
 
   validates_presence_of :student_id
   validates_presence_of :assignment_id
-  validates_presence_of :location
   validates_presence_of :feedback_released
 end

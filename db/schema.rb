@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140127093535) do
+ActiveRecord::Schema.define(version: 20140309182029) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,12 @@ ActiveRecord::Schema.define(version: 20140127093535) do
   add_index "sections_people", ["person_id"], name: "index_sections_people_on_person_id", using: :btree
   add_index "sections_people", ["section_id"], name: "index_sections_people_on_section_id", using: :btree
 
+  create_table "sessions", force: true do |t|
+    t.string   "token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "submission_files", force: true do |t|
     t.integer "submission_id"
     t.string  "path"
@@ -92,7 +98,6 @@ ActiveRecord::Schema.define(version: 20140127093535) do
   create_table "submissions", force: true do |t|
     t.integer  "student_id"
     t.integer  "assignment_id"
-    t.string   "location"
     t.datetime "date_submitted"
     t.boolean  "feedback_released"
   end
