@@ -41,6 +41,6 @@ class SubmissionsController < ApplicationController
   private
 
   def submission_params
-    params.permit(:student_id, :assignment_id, :feedback_released)
+    params.permit(:student_id, :assignment_id, :feedback_released, :date_submitted)
   end
 end
