@@ -38,7 +38,7 @@ class SubmissionFilesController < ApplicationController
   def submission_file_params
     params.permit(
       :submission_id,
-      :path,
+      :original_filename,
       :data
     )
   end
