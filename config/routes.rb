@@ -31,6 +31,9 @@ Namepending::Application.routes.draw do
 
   resources :comments
 
+  post '/sessions/generate', to: 'sessions#generate'
+  post '/sessions/verify', to: 'sessions#verify'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
