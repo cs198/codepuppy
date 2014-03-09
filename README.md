@@ -1,4 +1,4 @@
-#  [Insert title here]
+#  Codepuppy
 
 **NOTE: This is clearly not developed yet. As such, this README will eventually
 contain information about what it does and how to use/deploy it; but until that
@@ -7,7 +7,7 @@ information becomes clear, it will mostly log progress.**
 ## Setup and running the server.
 
 [Setup instructions are
-here](https://github.com/rawatson/namepending/wiki/Setup)
+here](https://github.com/cs198/codepuppy/wiki/Setup)
 
 To run the development server, just enter `rails server` in the project
 directory. Yay!
@@ -20,15 +20,15 @@ as a collaboration between 4 Stanford section leaders, as a senior project.
 
 [insert title here]'s overarching goals, by Spring 2014, are the following:
 
-* Successfully deploy in a CS106\* class by Spring 2014
+* Develop a working prototype with file uploading and commenting by Spring 2014
 * Structure project for easy updates and changes once authors graduate
 * Communicate the purpose of this project with section leaders
 
 ## Wiki links
 
-* [Wiki (home to unstructured documentation)](https://github.com/rawatson/namepending/wiki)
-* [Project goals](https://github.com/rawatson/namepending/wiki/Project-goals)
-* [Project roadmap](https://github.com/rawatson/namepending/wiki/Project-roadmap)
+* [Wiki (home to unstructured documentation)](https://github.com/cs198/codepuppy/wiki)
+* [Project goals](https://github.com/cs198/codepuppy/wiki/Project-goals)
+* [Project roadmap](https://github.com/cs198/codepuppy/wiki/Project-roadmap)
 
 ## Team
 
