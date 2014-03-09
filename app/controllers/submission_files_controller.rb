@@ -8,7 +8,14 @@ class SubmissionFilesController < ApplicationController
     )
     respond_with(submission_file)
   rescue ActiveRecord::RecordNotFound
-    rails 'Submission file not found'
+    raise 'Submission file not found'
+  end
+
+  def create
+    submission_file = SubmissionFile.create(submission_file_params)
+    respond_with(submission_file)
+  rescue ActiveRecord::RecordInvalid => invalid
+    puts invalid.record.errors
   end
 
   def show
@@ -24,5 +31,15 @@ class SubmissionFilesController < ApplicationController
     respond_with(comments)
   rescue ActiveRecord::RecordNotFound
     raise 'Submission file\'s comments not found'
+  end
+
+  private
+
+  def submission_file_params
+    params.permit(
+      :submission_id,
+      :path,
+      :data
+    )
   end
 end
