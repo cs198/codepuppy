@@ -1,5 +1,5 @@
 angular.module('codepuppy').controller('FileUploaderCtrl',
-['$scope', '$routeParams', '$fileUploader', '$http', function($scope, $routeParams, $fileUploader, $http) {
+['$scope', '$routeParams', '$fileUploader', '$http', '$location', function($scope, $routeParams, $fileUploader, $http, $location) {
 
   var uploader = $scope.uploader = $fileUploader.create({
       scope: $scope,
@@ -8,10 +8,9 @@ angular.module('codepuppy').controller('FileUploaderCtrl',
   
 
   uploader.bind('completeall', function (event, items) {
-      // TODO: redirect
-      console.info('Complete all', items);
-
-      // Redirect
+      var path = '/' + $routeParams.courseID + '/' + $routeParams.assignmentID;
+      $location.path(path);
+      $scope.$apply();
   });
 
   $scope.submitAll = function()
