@@ -6,13 +6,13 @@ codepuppy = angular.module('codepuppy', ['ngRoute', 'ui.bootstrap',
 
 codepuppy.config(function($routeProvider) {
   // TODO: use session information to determine role.  Should be one of 'student', 'leader'
-  var role = 'leader';
+  var role = 'student';
 
   // Student-specific routes:
   if(role === 'student') {
     $routeProvider.when('/:courseID/:assignmentID/submit', {
-      templateUrl: '/assets/pages/assignment/' + role + '/assignment.html',
-      controller: 'AssignmentCtrl'
+      templateUrl: '/assets/pages/fileUpload/' + role + '/upload.html',
+      controller: 'FileUploadCtrl'
     });
   }
 
