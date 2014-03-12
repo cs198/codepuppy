@@ -39,9 +39,10 @@ angular.module('codepuppy').controller('SubmissionFileCtrl',
   }
 
   // TODO: Change to an API call
-  $scope.codeLines = [];
+  //$scope.codeLines = [];
   //$.get('/assets/pages/submission/code.java', function(data) {
-  $scope.codeLines = $file.data.split('\n');
+  //$scope.codeLines = $scope.file.data.split('\n');
+
   //});
 
 }]);

@@ -79,7 +79,6 @@ angular.module('codepuppy').controller('NavigationCtrl',
     .success(function(data, status, headers, config) {
       var submissions = [];
       for (var i = 0; i < data.length; ++i) {
-        console.log(data[i]);
         submissions.push({
           'name': 'Submission: ' + data[i].person.user_system_id,
           'url': '/#/' + courseID + '/' + assignmentID + '/' +
