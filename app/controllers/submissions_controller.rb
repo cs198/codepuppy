@@ -3,15 +3,14 @@ class SubmissionsController < ApplicationController
   respond_to :json
 
   def index
-    submissions = Submission.find_all_by_assignment_id(params[:assignment_id])
-    person_submissions = []
-    submissions.each do |submission|
-      person = Person.find(submission.person_id)
-      person_submissions.push('person' => person, 'submission' => submission)
+    begin
+      submissions = Submission.find_all_by_assignment_id(params[:assignment_id])
+    rescue ActiveRecord::RecordNotFound
+      raise "No submissions with assignment id #{params[:assignment_id]} found"
     end
-    respond_with(person_submissions)
-  rescue ActiveRecord::RecordNotFound
-    raise 'Assignment not found'
+
+    person_submissions = people_for_submissions submissions
+    respond_with person_submissions
   end
 
   def create
@@ -54,6 +53,21 @@ class SubmissionsController < ApplicationController
   end
 
   private
+
+  def people_for_submissions(submissions)
+    person_submissions = []
+    submissions.each do |submission|
+      begin
+        person = Person.find(submission.person_id)
+      rescue ActiveRecord::RecordNotFound
+        raise "When finding submissions for assignment #{params[:assignment_id]}"\
+          ", no person with ID #{submission.person_id} found."
+      end
+
+      person_submissions.push('person' => person, 'submission' => submission)
+    end
+    person_submissions
+  end
 
   def submission_params
     params.permit(:person_id, :assignment_id, :feedback_released, :date_submitted)
