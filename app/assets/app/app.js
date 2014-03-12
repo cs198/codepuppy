@@ -1,7 +1,7 @@
 //= require_self
 //= require_tree .
 
-codepuppy = angular.module('codepuppy', ['ngRoute', 'ui.bootstrap', 
+codepuppy = angular.module('codepuppy', ['ngRoute', 'ui.bootstrap',
   'angularFileUpload']);
 
 codepuppy.config(function($routeProvider) {
@@ -22,19 +22,29 @@ codepuppy.config(function($routeProvider) {
     templateUrl: '/assets/pages/home/' + role + '/' + role + 'Home.html',
     controller: capRole + 'HomeCtrl'
   })
-  .when('/:courseID', {
+  .when('/courses/:courseID', {
     templateUrl: '/assets/pages/course/' + role +'/' + role + 'Course.html',
     controller: capRole + 'CourseCtrl'
   })
-  .when('/:courseID/:assignmentID', {
+  .when('/courses/:courseID/assignments/:assignmentID', {
     templateUrl: '/assets/pages/assignment/' + role + '/' + role + 'Assignment.html',
     controller: capRole + 'AssignmentCtrl'
   })
-  .when('/:courseID/:assignmentID/:submissionID', {
+  .when('/courses/:courseID/assignments/:assignmentID/' +
+        'submissions/:submissionID',
+  {
     templateUrl: '/assets/pages/submission/' + role + '/' + role + 'Submission.html',
     controller: capRole + 'SubmissionCtrl'
+  })
+  .when('/sessions/verify', {
+    templateUrl: '/assets/pages/sessions/verify/sessions-verify.html',
+    controller: 'SessionsVerifyCtrl'
+  })
+  .otherwise({
+    templateUrl: '/assets/errorPages/404/404.html',
+    controller: '404Ctrl'
   });
 
-  
+
 
 });
