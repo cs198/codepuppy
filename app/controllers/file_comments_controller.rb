@@ -1,6 +1,6 @@
 class FileCommentsController < ApplicationController
   skip_before_filter :verify_authenticity_token
-  respond_to :html, :xml, :json
+  respond_to :json
 
   def create
     comment = FileComment.create(comment_params)

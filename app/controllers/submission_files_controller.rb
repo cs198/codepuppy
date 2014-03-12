@@ -1,6 +1,6 @@
 class SubmissionFilesController < ApplicationController
   skip_before_filter :verify_authenticity_token
-  respond_to :html, :xml, :json
+  respond_to :json
 
   def index
     submission_file = SubmissionFile.find_all_by_submission_id(
