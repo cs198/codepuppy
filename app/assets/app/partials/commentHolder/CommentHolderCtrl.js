@@ -1,7 +1,6 @@
 angular.module('codepuppy').controller('CommentHolderCtrl',
   function($scope, $modal) {
     $scope.onClicked = function($event) {
-      console.log('reached');
       var commentModal = $modal.open({
         templateUrl: '/assets/partials/commentModal/commentModal.html',
         controller: CommentModalCtrl,
