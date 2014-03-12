@@ -3,8 +3,8 @@ angular.module('codepuppy').directive('submissionFile', function() {
     restrict: 'E',
     scope: {
       'file': '=file',
-      'commentsReleased': '=commentsReleased', 
-      'commentPermissions': '=commentPermissions'
+      'commentsReleased': '=commentsreleased', 
+      'commentPermissions': '=commentpermissions'
     },
     templateUrl: '/assets/partials/submissionFile/submissionFile.html'
   };
