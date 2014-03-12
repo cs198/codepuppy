@@ -29,6 +29,8 @@ Namepending::Application.routes.draw do
 
   resources :submissions do
     resources :submission_files
+
+    put 'update_feedback_released'
   end
 
   resources :submission_files do
