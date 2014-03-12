@@ -1,7 +1,6 @@
 class SubmissionsController < ApplicationController
   skip_before_filter :verify_authenticity_token
-
-  respond_to :html, :xml, :json
+  respond_to :json
 
   def index
     submissions = Submission.find_all_by_assignment_id(params[:assignment_id])
