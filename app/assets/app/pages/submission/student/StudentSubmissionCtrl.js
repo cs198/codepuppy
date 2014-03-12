@@ -8,6 +8,7 @@ angular.module('codepuppy').controller('StudentSubmissionCtrl',
   // Map from line numbers to commentBody objects -- have .comment and .lineNumber fields
   $scope.comments = {};
   $scope.commentsReleased = false;
+  $scope.commentPermissions = false;
   $scope.files = [];
 
   var getSubmission = function() {
@@ -23,19 +24,20 @@ angular.module('codepuppy').controller('StudentSubmissionCtrl',
       for(var i = 0; i < data.length; ++i) {
         $scope.files.push(data[i]);
       }
+      if($scope.files.length > 0) {
+        $scope.selectedFile = $scope.files[0];
+      }
+
     });
   };
 
   getFiles();
   getSubmission();
 
-  if($scope.files.length > 0) {
-    $scope.selectedFile = $scope.files[0];
-  }
 
   // TODO: Change to an API call
-  $scope.codeLines = [];
-  $.get('/assets/pages/submission/code.java', function(data) {
-    $scope.codeLines = data.split('\n');
-  });
+  //$scope.codeLines = [];
+  //$.get('/assets/pages/submission/code.java', function(data) {
+  //  $scope.codeLines = data.split('\n');
+  //});
 });
