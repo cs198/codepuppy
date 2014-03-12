@@ -1,6 +1,6 @@
 class AssignmentsController < ApplicationController
   skip_before_filter :verify_authenticity_token
-  respond_to :html, :xml, :json
+  respond_to :json
 
   def index
     assignments = Assignment.find_all_by_course_id(
