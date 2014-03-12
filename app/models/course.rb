@@ -18,7 +18,7 @@ class Course < ActiveRecord::Base
   has_many :sections
 
   validates_presence_of :course_dept
-  validates_presence_of :course_num
+  validates_presence_of :course_code
   validates_presence_of :course_name
   validates_presence_of :term_name
   validates_presence_of :period
