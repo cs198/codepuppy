@@ -1,5 +1,5 @@
 angular.module('codepuppy').controller('LeaderSubmissionCtrl',
-                                       function($scope, $routeParams, $modal) {
+                                       function($scope, $routeParams, $modal, $http) {
   $scope.message = 'I\'m a submission page for the course ' +
     $routeParams.courseID;
   $scope.message += ' and assignment ' + $routeParams.assignmentID;
@@ -7,37 +7,33 @@ angular.module('codepuppy').controller('LeaderSubmissionCtrl',
 
   $scope.comments = {};
 
-    $scope.submissionClicked = function(index) {
+  // Map from line numbers to commentBody objects -- have .comment and .lineNumber fields
+  $scope.comments = {};
+  $scope.commentsReleased = false;
+  $scope.commentPermissions = true;
+  $scope.files = [];
 
-		$scope.commentBody = {};
-		if($scope.comments[index] !== undefined) {
-			$scope.commentBody = $scope.comments[index];
-		} else {
-			$scope.commentBody.lineNumber = index;
-			$scope.commentBody.comment = "Hello!";
-		}
-
-		var commentModal = $modal.open({
-		templateUrl: '/assets/partials/commentModal/commentModal.html',
-		controller: CommentModalCtrl,
-		resolve: {
-			commentBody: function()  {
-				return $scope.commentBody;
-			}
-		}
-		});
-
-    commentModal.result.then(function(comment) {
-      $scope.commentBody.comment = comment;
-      // Used to be push
-      console.log($scope.commentBody);
-      $scope.comments[$scope.commentBody.lineNumber] = $scope.commentBody;
+  var getSubmission = function() {
+    $http({method: 'GET', url: '/submissions/' + $routeParams.submissionID + '.json'})
+    .success(function(data, status, headers, config) {
+      $scope.commentsReleased = data.submission.feedback_released;
     });
   };
 
-  // TODO: Change to an API call
-  $scope.codeLines = [];
-  $.get('/assets/pages/submission/code.java', function(data) {
-    $scope.codeLines = data.split('\n');
-  });
+  var getFiles = function() {
+    $http({method: 'GET', url: '/submissions/' + $routeParams.submissionID + '/submission_files.json'})
+    .success(function(data, status, headers, config) {
+      for(var i = 0; i < data.length; ++i) {
+        $scope.files.push(data[i]);
+      }
+      if($scope.files.length > 0) {
+        $scope.selectedFile = $scope.files[0];
+      }
+
+    });
+  };
+
+  getFiles();
+  getSubmission();
+
 });

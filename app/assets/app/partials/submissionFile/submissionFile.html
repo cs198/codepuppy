@@ -3,6 +3,7 @@
 <pre><code ng-click="submissionClicked($index)"
            class="submission_code_line">{{line}}</code></pre>
 <comment-holder ng-if="comments[$index] != undefined"
-                commentBody='comments[$index]' />
+                commentBody='comments[$index]' 
+                commentPermissions='commentPermissions'/>
 </div>
 </div>

@@ -6,8 +6,8 @@ codepuppy = angular.module('codepuppy', ['ngRoute', 'ui.bootstrap',
 
 codepuppy.config(function($routeProvider) {
   // TODO: use session information to determine role.  Should be one of 'student', 'leader'
-  var role = 'student';
-  var capRole = 'Student';
+  var role = 'leader';
+  var capRole = 'Leader';
 
   // Student-specific routes:
   if(role === 'student') {
