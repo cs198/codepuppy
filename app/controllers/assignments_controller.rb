@@ -25,6 +25,14 @@ class AssignmentsController < ApplicationController
     raise 'Assignment not found'
   end
 
+  def destroy
+    assignment = Assignment.find(params[:id])
+    assignment.destroy
+    render json: []
+  rescue ActiveRecord::RecordNotFound
+    raise 'Assignment not found'
+  end
+
   private
 
   def assignment_params

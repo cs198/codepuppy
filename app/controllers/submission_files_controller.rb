@@ -25,14 +25,6 @@ class SubmissionFilesController < ApplicationController
     raise 'Submission file not found'
   end
 
-  def comments
-    comments = FileComment.find_all_by_submission_file_id(
-      params[:submission_file_id])
-    respond_with(comments)
-  rescue ActiveRecord::RecordNotFound
-    raise 'Submission file\'s comments not found'
-  end
-
   private
 
   def submission_file_params
