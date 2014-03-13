@@ -41,6 +41,14 @@ class CoursesController < ApplicationController
     raise 'Course not found'
   end
 
+  def destroy
+    course = Course.find(params[:id])
+    course.destroy
+    render json: []
+  rescue ActiveRecord::RecordNotFound
+    raise 'Course not found'
+  end
+
   private
 
   def courses_params
