@@ -1,7 +1,12 @@
 angular.module('codepuppy').controller('SubmissionFileCtrl',
 ['$scope', '$routeParams', '$fileUploader', '$http', '$modal', function($scope, $routeParams, $fileUploader, $http, $modal) {
+  console.log($scope.file);
   $scope.comments = {};
   
+  if($scope.commentPermissions || $scope.commentReleased) {
+    // Make get request for comments.
+  }
+
   $scope.submissionClicked = function(index) {
     if($scope.commentPermissions) {
       $scope.commentBody = {};
@@ -31,11 +36,4 @@ angular.module('codepuppy').controller('SubmissionFileCtrl',
       });
     }
   };
-  
-
-  if($scope.commentPermissions || $scope.commentReleased) {
-    // Make get request for comments.
-  }
-
-
 }]);
