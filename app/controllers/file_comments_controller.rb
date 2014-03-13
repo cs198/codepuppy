@@ -20,7 +20,7 @@ class FileCommentsController < ApplicationController
 
   def comment_params
     params.permit(
-      :submission_id,
+      :submission_file_id,
       :file_location,
       :line_number,
       :num_lines,
