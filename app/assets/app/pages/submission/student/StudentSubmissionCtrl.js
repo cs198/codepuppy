@@ -24,6 +24,7 @@ angular.module('codepuppy').controller('StudentSubmissionCtrl',
       for(var i = 0; i < data.length; ++i) {
         $scope.files.push(data[i]);
       }
+      console.log($scope.files);
       if($scope.files.length > 0) {
         $scope.selectedFile = $scope.files[0];
       }

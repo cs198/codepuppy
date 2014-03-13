@@ -33,6 +33,7 @@ angular.module('codepuppy').controller('LeaderSubmissionCtrl',
     });
   };
 
+
   getFiles();
   getSubmission();
 
