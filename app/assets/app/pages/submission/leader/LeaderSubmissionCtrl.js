@@ -29,7 +29,6 @@ angular.module('codepuppy').controller('LeaderSubmissionCtrl',
       if($scope.files.length > 0) {
         $scope.selectedFile = $scope.files[0];
       }
-
     });
   };
 
