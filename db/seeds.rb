@@ -43,9 +43,9 @@ SectionsPeople.create(section:section, person:maesenc, role:'leader')
 SectionsPeople.create(section:section, person:odiab, role:'student')
 SectionsPeople.create(section:section, person:amainero, role:'student')
 
-assignment_1 = Assignment.create(course:cs106b, number:1, name:'Game of Life', 
+assignment_1 = Assignment.create(course:cs106b, number:1, name:'Game of Life',
                                  date_assigned:'2014-01-10', date_due:'2014-01-17 14:00:00')
-assignment_2 = Assignment.create(course:cs106b, number:2, name:'Word Ladder / NGrams', 
+assignment_2 = Assignment.create(course:cs106b, number:2, name:'Word Ladder / NGrams',
                                  date_assigned:'2014-01-17', date_due:'2014-01-27 14:00:00')
 assignment_3 = Assignment.create(course:cs106b, number:3, name:'Recursion Problems',
                                  date_assigned:'2014-01-27', date_due:'2014-02-05 14:00:00')
@@ -58,9 +58,12 @@ assignment_6 = Assignment.create(course:cs106b, number:6, name:'Huffman',
 assignment_7 = Assignment.create(course:cs106b, number:7, name:'Huffman',
                                  date_assigned:'2014-03-05', date_due:'2014-03-17 14:00:00')
 
-anthony_submission = Submission.create(person:amainero, assignment:assignment_1, 
+Submission.delete_all
+SubmissionFile.delete_all
+
+anthony_submission = Submission.create(person:amainero, assignment:assignment_1,
                                        date_submitted: '2014-01-12', feedback_released:false)
-omar_submission = Submission.create(person:odiab, assignment:assignment_1, 
+omar_submission = Submission.create(person:odiab, assignment:assignment_1,
                                     date_submitted: '2014-01-13', feedback_released:true)
 
 
@@ -102,7 +105,7 @@ Expression *LambdaExpression::call(Vector<Expression *>& arguments,
     }
 
     return funct->eval(localState);
-}') 
+}')
 
 SubmissionFile.create(submission:anthony_submission, original_filename:'specialforms.cpp', data:'/**
  * File: specialforms.cpp
