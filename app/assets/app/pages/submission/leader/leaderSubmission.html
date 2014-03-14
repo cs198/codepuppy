@@ -3,7 +3,12 @@
   <h1>Submission Page</h1>
   <p>{{ message }}</p>
 
-    <submission-file file='files[0]',
-      commentsReleased='commentsReleased', 
-      commentPermissions='commentPermissions'></submission-file>
+  <span ng-repeat='file in files' > 
+  	<button ng-click='fileClicked(file)'>{{file.original_filename}}</button>
+  </span>
+
+	<submission-file file='selectedFile',
+	  commentsReleased='commentsReleased', 
+	  commentPermissions='commentPermissions'></submission-file>
+  
 </div>
