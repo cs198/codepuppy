@@ -33,4 +33,22 @@ angular.module('codepuppy').controller('LeaderSubmissionCtrl',
   getFiles();
   getSubmission();
 
+  $scope.$watch('commentsReleased', function(oldValue, newValue) {
+    if(oldValue != newValue) {
+      var urlParams = {
+        feedback_released: $scope.commentsReleased,
+      };
+
+      var toggleFeedbackReleased = function() {
+        $http({method: 'PUT', 
+          url: '/submissions/' + $routeParams.submissionID + '/update_feedback_released.json',
+          data: urlParams })
+        .success(function(data, status, headers, config) {
+        });
+      };
+
+      toggleFeedbackReleased();
+    }
+  });
+
 });

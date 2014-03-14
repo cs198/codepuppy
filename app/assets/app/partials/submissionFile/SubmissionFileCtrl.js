@@ -3,7 +3,6 @@ angular.module('codepuppy').controller('SubmissionFileCtrl',
   $scope.comments = {};
 
   $scope.getComments = function() {
-    console.log($scope.file);
     if($scope.file === undefined) return;
 
     var urlParams = {
@@ -66,7 +65,6 @@ angular.module('codepuppy').controller('SubmissionFileCtrl',
         };
 
         createComment();
-
         
       });
     }
