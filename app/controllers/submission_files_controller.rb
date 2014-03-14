@@ -12,7 +12,12 @@ class SubmissionFilesController < ApplicationController
   end
 
   def create
-    submission_file = SubmissionFile.create(submission_file_params)
+    file = params[:file]
+    submission_file = SubmissionFile.create(
+      submission_id: params[:submission_id],
+      original_filename: file.original_filename,
+      data: file.read
+    )
     respond_with(submission_file)
   rescue ActiveRecord::RecordInvalid => invalid
     puts invalid.record.errors
