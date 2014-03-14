@@ -1,8 +1,28 @@
 angular.module('codepuppy').controller('SubmissionFileCtrl',
 ['$scope', '$routeParams', '$fileUploader', '$http', '$modal', function($scope, $routeParams, $fileUploader, $http, $modal) {
   $scope.comments = {};
-  
 
+  $scope.getComments = function() {
+    console.log($scope.file);
+    if($scope.file === undefined) return;
+
+    var urlParams = {
+      submission_file_id: $scope.file.id,
+    };
+
+    $http({
+      method: 'GET',
+      url: '/submission_files/' + $scope.file.id + '/file_comments.json',
+      data: urlParams
+    }).success(function(data, status, headers, config) {
+      for(var i = 0; i < data.length; ++i) {
+      var newComment = data[i];
+      // $scope.commentBody.comment = data.comment;
+      $scope.comments[newComment.line_number] = newComment;      
+      }
+    });  
+  };
+  
   $scope.submissionClicked = function(index) {
     if($scope.commentPermissions) {
       $scope.commentBody = {};
