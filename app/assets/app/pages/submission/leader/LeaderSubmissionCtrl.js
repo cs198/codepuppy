@@ -35,8 +35,4 @@ angular.module('codepuppy').controller('LeaderSubmissionCtrl',
   getFiles();
   getSubmission();
 
-  $scope.fileClicked = function(file) {
-    $scope.selectedFile = file;
-  };
-
 });
