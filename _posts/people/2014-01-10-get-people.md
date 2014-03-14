@@ -1,17 +1,17 @@
 ---
 category: People
-path: '/people/[:id]'
+path: '/people/:id'
 title: 'Get a person'
 type: 'GET'
 
 layout: nil
 ---
 
-Retrieve an individual user by ID.
+Retrieve an individual person by ID.
 
 ## Request
 
-* Valid ID in URL.
+* The `id` must correspond to a valid person in the database
 
 ## Response
 
@@ -28,5 +28,3 @@ Sends back a person with the given id.
   }
 }
 ```
-
-For errors responses, see the [response status codes documentation](#response-status-codes).
