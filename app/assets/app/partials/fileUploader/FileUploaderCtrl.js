@@ -4,7 +4,6 @@ angular.module('codepuppy').controller('FileUploaderCtrl',
   $scope.uploader = $fileUploader.create({
       scope: $scope,
       url: '/submission_files.json',
-      formData: [{'key': 'value'}],
   });
 
 
@@ -29,16 +28,20 @@ angular.module('codepuppy').controller('FileUploaderCtrl',
 
       // 4 URL params: assignment_id, person_id, date_submited, feedback_released
       $http({method: 'POST', url: '/submissions.json', data: urlParams}).success(function(data, status, headers, config) {
-        console.log(data);
-        // Add submission ID to the file data
+
+        // For each item we upload, we send off a POST request to
+        // submission_files#create. data is response from the POST
+        // request to submissions#create, which contains the
+        // submission_id.
 
         var items = $scope.uploader.getNotUploadedItems();
-        console.log(items);
+
         for (var i = 0; i < items.length; i++) {
+          // Adds submission_id to the params for each item's
+          // POST request to submission_files#create
           items[i].formData = [{'submission_id': data.id}];
-          console.log("item");
-          console.log(items[i]);
         }
+
         // Submit each member of the queue
         $scope.uploader.uploadAll();
       });
