@@ -20,7 +20,7 @@ def main():
   token = form.getvalue("token")
   forward_url = form.getvalue("forward_url")
   verify_url = form.getvalue("verify_url")
-  if token == None:
+  if token == None or forward_url == None or verify_url == None:
     print("Content-Type: text/plain")
     print("")
     print("unauthorized user plz go")
