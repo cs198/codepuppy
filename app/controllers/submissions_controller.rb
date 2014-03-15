@@ -9,8 +9,8 @@ class SubmissionsController < ApplicationController
       raise "No submissions with assignment id #{params[:assignment_id]} found"
     end
 
-    person_submissions = people_for_submissions submissions
-    respond_with person_submissions
+    person_submissions = people_for_submissions(submissions)
+    respond_with(person_submissions)
   end
 
   def create
@@ -60,8 +60,12 @@ class SubmissionsController < ApplicationController
       begin
         person = Person.find(submission.person_id)
       rescue ActiveRecord::RecordNotFound
-        raise "When finding submissions for assignment #{params[:assignment_id]}"\
-          ", no person with ID #{submission.person_id} found."
+        # TODO: switch back to raise after we fix submission uploads
+        # Right now, we use '1' as the ID for an upload, which causes
+        # this rescue.
+        next
+    #    raise "When finding submissions for assignment #{params[:assignment_id]}"\
+    #      ", no person with ID #{submission.person_id} found."
       end
 
       person_submissions.push('person' => person, 'submission' => submission)
