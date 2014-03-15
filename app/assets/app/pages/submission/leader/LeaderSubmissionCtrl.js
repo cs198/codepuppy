@@ -1,5 +1,6 @@
-angular.module('codepuppy').controller('LeaderSubmissionCtrl',
-                                       function($scope, $routeParams, $modal, $http) {
+angular.module('codepuppy').controller('LeaderSubmissionCtrl', ['$scope', '$routeParams', '$modal', '$http', 
+  function($scope, $routeParams, $modal, $http) {
+    
   $scope.message = 'I\'m a submission page for the course ' +
     $routeParams.courseID;
   $scope.message += ' and assignment ' + $routeParams.assignmentID;
@@ -51,4 +52,4 @@ angular.module('codepuppy').controller('LeaderSubmissionCtrl',
     }
   });
 
-});
+}]);
