@@ -14,10 +14,10 @@ angular.module('codepuppy').controller('SubmissionFileCtrl',
       url: '/submission_files/' + $scope.file.id + '/file_comments.json',
       data: urlParams
     }).success(function(data, status, headers, config) {
+      $scope.comments = {};
       for(var i = 0; i < data.length; ++i) {
-      var newComment = data[i];
-      // $scope.commentBody.comment = data.comment;
-      $scope.comments[newComment.line_number] = newComment;      
+        var newComment = data[i];
+        $scope.comments[newComment.line_number] = newComment;      
       }
     });  
   };
@@ -43,8 +43,6 @@ angular.module('codepuppy').controller('SubmissionFileCtrl',
       });
 
       commentModal.result.then(function(comment) {
-        // Make a POST for a new comment.
-        // On succcess: perform these things -- add to comments.
         var createComment = function() {
           var urlParams = {
             submission_file_id: $scope.file.id,
@@ -53,19 +51,20 @@ angular.module('codepuppy').controller('SubmissionFileCtrl',
             comment: $scope.commentBody.comment,
           };
 
-          // 4 URL params: assignment_id, student_id, date_submited, feedback_released
           $http({
             method: 'POST',
             url: '/submission_files/' + $scope.file.id + '/file_comments.json',
             data: urlParams
           }).success(function(data, status, headers, config) {
-            $scope.commentBody.comment = data.comment;
+            // data returned should have commentBody's line number and content.
+            // Set commentBody equal to data so it becomes associated with id.
+            $scope.commentBody = data;
             $scope.comments[$scope.commentBody.line_number] = $scope.commentBody;
           });  
         };
-
-        createComment();
-        
+        if(comment !== "") {
+          createComment();  
+        }
       });
     }
   };

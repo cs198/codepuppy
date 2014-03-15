@@ -8,12 +8,11 @@ angular.module('codepuppy').controller('CommentHolderCtrl',
             resolve: {
               commentBody: function()  {
                 return $scope.commentBody;
-              }
+              },
             }
           });
 
           commentModal.result.then(function(comment) {
-            // Make a PUT request
             $scope.commentBody.comment = comment;
 
             var createComment = function() {
@@ -42,12 +41,13 @@ angular.module('codepuppy').controller('CommentHolderCtrl',
                 url: '/file_comments/' + $scope.commentBody.id,
                 data: urlParams
               }).success(function(data, status, headers, config) {
-                createComment(); 
+                if($scope.commentBody.comment !== "") {
+                  createComment(); 
+                }
               }); 
 
-            };            
+            };
             replaceComment();
-
           });
 
           if ($event.stopPropagation) $event.stopPropagation();
