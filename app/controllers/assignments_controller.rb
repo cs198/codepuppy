@@ -25,6 +25,16 @@ class AssignmentsController < ApplicationController
     raise 'Assignment not found'
   end
 
+  def update
+    assignment = Assignment.find(params[:assignment_id])
+    unless assignment.update_attributes(assignment_params)
+      puts 'Unable to update assignment ' + assignment.id
+    end
+    render json: assignment
+  rescue ActiveRecord::RecordNotFound
+    raise 'Assignment not found'
+  end
+
   def destroy
     assignment = Assignment.find(params[:id])
     assignment.destroy
@@ -40,7 +50,9 @@ class AssignmentsController < ApplicationController
       :course_id,
       :number,
       :date_assigned,
-      :date_due
+      :date_due,
+      :name,
+      :description
     )
   end
 end

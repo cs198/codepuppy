@@ -37,17 +37,19 @@ class SubmissionsController < ApplicationController
   end
 
   def update_feedback_released
-    submission = Submission.find(params[:submission_id])
-    submission.update_attribute(:feedback_released, params[:feedback_released])
+    if params.key?(:submission_id) && params.key?(:description)
+      submission = Submission.find(params[:submission_id])
+      submission.update_attribute(:feedback_released, params[:feedback_released])
 
-    # NOTE: Rails is really weird with PUT requests and
-    # defaults to sending Code 204: No Content responses
-    # upon respond_with calls. To respond with an actual
-    # resource, we break from our respond_with paradigm
-    # and render json instead. You will have to do this
-    # for every PUT request.
+      # NOTE: Rails is really weird with PUT requests and
+      # defaults to sending Code 204: No Content responses
+      # upon respond_with calls. To respond with an actual
+      # resource, we break from our respond_with paradigm
+      # and render json instead. You will have to do this
+      # for every PUT request.
 
-    render json: submission
+      render json: submission
+    end
  rescue ActiveRecord::RecordNotFound
     raise 'Submission not found'
   end
