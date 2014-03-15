@@ -37,7 +37,7 @@ class SubmissionsController < ApplicationController
   end
 
   def update_feedback_released
-    if params.key?(:submission_id) && params.key?(:description)
+    if params.key?(:submission_id)
       submission = Submission.find(params[:submission_id])
       submission.update_attribute(:feedback_released, params[:feedback_released])
 
@@ -50,7 +50,7 @@ class SubmissionsController < ApplicationController
 
       render json: submission
     end
- rescue ActiveRecord::RecordNotFound
+  rescue ActiveRecord::RecordNotFound
     raise 'Submission not found'
   end
 
