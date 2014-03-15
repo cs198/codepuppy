@@ -13,7 +13,6 @@ angular.module('codepuppy').controller('CommentHolderCtrl',
           });
 
           commentModal.result.then(function(comment) {
-            console.log($scope.commentBody);
             $scope.commentBody.comment = comment;
 
             var createComment = function() {
