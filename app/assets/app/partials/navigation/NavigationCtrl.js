@@ -82,7 +82,7 @@ angular.module('codepuppy').controller('NavigationCtrl',
         submissions.push({
           'name': 'Submission: ' + data[i].person.user_system_id,
           'url': '/#/courses/' + courseID + '/assignments/' + assignmentID +
-            '/submissions/' + data[i].person.id
+            '/submissions/' + data[i].submission.id
         });
       }
       var submissionNav = {'title': 'Submissions', 'elements': submissions,
