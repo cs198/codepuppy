@@ -3,7 +3,6 @@ angular.module('codepuppy').controller('StudentAssignmentCtrl', ['$scope', '$rou
   var getAssignment = function() {
     $http({method: 'GET', url: '/assignments/' + $routeParams.assignmentID + '.json'})
     .success(function(data, status, headers, config) {
-      console.log(data);
       $scope.assignmentDescription = data.description;
       $scope.assignmentName = data.name;
       if (!$scope.assignmentDescription) {
