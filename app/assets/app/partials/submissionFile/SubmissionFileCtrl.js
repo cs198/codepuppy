@@ -64,9 +64,7 @@ angular.module('codepuppy').controller('SubmissionFileCtrl',
         };
         if(comment !== "") {
           createComment();  
-        } else {
-          console.log("hello");
-        }       
+        }
       });
     }
   };
