@@ -10,7 +10,7 @@ SHARED_SECRET_KEY = 'BESURETODRINKYOUROVALTINE'
 def authenticate_with_codepuppy(token, forward_url, verify_url):
   sunetid = os.environ['REMOTE_USER']
   h = hmac.new(SHARED_SECRET_KEY, "{0},{1}".format(token, sunetid), sha256)
-  url = "{0}token={1}&user_system_id={2}&hmac={3}&forward_url={4}"
+  url = "{0}?token={1}&user_system_id={2}&hmac={3}&forward_url={4}"
   url = url.format(verify_url, token, sunetid, h.hexdigest(), forward_url)
   print("Location:{0}".format(url))
   print("")
