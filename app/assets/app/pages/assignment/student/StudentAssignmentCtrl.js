@@ -1,6 +1,6 @@
 angular.module('codepuppy').controller('StudentAssignmentCtrl', ['$scope',
-    '$routeParams', '$fileUploader', '$http',
-    function($scope, $routeParams, $fileUploader, $http) {
+  '$routeParams', '$fileUploader', '$http', '$sce',
+  function($scope, $routeParams, $fileUploader, $http, $sce) {
 
   var getAssignment = function() {
     $http({
@@ -13,11 +13,19 @@ angular.module('codepuppy').controller('StudentAssignmentCtrl', ['$scope',
       } else {
         $scope.assignmentName = "";
       }
+
       if (data.description) {
-        $scope.assignmentDescription = ParseWiki(data.description);
+        if (true || iswiki(data.description)) {
+          $scope.assignmentDescription = $sce.trustAsHtml(
+            wiki2html(data.description)
+          );
+        } else {
+          $scope.assignmentDescription = data.description;
+        }
       } else {
         $scope.assignmentDescription = "";
       }
+      console.log($scope.assignmentDescription);
     });
   };
   getAssignment();

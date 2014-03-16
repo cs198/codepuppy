@@ -3,6 +3,6 @@
   <h1>Assignment Page</h1>
   <p>{{ message }}</p>
   <p>{{ assignmentName }}</p>
-  <p>{{ assignmentDescription }}</p>
+  <div ng-bind-html="assignmentDescription" ></div>
   <a href="{{uploadPath}}">Upload a submission</a>
 </div>

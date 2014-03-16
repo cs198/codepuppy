@@ -1,4 +1,6 @@
-angular.module('codepuppy').controller('LeaderAssignmentCtrl', ['$scope', '$routeParams', '$fileUploader', '$http', '$sce', function($scope, $routeParams, $fileUploader, $http, $sce) {
+angular.module('codepuppy').controller('LeaderAssignmentCtrl', ['$scope',
+    '$routeParams', '$fileUploader', '$http', '$sce',
+    function($scope, $routeParams, $fileUploader, $http, $sce) {
 
   var getAssignment = function() {
     $http({
@@ -19,7 +21,6 @@ angular.module('codepuppy').controller('LeaderAssignmentCtrl', ['$scope', '$rout
             wiki2html(data.description)
           );
         } else {
-          console.log('muthafucka');
           $scope.assignmentDescription = data.description;
         }
       } else {
