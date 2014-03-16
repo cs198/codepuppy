@@ -3,10 +3,15 @@ class Session < ActiveRecord::Base
   validates_presence_of :token
   before_create :init_last_seen
 
-  TTL = 20.minutes
+  TTL_TO_VERIFY = 20.minutes
+  TTL_VALID = 1.month
 
   def expired?
-    last_seen_at < TTL.ago
+    if verified
+      return last_seen_at < TTL_VALID.ago
+    else
+      return last_seen_at < TTL_TO_VERIFY.ago
+    end
   end
 
   def active?
