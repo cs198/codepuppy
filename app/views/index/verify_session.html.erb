@@ -1,0 +1,22 @@
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script>
+var data = {
+    hmac: '<%= params[:hmac] %>',
+    user_system_id: '<%= params[:user_system_id] %>'
+};
+
+$.ajax({
+    type: "POST",
+    url: "/sessions/verify.json",
+    data: $.param(data),
+    headers: {
+        AUTHORIZATION: '<%= params[:token] %>',
+    },
+    success: function(data) {
+        window.location = '<%= params[:forward_url] %>';
+    },
+    error: function(data) {
+        window.location = 'http://cs198.stanford.edu';
+    }
+});
+</script>

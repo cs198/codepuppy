@@ -25,10 +25,10 @@ angular.module('codepuppy').controller('NavigationCtrl',
       var courses = [];
       for (var i = 0; i < data.length; ++i) {
         courses.push({
-          'name': data[i].course_name + ' (' +
+          name: data[i].course_name + ' (' +
             data[i].term_name + ' ' +
             data[i].period + ')',
-          'url': '/#/' + data[i].id
+          url: '/#/courses/' + data[i].id
         });
       }
       var courseNav = {'title': 'Courses', 'elements': courses,
@@ -55,7 +55,7 @@ angular.module('codepuppy').controller('NavigationCtrl',
       for (var i = 0; i < data.length; ++i) {
         assignments.push({
           'name': 'Assignment ' + data[i].number,
-          'url': '/#/' + courseID + '/' + data[i].id
+          'url': '/#/courses/' + courseID + '/assignments/' + data[i].id
         });
       }
       var assignmentNav = {'title': 'Assignments', 'elements': assignments,
@@ -81,8 +81,8 @@ angular.module('codepuppy').controller('NavigationCtrl',
       for (var i = 0; i < data.length; ++i) {
         submissions.push({
           'name': 'Submission: ' + data[i].person.user_system_id,
-          'url': '/#/' + courseID + '/' + assignmentID + '/' +
-            data[i].submission.id
+          'url': '/#/courses/' + courseID + '/assignments/' + assignmentID +
+            '/submissions/' + data[i].submission.id
         });
       }
       var submissionNav = {'title': 'Submissions', 'elements': submissions,
