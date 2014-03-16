@@ -1,7 +1,7 @@
 //= require_self
 //= require_tree .
 
-codepuppy = angular.module('codepuppy', ['ngRoute', 'ui.bootstrap',
+codepuppy = angular.module('codepuppy', ['ngRoute', 'ngCookies', 'ui.bootstrap',
   'angularFileUpload']);
 
 codepuppy.config(function($routeProvider) {
@@ -44,7 +44,9 @@ codepuppy.config(function($routeProvider) {
     templateUrl: '/assets/errorPages/404/404.html',
     controller: '404Ctrl'
   });
-
-
-
-});
+}).run(['session', function(session) {
+    session.checkAuthenticated(function() {
+    }, function() {
+        session.authenticate();
+    });
+}]);
