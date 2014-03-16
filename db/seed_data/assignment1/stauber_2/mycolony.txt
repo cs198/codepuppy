@@ -1,0 +1,21 @@
+15
+20
+--------------------
+--------------------
+------XX------------
+-------X------------
+-------XX-----------
+--------XX----------
+---------X----------
+----------X---------
+----------XX--------
+-----------XX-------
+------------X-------
+------------XX------
+--------------------
+--------------------
+--------------------
+
+# This colony appears to act like a springy material under tension.
+# It begins stretched and quickly shrinks to the middle, then expands
+# again and snaps into little pieces.

@@ -1,0 +1,5 @@
+<s>::=<v>|<adj> <n>|<adv> <v>|<n>
+<v>::=<n>|<adj> <n>|jump|play|learn|code
+<n>::=student|professor|teacher|boy|girl|man|woman
+<adj>::=<n>|sad|happy|pretty|colorful
+<adv>::=<v>|happily|playfully|randomly

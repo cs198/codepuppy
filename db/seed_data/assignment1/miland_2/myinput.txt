@@ -1,0 +1,1 @@
+I was really frustrated that I could not figure out a way to code the assignment without global variables. My goal is to not use global variables next time. 

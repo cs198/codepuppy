@@ -1,0 +1,20 @@
+13
+13
+XXXXXXXXXXXXX
+X-----------X
+X-X-------X-X
+X--X-----X--X
+X---X---X---X
+X----X-X----X
+X-----X-----X
+X----X-X----X
+X---X---X---X
+X--X-----X--X
+X-X-------X-X
+X-----------X
+XXXXXXXXXXXXX
+
+
+# czeng
+# Starts as a large X formation enclosed in a rectangle
+# and stabilizes to a diamond in the center

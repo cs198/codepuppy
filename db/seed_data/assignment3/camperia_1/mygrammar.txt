@@ -1,0 +1,8 @@
+n::=Eddard|Tyrion|Jaime|Jon|Robert|Cersei|Robb|Arya|Bran|Sansa|Petyr
+v::=died
+tv::=killed|massacred|stabbed
+a::=violently|murderously|maliciously|treacherously
+t::=before|after|in
+b::=game of thrones|clash of kings|storm of swords|feast for crows|dance with dragons
+s::=n vc t b
+vc::=v a|a tv n

@@ -1,0 +1,10 @@
+RAPVERSE::= RAPPERNOISE NOUNPHRASE VERBPHRASE|RAPPERNOISE PNOUN VERBPHRASE|NOUNPHRASE VERBPHRASE|PNOUN RAPSLANGVERB PREPOSITION RAPSLANGNOUN
+RAPPERNOISE::= SWERVE|SCURR
+PREPOSITION::= the|a
+RAPSLANGADJEC::= trill|jiggy|misoverstood|spottieottiedopaliscious|illmatic
+RAPSLANGNOUN::= swaghili|swag|homey|gangstarr|audience|shaboobalaboopy|wanksta
+RAPSLANGVERB::= yawked|started|copped|dropped|rapped
+RAPSLANGADVERB::= quickly|robustly|meticulously|articulately
+NOUNPHRASE::=PREPOSITION RAPSLANGADJEC RAPSLANGNOUN|RAPSLANGNOUN|PNOUN
+VERBPHRASE::=RAPSLANGVERB|RAPSLANGADVERB RAPSLANGVERB
+PNOUN::= Dylan|Birdman|Andrew|Weezy|Macklemore|Kendrick|KDot|Hova|Cyrus|Cesar|MaximumSteelFlex|Eminem|Biggie

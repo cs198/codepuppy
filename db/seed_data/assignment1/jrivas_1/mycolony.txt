@@ -1,0 +1,26 @@
+15
+15
+---------------
+---------------
+---------------
+----X-----X----
+---------------
+---------------
+-------X-------
+---------------
+--X---------X--
+---X-------X---
+----XXXXXXX----
+---------------
+---------------
+---------------
+---------------
+
+
+
+# This file is empty for now, but you should delete this initial text
+# and replace it with your own creative input file representing a
+# starting state for the Game of Life simulation.
+# The file should be your own creation that is different from the
+# other provided starter grid files.
+# This smile is now a smiley face!! :-)

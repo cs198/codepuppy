@@ -1,0 +1,15 @@
+<noun>::=tower|chair|guy|person|champion
+<name>::=Ezreal|Vayne|Zyra|Janna
+<presverb>::=walks|talks|draws
+<pastverb>::=slept|cried|shouted|screamed
+<adverb>::=wonderfully|beautifully|nicely
+<conjunc>::=and|but|or|yet|for|nor|so
+<superl>::=best|worst|nicest
+<adjec>::=good|bad|mysterious|attractive
+<is>::=is
+<det>::=the
+<r1>::=<name> <presverb> <adverb>|<name> <pastverb>
+<r2>::=<r1> <conjunc> <r1>
+<r3>::=<name> <is> <det> <superl> <noun>
+<r4>::=<det> <adjec> <noun>|<det> <adjec> <name>|<det> <superl> <name>
+<r5>::=<name> <pastverb>|<det> <noun> <pastverb>

@@ -1,0 +1,10 @@
+<s>::=<np> <vp>
+<np>::=<dp> <n>|<pn>
+<dp>::=the|a
+<adjp>::=<adj>|<adjp>
+<adj>::=big|fat|green|wonderful|faulty|subliminal|pretentious|sexy|attractive
+<n>::=dog|cat|man|university|father|mother|child|television|bigboy
+<pn>::=John|Jane|Sally|Spot|Fred|Elmo|Shankara|Sloppy|Nemo|Tara|Milan
+<vp>::=<tv> <np>|<iv>
+<tv>::=hit|honored|kissed|helped|sloppied|ate
+<iv>::=died|collapsed|laughed|wept

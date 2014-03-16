@@ -1,0 +1,10 @@
+sentence::=nounphrase verbphrase
+noun::=student|vodka|cigarettes|glass|guitar|alcohol|wine
+pronoun::=Will|Vic|Harry|Mary|Amy
+verbphrase::=verb nounphrase|indirectverb
+adjective::=rainy|gloomy|depressed|emotional|lost|alone
+verb::=cut|cried|drank|sang|wrote
+indirectverb::=dreamed|loved|collapsed|forgave
+nounphrase::=definitearticle adjectivephrase noun|pronoun
+definitearticle::=the|a
+adjectivephrase::=adjective|adjective adjectivephrase

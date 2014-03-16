@@ -43,244 +43,80 @@ SectionsPeople.create(section:section, person:maesenc, role:'leader')
 SectionsPeople.create(section:section, person:odiab, role:'student')
 SectionsPeople.create(section:section, person:amainero, role:'student')
 
-assignment_1 = Assignment.create(course:cs106b, number:1, name:'Game of Life',
+assignments = Array.new(7)
+assignments[0] = Assignment.create(course:cs106b, number:1, name:'Game of Life',
                                  date_assigned:'2014-01-10', date_due:'2014-01-17 14:00:00')
-assignment_2 = Assignment.create(course:cs106b, number:2, name:'Word Ladder / NGrams',
+assignments[1] = Assignment.create(course:cs106b, number:2, name:'Word Ladder / NGrams',
                                  date_assigned:'2014-01-17', date_due:'2014-01-27 14:00:00')
-assignment_3 = Assignment.create(course:cs106b, number:3, name:'Recursion Problems',
+assignments[2] = Assignment.create(course:cs106b, number:3, name:'Recursion Problems',
                                  date_assigned:'2014-01-27', date_due:'2014-02-05 14:00:00')
-assignment_4 = Assignment.create(course:cs106b, number:4, name:'Boggle',
+assignments[3] = Assignment.create(course:cs106b, number:4, name:'Boggle',
                                  date_assigned:'2014-02-05', date_due:'2014-02-14 14:00:00')
-assignment_5 = Assignment.create(course:cs106b, number:5, name:'Priority Queue',
+assignments[4] = Assignment.create(course:cs106b, number:5, name:'Priority Queue',
                                  date_assigned:'2014-02-14', date_due:'2014-02-24 14:00:00')
-assignment_6 = Assignment.create(course:cs106b, number:6, name:'Huffman',
+assignments[5] = Assignment.create(course:cs106b, number:6, name:'Huffman',
                                  date_assigned:'2014-02-24', date_due:'2014-03-05 14:00:00')
-assignment_7 = Assignment.create(course:cs106b, number:7, name:'Huffman',
+assignments[6] = Assignment.create(course:cs106b, number:7, name:'Huffman',
                                  date_assigned:'2014-03-05', date_due:'2014-03-17 14:00:00')
 
 Submission.delete_all
 SubmissionFile.delete_all
 
-anthony_submission = Submission.create(person:amainero, assignment:assignment_1,
-                                       date_submitted: '2014-01-12', feedback_released:false)
-omar_submission = Submission.create(person:odiab, assignment:assignment_1,
-                                    date_submitted: '2014-01-13', feedback_released:true)
 
+first_names = ['James', 'John', 'Robert', 'Michael', 'William', 'David',
+               'Richard', 'Charles', 'Thomas', 'Christopher', 'Daniel', 'Paul',
+               'Mark', 'Donald', 'George', 'Kenneth', 'Steven', 'Edward',
+               'Brian', 'Ronald']
 
-SubmissionFile.create(submission:anthony_submission, original_filename:'lambda.cpp', data:'/**
- * File: lambda.cpp
- * ----------------
- */
+last_names = ['Smith', 'Johnson', 'Williams', 'Jones', 'Brown', 'Davis',
+              'Miller', 'Wilson', 'Moore', 'Taylor', 'Anderson', 'Thomas',
+              'Jackson', 'White', 'Harris', 'Martin', 'Thompson']
 
-#include "genlib.h"
-#include "lambda.h"
-#include "symbol.h"
-#include "strutils.h"
+student_objects = Hash.new
+ActiveRecord::Base.transaction do
+Dir.foreach("#{Rails.root}/db/seed_data") do |assignment|
+  assignment_dir = "#{Rails.root}/db/seed_data/#{assignment}"
+  match_results = /^assignment(\d+)$/.match(assignment)
+  puts assignment
+  next if match_results == nil
+  assignment_number = match_results[1]
+  assignment_obj = assignments[assignment_number.to_i - 1]
 
-LambdaExpression::LambdaExpression(Vector<SymbolExpression *>& parameters,
-                                   Expression *parametrizedExpression,
-                                   EvalState& stateAtEvalTime) {
-    param = parameters;
-    funct = parametrizedExpression;
-    initState = new EvalState(stateAtEvalTime);
-}
-
-/**
- * Rather than return the full stringification of the full lambda,
- * we elect to return an abbreviated string that just makes it clear
- * the expression is some sort of a lambda.
- */
-
-Expression *LambdaExpression::call(Vector<Expression *>& arguments,
-                                   EvalState& state) {
-    if(arguments.size() != param.size()){
-        Error("Incorrect number of arguments in the lambda expression.");
-    }
-
-    EvalState localState(state);
-
-    for(int i = 0; i < arguments.size(); i++){
-        Expression *evalArg = arguments[i]->eval(localState);
-        localState.setExpression(param[i]->toString(), evalArg);
-    }
-
-    return funct->eval(localState);
-}')
-
-SubmissionFile.create(submission:anthony_submission, original_filename:'specialforms.cpp', data:'/**
- * File: specialforms.cpp
- * ----------------------
- */
-
-#include "specialforms.h"
-#include "expression.h"
-#include "lst.h"
-#include "symbol.h"
-#include "boolean.h"
-#include "set.h"
-#include "lambda.h"
-#include "rational.h"
-#include "str.h"
-#include "scanner.h"
-#include <iostream>
-
-Expression *DefineSpecialForm::call(Vector<Expression *>& arguments,
-                                    EvalState& state) {
-    if (arguments.size() != 2) {
-        Error("define expects exactly two arguments");
-    }
-
-    SymbolExpression *symbol = dynamic_cast<SymbolExpression *>(arguments[0]);
-    if (symbol == NULL) {
-        Error("The first argument to define by be a symbol");
-    }
-    Expression *value = arguments[1];
-
-    state.setExpression(symbol->toString(),
-                        value->eval(state));
-    return symbol;
-}
-
-Expression *QuitSpecialForm::call(Vector<Expression *>& arguments,
-                                  EvalState& state) {
-    cout << endl;
-    cout << "[Press <return> to close]";
-    string dummy;
-    getline(cin, dummy);
-    exit(0);
-    return this; // hush the compiler
-}
-
-Expression *CarSpecialForm::call(Vector<Expression *>& arguments,
-                                 EvalState& state) {
-    if (arguments.size() != 1) {
-        Error("car expects exactly one argument");
-    }
-
-    evaluateAllArguments(arguments, state);
-    ListExpression *listArgument =
-        dynamic_cast<ListExpression *>(arguments[0]);
-    if (listArgument == NULL) {
-        Error("car expects its one argument to be a list");
-    }
-
-    return listArgument->car();
-}
-
-Expression *CdrSpecialForm::call(Vector<Expression *>& arguments,
-                                 EvalState& state) {
-    if (arguments.size() != 1) {
-        Error("cdr expects exactly one argument.");
-    }
-
-    evaluateAllArguments(arguments, state);
-    ListExpression *listArgument =
-        dynamic_cast<ListExpression *>(arguments[0]);
-    if (listArgument == NULL) {
-        Error("cdr expects its one argument to be a list.");
-    }
-
-    return listArgument->cdr();
-}
-
-Expression *ConsSpecialForm::call(Vector<Expression *>& arguments,
-                                  EvalState& state) {
-    if (arguments.size() != 2) {
-        Error("cons expects precisely two arguments.");
-    }
-
-    evaluateAllArguments(arguments, state);
-    Expression *newCar = arguments[0];
-    ListExpression *newCdr = dynamic_cast<ListExpression *>(arguments[1]);
-    if (newCdr == NULL) {
-        Error("Second argument passed to cons must be a list.");
-    }
-
-    return new ListExpression(newCar, newCdr);
-}
-
-Expression *ListSpecialForm::call(Vector<Expression *>& arguments,
-                                  EvalState& state) {
-    evaluateAllArguments(arguments, state);
-    return new ListExpression(arguments);
-}
-
-Expression *IfSpecialForm::call(Vector<Expression *>& arguments,
-                                EvalState& state) {
-    if (arguments.size() != 3) {
-        Error("if expressions expect precisely three arguments.");
-    }
-
-    if (arguments[0]->eval(state)->isTrue())
-        return arguments[1]->eval(state);
+  Dir.foreach(assignment_dir) do |submission|
+    next if submission == '.' or submission == '..'
+    match_results = /(\w+)_(\d+)/.match(submission)
+    student_id = match_results[1]
+    if student_objects.has_key?(student_id)
+      student = student_objects[student_id]
     else
-        return arguments[2]->eval(state);
-}
+      student = Person.create(user_system_id:student_id,
+                              given_name:first_names.sample, 
+                              family_name:last_names.sample)
+      CoursesPeople.create(course:cs106b, person:student, role:'student')
+      student_objects[student_id] = student
+    end
 
-Expression *NullSpecialForm::call(Vector<Expression *>& arguments,
-                                  EvalState& state)
-{
-    if (arguments.size() != 1) {
-        Error("null expressions take just one argument.");
-    }
-
-    evaluateAllArguments(arguments, state);
-    ListExpression *list =
-        dynamic_cast<ListExpression *>(arguments[0]);
-    if (list == NULL) {
-        Error("null expects a list and only a list");
-    }
-
-    return new BooleanExpression(list->isEmpty());
-}
-
-Expression *AddSpecialForm::call(Vector<Expression *>& arguments,
-                                EvalState& state)
-{
-    evaluateAllArguments(arguments, state);
-    RationalExpression *sum = new RationalExpression(0);
-    for (int i = 0; i < arguments.size(); i++) {
-        RationalExpression *addend =
-            dynamic_cast<RationalExpression *>(arguments[i]);
-        if (addend == NULL) {
-            Error("add expects all arguments to be rational numbers.");
-        }
-        sum = sum->add(addend);
-    }
-    return sum;
-}
-
-Expression *SubtractSpecialForm::call(Vector<Expression *>& arguments,
-                                      EvalState& state)
-{
-    if (arguments.size() != 2) {
-        Error("subtract takes precisely two arguments.");
-    }
-    evaluateAllArguments(arguments, state);
-    RationalExpression *minuend =
-        dynamic_cast<RationalExpression *>(arguments[0]);
-    RationalExpression *subtrahend =
-        dynamic_cast<RationalExpression *>(arguments[1]);
-    if (minuend == NULL || subtrahend == NULL) {
-        Error("subtract only takes rational numbers as arguments.");
-    }
-
-    return minuend->subtract(subtrahend);
-}
-
-Expression *MultiplySpecialForm::call(Vector<Expression *>& arguments,
-                                      EvalState& state)
-{
-    evaluateAllArguments(arguments, state);
-    RationalExpression *product = new RationalExpression(1);
-    for (int i = 0; i < arguments.size(); i++) {
-        RationalExpression *factor =
-            dynamic_cast<RationalExpression *>(arguments[i]);
-        if (factor == NULL) {
-            Error("multiply expects all arguments to be rational numbers.");
-        }
-        product = product->multiply(factor);
-    }
-    return product;
-} // enough code for now!
-  ')
+    submission_dir = "#{assignment_dir}/#{submission}"
+    submission_obj = Submission.create(person:student, assignment:assignment_obj,
+                                       date_submitted: '2014-01-12', feedback_released:false)
+    puts submission_dir
+    Dir.foreach("#{submission_dir}") do |file|
+      if file == 'lateDays.txt'
+        latedays_contents = IO.read("#{submission_dir}/lateDays.txt")
+        m = %r#student_submission_time: (\d+)/(\w+)/(\d+) ([0-9:]+)#.match(latedays_contents)
+        month = Date::ABBR_MONTHNAMES.index(m[2])
+        date_submitted = "#{m[3]}-%02d-%02d #{m[4]}" % [month, m[1].to_i]
+        puts date_submitted
+        submission_obj.date_submitted = date_submitted
+        submission_obj.save
+      end
+      next if file == 'lateDays.txt' or file == 'GRADE.txt' or file == 'release' or file == '.' or file =='..'
+      # Ignore .huf files since they can mess up the encoding
+      next if file =~ /.*\.huf/
+      puts "#{submission_dir}/#{file}"
+      contents = IO.read("#{submission_dir}/#{file}")
+      SubmissionFile.create(submission: submission_obj, original_filename:file, data:contents)
+    end
+  end
+end
+end

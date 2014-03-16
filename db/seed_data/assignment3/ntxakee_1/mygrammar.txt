@@ -1,0 +1,9 @@
+VERB::=PVERB|PRVERB|PVERB PRVERB|IVERB
+PVERB::=threw|looked|met|came|missed
+PRVERB::=ask|trade|call|beg|borrow|steal
+IVERB::=holdin|showin|blowin|going|looking
+ADJ::=hot|ripped|bad
+NOUN::=PRNOUN|INOUN|PRNOUN INOUN
+PRNOUN::=I|me|you|your|baby|my
+INOUN::=jeans|skin|stare|boys|number|call|well
+CHORUS::=hey|I|just|met|you|and|this|is|crazy|but|heres|my|number|so|call|me|maybe

@@ -1,0 +1,7 @@
+<s>::=<a> <b> <q>|<w> <q>|<a> <b> <c> <d> <q>|<a> <w> <q>|<q>
+<a>::=<c> <d>
+<b>::=me|I|is|not|listen
+<c>::=such|many|no|what
+<d>::=happy|fun|cry|quick|joyful
+<w>::=wow|tears
+<q>::=:)|:(|:D|:P
