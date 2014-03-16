@@ -1,13 +1,6 @@
 <div class="login-pane" ng-controller="LoginPaneCtrl">
-  <div ng-if="!loggedIn">
-    <form ng-submit="loginWebauth()">
-      <button type="submit">Login</a>
-    </form>
-  </div>
-  <div ng-if="loggedIn">
     <!-- TODO: display username --!>
     <form ng-submit="logout()">
-      <button type="submit">Logout</a>
+        <button type="submit">Logout</a>
     </form>
-  </div>
 </div>
