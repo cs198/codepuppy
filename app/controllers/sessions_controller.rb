@@ -18,12 +18,12 @@ class SessionsController < ApplicationController
     unless session.verified ||
       verify_hmac(_authorization_header, params[:user_system_id],
                   params[:hmac])
-      render_failure 'Could not validate session authenticity [hmac].'
+      render_failure 'Could not validate session authenticity.'
       return
     end
 
     if session.expired?
-      render_failure 'Session is valid, but expired (TTL: 20 mins).'
+      render_failure 'Session is valid, but expired.'
       return
     end
 
