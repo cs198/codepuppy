@@ -43,6 +43,7 @@ SectionsPeople.create(section:section, person:maesenc, role:'leader')
 SectionsPeople.create(section:section, person:odiab, role:'student')
 SectionsPeople.create(section:section, person:amainero, role:'student')
 
+Assignment.delete_all
 assignments = Array.new(7)
 assignments[0] = Assignment.create(course:cs106b, number:1, name:'Game of Life',
                                  date_assigned:'2014-01-10', date_due:'2014-01-17 14:00:00')
