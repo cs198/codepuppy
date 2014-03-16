@@ -33,6 +33,6 @@ angular.module('codepuppy').controller('StudentAssignmentCtrl', ['$scope',
   $scope.message = 'I\'m an assignment page for the course ' +
       $routeParams.courseID;
   $scope.message += ' and assignment ' + $routeParams.assignmentID;
-  $scope.uploadPath = '/#/' + $routeParams.courseID + '/' +
+  $scope.uploadPath = '/#/courses/' + $routeParams.courseID + '/assignments/' +
       $routeParams.assignmentID + '/submit';
 }]);
