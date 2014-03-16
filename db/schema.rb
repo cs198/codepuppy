@@ -85,9 +85,14 @@ ActiveRecord::Schema.define(version: 20140315190330) do
 
   create_table "sessions", force: true do |t|
     t.string   "token"
+    t.integer  "person_id"
+    t.boolean  "verified"
+    t.datetime "last_seen_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "sessions", ["person_id"], name: "index_sessions_on_person_id", using: :btree
 
   create_table "submission_files", force: true do |t|
     t.integer "submission_id"

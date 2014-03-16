@@ -3,13 +3,15 @@ angular.module('codepuppy').controller('StudentAssignmentCtrl', ['$scope', '$rou
   var getAssignment = function() {
     $http({method: 'GET', url: '/assignments/' + $routeParams.assignmentID + '.json'})
     .success(function(data, status, headers, config) {
-      $scope.assignmentDescription = data.description;
-      $scope.assignmentName = data.name;
-      if (!$scope.assignmentDescription) {
-        $scope.assignmentDescription = "";
-      }
-      if (!$scope.assignmentName) {
+      if (data.name) {
+        $scope.assignmentName = data.name;
+      } else {
         $scope.assignmentName = "";
+      }
+      if (data.description) {
+        $scope.assignmentDescription = ParseWiki(data.description);
+      } else {
+        $scope.assignmentDescription = "";
       }
     });
   };
@@ -19,4 +21,4 @@ angular.module('codepuppy').controller('StudentAssignmentCtrl', ['$scope', '$rou
   $scope.message+= " and assignment " + $routeParams.assignmentID;
 
   $scope.uploadPath = '/#/' + $routeParams.courseID + '/' + $routeParams.assignmentID + '/submit';
-});
+}]);
