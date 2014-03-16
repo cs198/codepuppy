@@ -54,7 +54,51 @@ class SubmissionsController < ApplicationController
     raise 'Submission not found'
   end
 
+  def download
+    temp_code_files = temp_files_for_download(params[:submission_id])
+    temp_zip_filename = 'submission' + params[:submission_id]
+    temp_zip_file = Tempfile.new(temp_zip_filename)
+    begin
+      Zip::OutputStream.open(temp_zip_file) do |zos|
+        temp_code_files.each do |temp_file|
+          zos.put_next_entry(temp_file.path)
+        end
+      end
+    ensure
+      temp_code_files.each do |temp_file|
+        temp_file.close
+        temp_file.unlink
+      end
+    end
+    send_file(
+      temp_zip_file.path,
+      type: 'application/zip',
+      disposition: attachment,
+      filename: temp_zip_filename
+    )
+    temp_zip_file.close
+  rescue ActiveRecord::RecordNotFound
+    raise 'Submission not found'
+  end
+
   private
+
+  def submission_params
+    params.permit(:person_id, :assignment_id, :feedback_released, :date_submitted)
+  end
+
+  def temp_files_for_download(submission_id)
+    temp_files = []
+    files = SubmissionFile.find_all_by_submission_id(submission_id)
+    files.each do |file|
+      temp_file = Tempfile.new('submission' + submission_id + file.original_filename)
+      temp_file.path = '/tmp/submissions/' + submission_id + '/' + file.original_filename + '.cpp'
+      temp_file.write(file.data)
+      temp_file.rewind
+      temp_files << temp_file
+    end
+    temp_files
+  end
 
   def people_for_submissions(submissions)
     person_submissions = []
@@ -73,9 +117,5 @@ class SubmissionsController < ApplicationController
       person_submissions.push('person' => person, 'submission' => submission)
     end
     person_submissions
-  end
-
-  def submission_params
-    params.permit(:person_id, :assignment_id, :feedback_released, :date_submitted)
   end
 end
