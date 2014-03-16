@@ -8,8 +8,9 @@ angular.module('codepuppy').service('session', [
                 '/cgi-bin/codepuppy/auth.py';
             var baseUrl = $location.protocol() + '://' + $location.host() +
                 ':' + $location.port();
+
             var params = {
-                forward_url: $location.path(),
+                forward_url: baseUrl + '/#' + $location.path(),
                 verify_url: baseUrl + '/sessions/verify',
                 token: token
             };
