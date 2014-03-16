@@ -46,6 +46,7 @@ codepuppy.config(function($routeProvider) {
   });
 }).run(['session', function(session) {
     session.checkAuthenticated(function() {
+        // no-op, success, continue to site
     }, function() {
         session.authenticate();
     });
