@@ -15,7 +15,6 @@ angular.module('codepuppy').controller('LeaderAssignmentCtrl', ['$scope', '$rout
             wiki2html(data.description)
           );
         } else {
-          console.log('muthafucka');
           $scope.assignmentDescription = data.description;
         }
       } else {
