@@ -1,14 +1,17 @@
 angular.module('codepuppy').controller('FileUploaderCtrl',
-['$scope', '$routeParams', '$fileUploader', '$http', '$location', function($scope, $routeParams, $fileUploader, $http, $location) {
+    ['$scope', '$routeParams', '$fileUploader', '$http', '$location',
+     function($scope, $routeParams, $fileUploader, $http, $location)
+{
 
   $scope.uploader = $fileUploader.create({
       scope: $scope,
-      url: '/submission_files.json',
+      url: '/submission_files.json'
   });
 
 
-  $scope.uploader.bind('completeall', function (event, items) {
-      var path = '/' + $routeParams.courseID + '/' + $routeParams.assignmentID;
+  $scope.uploader.bind('completeall', function(event, items) {
+      var path = '/courses/' + $routeParams.courseID + '/assignments' +
+          $routeParams.assignmentID;
       $location.path(path);
       $scope.$apply();
   });
@@ -26,8 +29,13 @@ angular.module('codepuppy').controller('FileUploaderCtrl',
       };
 
 
-      // 4 URL params: assignment_id, person_id, date_submited, feedback_released
-      $http({method: 'POST', url: '/submissions.json', data: urlParams}).success(function(data, status, headers, config) {
+      // 4 URL params: assignment_id, person_id, date_submited,
+      // feedback_released
+      $http({
+        method: 'POST',
+        url: '/submissions.json',
+        data: urlParams
+      }).success(function(data, status, headers, config) {
 
         // For each item we upload, we send off a POST request to
         // submission_files#create. data is response from the POST
@@ -47,8 +55,6 @@ angular.module('codepuppy').controller('FileUploaderCtrl',
       });
 
     };
-
     createSubmission();
   };
-
 }]);

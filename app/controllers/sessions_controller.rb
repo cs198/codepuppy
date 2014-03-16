@@ -5,6 +5,7 @@ require 'time'
 class SessionsController < ApplicationController
   respond_to :json
   skip_before_filter :verify_authenticity_token
+  skip_before_filter :api_session_authenticate!
 
   def generate
     session = Session.create(token: generate_token)
@@ -12,17 +13,35 @@ class SessionsController < ApplicationController
   end
 
   def verify
-    unless verify_hmac(params[:token],
-                       params[:user_system_id],
-                       params[:hmac])
-      render json: { valid: false }
+    session = _api_session
+
+    unless session.verified ||
+      verify_hmac(_authorization_header, params[:user_system_id],
+                  params[:hmac])
+      render_failure 'Could not validate session authenticity.'
       return
     end
 
-    render json: { valid: verify_session(params[:token]) }
+    if session.expired?
+      render_failure 'Session is valid, but expired.'
+      return
+    end
+
+    update_verified_session(session, params[:user_system_id])
+    render json: { valid: true }
   end
 
   private
+
+  def update_verified_session(session, user_system_id = nil)
+    person = Person.find_by user_system_id: user_system_id
+    person ||= session.person
+
+    session.person = person
+    session.refresh_last_seen
+    session.verified = true
+    session.save
+  end
 
   def generate_token
     SecureRandom.hex
@@ -39,13 +58,19 @@ class SessionsController < ApplicationController
     hmac.hexdigest == params[:hmac]
   end
 
-  def verify_session(token)
-    session = Session.find_by(token: token)
-    return false if session.nil?
+  private
 
-    valid = false
-    valid = true if session.created_at > 2.hours.ago
-    session.destroy
-    valid
+  def _api_session
+    session = Session.find_by(token: _authorization_header)
+    fail 'Session not found' if session.nil?
+    session
+  end
+
+  def _authorization_header
+    request.headers['HTTP_AUTHORIZATION']
+  end
+
+  def render_failure(message)
+    render json: { valid: false, message: message }, status: 401
   end
 end
