@@ -13,8 +13,12 @@ class ApiController < ApplicationController
   end
 
   def api_session_authenticate!
-    return _not_authorized unless _authorization_header &&
-        current_api_session.valid?
+    if _authorization_header && current_api_session.active?
+      current_api_session.refresh_last_seen
+      current_api_session.save
+    else
+      return _not_authorized
+    end
   end
 
   def current_api_session
