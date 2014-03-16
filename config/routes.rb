@@ -41,6 +41,7 @@ Namepending::Application.routes.draw do
 
   post '/sessions/generate', to: 'sessions#generate'
   post '/sessions/verify', to: 'sessions#verify'
+  get '/sessions/verify', to: 'index#verify_session'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
