@@ -1,0 +1,4 @@
+<face>::=<eyes> <nose> <mouth>|<eyes> <mouth>
+<eyes>::=:|;|X|=
+<nose>::=-|*|^
+<mouth>::=D|)|(|O|p|P|b|B|$|#|]|[|3

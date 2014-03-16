@@ -1,0 +1,12 @@
+nike::=foams|running flyknit
+jordan::=elevens|fives|23 concords
+adidas::=stan smith|superstar|JeremyKennedy
+elevens::=breds|columbias
+asics::=gel lyte iii|running|docs
+docs::=shiny|8eye|nike
+clarks::=swag boots grey|tan|shoes tag
+sperry::=topsider boot
+vans::=classic|red|era|california
+fives::=jordan|laneys grapes firered
+lebrons::=nike|jordan
+foams::=nike|lebrons

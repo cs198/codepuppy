@@ -1,0 +1,18 @@
+11
+12
+XX--------XX
+-XX------XX-
+--XX----XX--
+---XX--XX---
+----X--X----
+-----XX-----
+----X--X----
+---XX--XX---
+--XX----XX--
+-XX------XX-
+XX--------XX
+# sbuck
+# This colony evolves over time into various
+# Different butterfly-esque shapes. It is an
+# 11x12 grid and lasts 20 generations until it
+# becomes stable.

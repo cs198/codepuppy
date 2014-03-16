@@ -1,0 +1,8 @@
+<s>::=<np> <vp>
+<np>::=<n> <adj>|<pn>
+<adj>::=grande|magnifique|adorable|belle|chic|formidable|charmante|sympa|
+<n>::=la fille|la fleur|la cousine|la ville|la famille
+<pn>::=Emilie|Maureen|Claire|Cecile|Cyrille|Aurelie|Adele|Laure|Karine|Michele|Anais|Marie|Clemence
+<vp>::=<tv> <np>|<iv>
+<tv>::=aime|adore|embrasse|aide
+<iv>::=sourit|pleurait|chante|danse

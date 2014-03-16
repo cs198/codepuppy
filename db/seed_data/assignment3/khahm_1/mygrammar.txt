@@ -1,0 +1,6 @@
+GREET::=FORMAL|INFORMAL|hello
+FORMAL::=greetings|EXP1 EXP2 EXP3
+INFORMAL::=hi|sup|howru
+EXP1::=nice|pleasant
+EXP2::=tomeet|tosee|tocomeacross
+EXP3::=you|youtoday

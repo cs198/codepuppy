@@ -1,0 +1,8 @@
+meal::=appetizer main dessert
+appetizer::=soup|salad
+soup::=clam chowder|cream of wheat
+salad::=caesar salad|garden salad
+meat::=chicken|shrimp|steak
+main::=fried meat with side|grilled meat with side
+side::=french fries|mashed potatoes|biscuit|mac and cheese
+dessert::=fruit|cake|pie|ice cream

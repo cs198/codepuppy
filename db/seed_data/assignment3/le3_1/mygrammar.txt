@@ -1,0 +1,10 @@
+A::=B C
+B::=D E G|F
+D::=where|when|what|who
+H::=cool|bad|terrible|wonderful
+E::=H|H E
+G::=code|laptop|screen|java|qtcreator
+F::=teacher|undergraduate|graduate
+I::=is|am|are
+S::=B I F|H
+C::=F I G

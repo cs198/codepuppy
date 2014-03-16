@@ -1,0 +1,5 @@
+A::=B C
+B::=C Y Z|E
+C::=Y L|D
+D::=M|N|O|P|Q
+E::= hi there|hello there

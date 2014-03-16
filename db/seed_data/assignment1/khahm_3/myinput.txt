@@ -1,0 +1,8 @@
+Hello, this file needs some repeats to test nGrams. It needs some repeats 
+because there should be multiple values for a certain window.
+Hello, this file doesn't need some repeats to not test nGrams. It needs some repeats
+because there should not be multiple values for the certain window.
+Hello, this file needs some repeats to test nGrams. It needs some repeats
+because there should be multiple values for a certain window.
+Hello, this file doesn't need some repeats to not test nGrams. It needs some repeats
+because there should not be multiple values for the certain window.

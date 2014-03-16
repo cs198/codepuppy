@@ -1,0 +1,6 @@
+A::=E I O U Y|A
+E::=B|C|D|E I
+I::=F|G|H|E|O U Y|I
+O::=L|M|N|O|E Y|O
+U::=P|Q|R|S|T|E Y|U
+Y::=W|X|Y|Z|V|E O|Y
