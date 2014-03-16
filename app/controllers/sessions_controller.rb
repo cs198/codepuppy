@@ -33,8 +33,10 @@ class SessionsController < ApplicationController
 
   private
 
-  def update_verified_session(session, user_system_id)
+  def update_verified_session(session, user_system_id = nil)
     person = Person.find_by user_system_id: user_system_id
+    person ||= session.person
+
     session.person = person
     session.refresh_last_seen
     session.verified = true
