@@ -8,23 +8,22 @@ angular.module('codepuppy').controller('StudentAssignmentCtrl', ['$scope',
       url: '/assignments/' + $routeParams.assignmentID + '.json'
     })
     .success(function(data, status, headers, config) {
-      $scope.assignmentDescription = data.description;
-      $scope.assignmentName = data.name;
-
-      if (!$scope.assignmentDescription) {
-        $scope.assignmentDescription = '';
+      if (data.name) {
+        $scope.assignmentName = data.name;
+      } else {
+        $scope.assignmentName = "";
       }
-
-      if (!$scope.assignmentName) {
-        $scope.assignmentName = '';
+      if (data.description) {
+        $scope.assignmentDescription = ParseWiki(data.description);
+      } else {
+        $scope.assignmentDescription = "";
       }
     });
   };
   getAssignment();
 
-  $scope.message = 'I\'m an assignment page for the course ' +
-      $routeParams.courseID;
-  $scope.message += ' and assignment ' + $routeParams.assignmentID;
-  $scope.uploadPath = '/#/' + $routeParams.courseID + '/' +
-      $routeParams.assignmentID + '/submit';
+  $scope.message = "I'm an assignment page for the course " + $routeParams.courseID;
+  $scope.message+= " and assignment " + $routeParams.assignmentID;
+
+  $scope.uploadPath = '/#/' + $routeParams.courseID + '/' + $routeParams.assignmentID + '/submit';
 }]);

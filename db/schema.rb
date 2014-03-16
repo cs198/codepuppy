@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 20140315190330) do
   create_table "sessions", force: true do |t|
     t.string   "token"
     t.integer  "person_id"
+    t.boolean  "verified"
     t.datetime "last_seen_at"
     t.datetime "created_at"
     t.datetime "updated_at"
