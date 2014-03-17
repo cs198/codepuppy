@@ -1,7 +1,6 @@
 <div ng-controller="SubmissionFileCtrl">
 <div class="submission-code-line" ng-if="file.data != undefined" ng-repeat="line in file.data.split('\n') track by $index">
-<pre><code ng-click="submissionClicked($index)"
-           class="submission_code_line">{{line}}</code></pre>
+<pre class="line-numbers"><code class="language-java" ng-click="submissionClicked($index)">{{line}}</code></pre>
 <comment-holder ng-if='comments[$index] != undefined && (commentPermissions || commentsReleased)'
                 commentBody='comments[$index]' 
                 commentPermissions='commentPermissions'
