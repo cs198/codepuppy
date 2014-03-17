@@ -1,9 +1,20 @@
-angular.module('codepuppy').controller('AnnouncementListCtrl', ['$scope', '$routeParams', function($scope, $routeParams) {
-	$scope.sortByField = "date_added";
+angular.module('codepuppy').controller('AnnouncementListCtrl', ['$scope', '$routeParams', '$http', function($scope, $routeParams, $http) {
+	$scope.sortByField = "created_at";
 	$scope.reverse = true;
 	$scope.newAnnouncementPath = '/#/courses/' + $routeParams.courseID + '/newAnnouncement';
-	$scope.announcements = [{date_added: '2012-08-14', subject: 'Remember to buy a textbook people', body: 'BLAH BLAH BLAH'}, {date_added: '2012-08-17', subject: 'First sections tomorrow', body: 'BLAH FIRST BLAH'}, ];
 	$scope.selectedAnnouncement = null;
+	$scope.announcements = [];
+
+	var getAnnouncements = function() {
+    $http({method: 'GET', url: '/courses/' + $routeParams.courseID + '/announcements.json'})
+		.success(function(data, status, headers, config) {
+			for(var i = 0; i < data.length; ++i) {
+				$scope.announcements.push(data[i]);
+			}
+		});
+	};
+
+	getAnnouncements();
 
 	$scope.announcementSelected = function(announcement) {
 		$scope.selectedAnnouncement = announcement;
