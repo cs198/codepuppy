@@ -3,9 +3,7 @@ class FileCommentsController < ApiController
   respond_to :json
 
   def index
-    comments = FileComment.find_all_by_submission_file_id(
-      params[:submission_file_id]
-    )
+    comments = FileComment.where(submission_file_id:params[:submission_file_id])
     respond_with(comments)
   rescue ActiveRecord::RecordInvalid
     raise 'Submission file not found'
