@@ -46,6 +46,7 @@ ActiveRecord::Base.transaction do
 end
 
 Assignment.delete_all
+
 assignments = Array.new(7)
 ActiveRecord::Base.transaction do
   description = IO.read("#{Rails.root}/db/seed_data/assignment1.txt")
