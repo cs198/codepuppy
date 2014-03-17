@@ -82,25 +82,6 @@ class SubmissionsController < ApiController
     person_submissions_joined
   end
 
-  def people_for_submissions_deprecated(submissions)
-    person_submissions = []
-    submissions.each do |submission|
-      begin
-        person = Person.find(submission.person_id)
-      rescue ActiveRecord::RecordNotFound
-        # TODO: switch back to raise after we fix submission uploads
-        # Right now, we use '1' as the ID for an upload, which causes
-        # this rescue.
-        next
-    #    raise "When finding submissions for assignment #{params[:assignment_id]}"\
-    #      ", no person with ID #{submission.person_id} found."
-      end
-
-      person_submissions.push('person' => person, 'submission' => submission)
-    end
-    person_submissions
-  end
-
   def submission_params
     params.permit(:person_id, :assignment_id, :feedback_released, :date_submitted)
   end
