@@ -29,36 +29,57 @@ maesenc = Person.create(user_system_id:'maesenc', given_name:'Maesen', family_na
 odiab = Person.create(user_system_id:'odiab', given_name:'Omar Sebastian', family_name:'Diab')
 rawatson = Person.create(user_system_id:'rawatson', given_name:'Reid', family_name:'Watson')
 
-CoursesPeople.delete_all
-CoursesPeople.create(course:cs106b, person:rawatson, role:'admin')
-CoursesPeople.create(course:cs106b, person:maesenc, role:'leader')
-CoursesPeople.create(course:cs106b, person:odiab, role:'student')
-CoursesPeople.create(course:cs106b, person:amainero, role:'student')
+ActiveRecord::Base.transaction do
+  CoursesPeople.delete_all
+  CoursesPeople.create(course:cs106b, person:rawatson, role:'admin')
+  CoursesPeople.create(course:cs106b, person:maesenc, role:'leader')
+  CoursesPeople.create(course:cs106b, person:odiab, role:'student')
+  CoursesPeople.create(course:cs106b, person:amainero, role:'student')
 
-Section.delete_all
-section = Section.create(course:cs106b)
+  Section.delete_all
+  section = Section.create(course:cs106b)
 
-SectionsPeople.delete_all
-SectionsPeople.create(section:section, person:maesenc, role:'leader')
-SectionsPeople.create(section:section, person:odiab, role:'student')
-SectionsPeople.create(section:section, person:amainero, role:'student')
+  SectionsPeople.delete_all
+  SectionsPeople.create(section:section, person:maesenc, role:'leader')
+  SectionsPeople.create(section:section, person:odiab, role:'student')
+  SectionsPeople.create(section:section, person:amainero, role:'student')
+end
 
 Assignment.delete_all
 assignments = Array.new(7)
-assignments[0] = Assignment.create(course:cs106b, number:1, name:'Game of Life',
-                                 date_assigned:'2014-01-10', date_due:'2014-01-17 14:00:00')
-assignments[1] = Assignment.create(course:cs106b, number:2, name:'Word Ladder / NGrams',
-                                 date_assigned:'2014-01-17', date_due:'2014-01-27 14:00:00')
-assignments[2] = Assignment.create(course:cs106b, number:3, name:'Recursion Problems',
-                                 date_assigned:'2014-01-27', date_due:'2014-02-05 14:00:00')
-assignments[3] = Assignment.create(course:cs106b, number:4, name:'Boggle',
-                                 date_assigned:'2014-02-05', date_due:'2014-02-14 14:00:00')
-assignments[4] = Assignment.create(course:cs106b, number:5, name:'Priority Queue',
-                                 date_assigned:'2014-02-14', date_due:'2014-02-24 14:00:00')
-assignments[5] = Assignment.create(course:cs106b, number:6, name:'Huffman',
-                                 date_assigned:'2014-02-24', date_due:'2014-03-05 14:00:00')
-assignments[6] = Assignment.create(course:cs106b, number:7, name:'Huffman',
-                                 date_assigned:'2014-03-05', date_due:'2014-03-17 14:00:00')
+ActiveRecord::Base.transaction do
+  description = IO.read("#{Rails.root}/db/seed_data/assignment1.txt")
+  assignments[0] = Assignment.create(course:cs106b, number:1, name:'Game of Life', 
+                                     date_assigned:'2014-01-10',
+                                     date_due:'2014-01-17 14:00:00',
+                                     description:description)
+
+  assignments[1] = Assignment.create(course:cs106b, number:2, name:'Word Ladder / NGrams',
+                                 date_assigned:'2014-01-17', 
+                                 date_due:'2014-01-27 14:00:00',
+                                 description: description)
+
+  assignments[2] = Assignment.create(course:cs106b, number:3, name:'Recursion Problems',
+                                 date_assigned:'2014-01-27',
+                                 date_due:'2014-02-05 14:00:00',
+                                 description: description)
+  assignments[3] = Assignment.create(course:cs106b, number:4, name:'Boggle',
+                                 date_assigned:'2014-02-05',
+                                 date_due:'2014-02-14 14:00:00',
+                                 description: description)
+  assignments[4] = Assignment.create(course:cs106b, number:5, name:'Priority Queue',
+                                 date_assigned:'2014-02-14',
+                                 date_due:'2014-02-24 14:00:00',
+                                 description: description)
+  assignments[5] = Assignment.create(course:cs106b, number:6, name:'Huffman',
+                                 date_assigned:'2014-02-24',
+                                 date_due:'2014-03-05 14:00:00',
+                                 description: description)
+  assignments[6] = Assignment.create(course:cs106b, number:7, name:'Huffman',
+                                 date_assigned:'2014-03-05',
+                                 date_due:'2014-03-17 14:00:00',
+                                 description: description)
+end
 
 Submission.delete_all
 SubmissionFile.delete_all
@@ -115,8 +136,12 @@ Dir.foreach("#{Rails.root}/db/seed_data") do |assignment|
       # Ignore .huf files since they can mess up the encoding
       next if file =~ /.*\.huf/
       puts "#{submission_dir}/#{file}"
-      contents = IO.read("#{submission_dir}/#{file}")
-      SubmissionFile.create(submission: submission_obj, original_filename:file, data:contents)
+      Encoding::InvalidByteSequenceError
+      begin
+        contents = IO.read("#{submission_dir}/#{file}")
+        SubmissionFile.create(submission: submission_obj, original_filename:file, data:contents)
+      rescue
+      end
     end
   end
 end
