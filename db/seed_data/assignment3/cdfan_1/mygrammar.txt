@@ -1,0 +1,10 @@
+<s>::=<np> <vp>
+<np>::=<dp> <adjp> <n>|<pn>
+<dp>::=the|a
+<adjp>::=<adj>|<adj> <adjp>
+<adj>::=excellent|fat|purple|beautiful|faulty|giant|stupid|colorful|substantial
+<n>::=fish|cat|man|campus|friend|desk|child|computer|mirror
+<pn>::=Wall-E|Molly|Shawn|Scott
+<vp>::=<tv> <np>|<iv>
+<tv>::=pursue|honored|cut|enjoyed
+<iv>::=died|collapsed|laughed|ended|argued

@@ -1,0 +1,8 @@
+<adj>::=silly|funny|fun|serious|boring|loud|absurd|sad|happy|complicated|confused
+<adv>::=quickly|slowly|astonishingly|quietly|thoughtfully|loudly|happily|sadly
+<n>::=car|house|school|dog|cat|shoe|shirt|dress|skirt|pants|shorts|homework|desk|bed
+<pron>::=the|a
+<v>::=ran|walked|swam|kicked|studied|danced
+<np>::=<pron> <n>|<pron> <adj> <n>
+<vp>::=<v> <adv>|<adv> <v>
+<s>::=<pron> <n> <v>|<pron> <adj> <n> <v>|<pron> <n> <adv> <v>|<pron> <adj> <n> <adv> <v>

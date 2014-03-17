@@ -1,0 +1,8 @@
+CMD::=SUB SHA VRB|SUB SHA VRB PSN NON
+SUB::=thou|PSN NON
+PSN::=THN PON
+SHA::=shalt|shalt not
+VRB::=flip|tickle|eat|curse|recurse
+THN::=thy|thine
+PON::=PON PON|neighbor's|children's|wife's|husband's|friend's
+NON::=house|dog|sheep|cake|name|borscht

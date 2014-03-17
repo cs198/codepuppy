@@ -1,0 +1,13 @@
+<s>::=<np> <vp>
+<np>::=<dp> <adjp> <n>|<pn>|<pn3> <adjp> <n>
+<dp>::=the|a
+<adjp>::=<adj>|<adj> <adjp>
+<adj>::=big|fat|green|wonderful|faulty|subliminal|pretentious
+<n>::=dog|cat|gift|boat|television
+<pn>::=John|Jane|Sally
+<vp>::=<tv> <np>|<iv>|<tv> <pn2>|<nv> <pn2> <np>
+<tv>::=hit|honored|saved|helped
+<iv>::=died|collapsed|laughed|wept
+<pn2>::=me|you|him|her|them|us
+<pn3>::=my|your|his|her|their|our
+<nv>::=gave|bought

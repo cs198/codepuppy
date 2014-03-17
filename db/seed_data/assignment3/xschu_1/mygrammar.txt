@@ -1,0 +1,15 @@
+<a>::=<tv> <n>
+<b>::=<iv>|<a>
+<c>::=<adjp> <n>|<n>
+<d>::=<c> <pn> <b>
+<e>:==<c> <tv> <pn>|<iv>
+<f>:==<pn> <iv>|<pn> <tv> <adj> <pn>
+<np>::=<adjp> <n>|<pn>
+<adjp>::=<adj>|<adj> <adjp>
+<adj>::=great|awesome|ugly|sad|stupid|magnificent
+<n>::=football|cheerleaders|designer|professors|latte|tuition
+<pn>::=Stanford|Berkeley|MIT
+<vp>::=<tv> <np>|<iv>
+<tv>::=beat|killed|kissed|made
+<iv>::=hurt|laughed|wept|lost
+<s>::=<np> <vp>

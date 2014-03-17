@@ -1,0 +1,13 @@
+<s>::=<np> <vp>
+<np>::=<dp> <adj> <n>|<pn>
+<dp>::=the|a
+<date>::= <g> <tv> <b>|<b> <tv> <g>|<b> <tv> <b>|<g> <tv> <g>
+<adj>::=big|fat|wonderful|fluffy|weird|fancy
+<n>::=puppy|bunny|kitty|unicorn|puppy|witch|wizard|pony
+<g>::=Erica|Stephanie|Danielle|Nicole|Michelle|Suzy
+<b>::=Patrick|Dylan|Bryan|Trevor|Grant|Simon
+<pn>::=John|Jane|Sally|Spot|Fred|Elmo
+<vp>::=<tv> <np>|<adv> <iv>
+<tv>::=hugged|married|kissed|dated
+<iv>::=sang|danced|laughed|blushed
+<adv>::=happily|sadly|slowly|quickly

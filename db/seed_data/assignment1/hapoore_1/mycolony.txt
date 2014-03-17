@@ -1,0 +1,14 @@
+10
+10
+XXXXXXXXXX
+-X------X-
+--X----X--
+---X--X---
+-X--XX----
+----XX--X-
+---X--X---
+--X----X--
+-X------X-
+XXXXXXXXXX
+
+#Everybody dies rather suddenly, faster than you'd expect from watching it.
