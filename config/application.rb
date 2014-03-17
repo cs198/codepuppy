@@ -23,4 +23,8 @@ module Namepending
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
   end
+
+  Sass::Engine::DEFAULT_OPTIONS[:load_paths].tap do |load_paths|
+    load_paths << "#{Rails.root}/app/assets/stylesheets"
+  end
 end

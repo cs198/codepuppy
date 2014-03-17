@@ -1,0 +1,10 @@
+@import "app/lib/colors";
+
+h1, h2, h3, h4, h5 {
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 700;
+}
+
+a {
+    color: $dark_red;
+}
