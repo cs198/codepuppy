@@ -9,8 +9,12 @@ class SubmissionsController < ApiController
       raise "No submissions with assignment id #{params[:assignment_id]} found"
     end
 
-    person_submissions = people_for_submissions(submissions)
-    respond_with(person_submissions)
+    if !submissions.empty?
+      person_submissions = people_for_submissions(submissions)
+      respond_with(person_submissions)
+    else
+      respond_with([])
+    end
   end
 
   def create
@@ -56,26 +60,24 @@ class SubmissionsController < ApiController
 
   private
 
-  def people_for_submissions(submissions)
-    person_submissions = []
-    submissions.each do |submission|
-      begin
-        person = Person.find(submission.person_id)
-      rescue ActiveRecord::RecordNotFound
-        # TODO: switch back to raise after we fix submission uploads
-        # Right now, we use '1' as the ID for an upload, which causes
-        # this rescue.
-        next
-    #    raise "When finding submissions for assignment #{params[:assignment_id]}"\
-    #      ", no person with ID #{submission.person_id} found."
-      end
-
-      person_submissions.push('person' => person, 'submission' => submission)
-    end
-    person_submissions
-  end
-
   def submission_params
     params.permit(:person_id, :assignment_id, :feedback_released, :date_submitted)
+  end
+
+  def people_for_submissions(submissions)
+    person_id_to_submissions = {}
+    submissions.each do |submission|
+      person_id_to_submissions[submission.person_id] ||= []
+      person_id_to_submissions[submission.person_id] << submission
+    end
+
+    person_submissions_joined = []
+    persons = Person.find(person_id_to_submissions.keys)
+    persons.each do |person|
+      person_id_to_submissions[person.id].each do |submission|
+        person_submissions_joined.push('person' => person, 'submission' => submission)
+      end
+    end
+    person_submissions_joined
   end
 end
