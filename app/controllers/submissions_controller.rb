@@ -9,8 +9,12 @@ class SubmissionsController < ApiController
       raise "No submissions with assignment id #{params[:assignment_id]} found"
     end
 
-    person_submissions = people_for_submissions(submissions)
-    respond_with(person_submissions)
+    if !submissions.empty?
+      person_submissions = people_for_submissions(submissions)
+      respond_with(person_submissions)
+    else
+      respond_with([])
+    end
   end
 
   def create
@@ -57,6 +61,28 @@ class SubmissionsController < ApiController
   private
 
   def people_for_submissions(submissions)
+    # builds a hash from person_id to all that person's
+    # submissions, where the value in that hash is a
+    # list of submissions
+    person_id_to_submissions = {}
+    person_id_to_submissions.default = []
+    submissions.each do |submission|
+      submission_list_for_person = person_id_to_submissions[submission.person_id]
+      submission_list_for_person.push(submission)
+      person_id_to_submissions[submission.person_id] = submission_list_for_person
+    end
+
+    person_submissions_joined = []
+    persons = Person.find(person_id_to_submissions.keys)
+    persons.each do |person|
+      person_id_to_submissions[person.id].each do |submission|
+        person_submissions_joined.push('person' => person, 'submission' => submission)
+      end
+    end
+    person_submissions_joined
+  end
+
+  def people_for_submissions_deprecated(submissions)
     person_submissions = []
     submissions.each do |submission|
       begin
