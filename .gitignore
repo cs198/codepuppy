@@ -18,4 +18,5 @@
 /log/*.log
 /tmp
 
+# Ignore Mac generated files
 .DS_STORE
