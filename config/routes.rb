@@ -12,6 +12,7 @@ Namepending::Application.routes.draw do
     get 'leaders'
     get 'admins'
     resources :assignments
+    resources :announcements
   end
 
   resources :assignments do
@@ -38,6 +39,7 @@ Namepending::Application.routes.draw do
   end
 
   resources :file_comments
+  resources :announcements
 
   post '/sessions/generate', to: 'sessions#generate'
   post '/sessions/verify', to: 'sessions#verify'
