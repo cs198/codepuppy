@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140315190330) do
+ActiveRecord::Schema.define(version: 20140317222946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "announcements", force: true do |t|
+    t.integer  "course_id"
+    t.text     "subject"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "announcements", ["course_id"], name: "index_announcements_on_course_id", using: :btree
 
   create_table "assignments", force: true do |t|
     t.integer  "course_id"
@@ -23,6 +33,8 @@ ActiveRecord::Schema.define(version: 20140315190330) do
     t.datetime "date_due"
     t.string   "name"
     t.text     "description"
+    t.boolean  "released"
+    t.string   "pdf_url"
   end
 
   add_index "assignments", ["course_id"], name: "index_assignments_on_course_id", using: :btree
@@ -42,6 +54,7 @@ ActiveRecord::Schema.define(version: 20140315190330) do
     t.string  "role"
   end
 
+  add_index "courses_people", ["course_id", "person_id"], name: "index_courses_people_on_course_id_and_person_id", unique: true, using: :btree
   add_index "courses_people", ["course_id"], name: "index_courses_people_on_course_id", using: :btree
   add_index "courses_people", ["person_id"], name: "index_courses_people_on_person_id", using: :btree
 

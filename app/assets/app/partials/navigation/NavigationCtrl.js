@@ -20,7 +20,7 @@ angular.module('codepuppy').controller('NavigationCtrl',
   }
 
   var getCourses = function() {
-    $http({method: 'GET', url: '/courses/active.json'})
+    $http({method: 'GET', url: '/courses/active.json', cache:true})
     .success(function(data, status, headers, config) {
       var courses = [];
       for (var i = 0; i < data.length; ++i) {
@@ -49,7 +49,7 @@ angular.module('codepuppy').controller('NavigationCtrl',
 
   /* ASSIGNMENT HANDLING */
   var getAssignments = function(courseID) {
-    $http({method: 'GET', url: '/courses/' + courseID + '/assignments.json'})
+    $http({method: 'GET', url: '/courses/' + courseID + '/assignments.json', cache:true})
     .success(function(data, status, headers, config) {
       var assignments = [];
       for (var i = 0; i < data.length; ++i) {
@@ -75,7 +75,7 @@ angular.module('codepuppy').controller('NavigationCtrl',
   /* SUBMISSION HANDLING */
   var getSubmissions = function(courseID, assignmentID) {
     $http({method: 'GET', url: '/assignments/' + assignmentID +
-          '/submissions.json'})
+          '/submissions.json', cache:true})
     .success(function(data, status, headers, config) {
       var submissions = [];
       for (var i = 0; i < data.length; ++i) {
