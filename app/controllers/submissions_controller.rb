@@ -61,15 +61,13 @@ class SubmissionsController < ApiController
   private
 
   def people_for_submissions(submissions)
-    # builds a hash from person_id to all that person's
-    # submissions, where the value in that hash is a
-    # list of submissions
     person_id_to_submissions = {}
-    person_id_to_submissions.default = []
     submissions.each do |submission|
-      submission_list_for_person = person_id_to_submissions[submission.person_id]
-      submission_list_for_person.push(submission)
-      person_id_to_submissions[submission.person_id] = submission_list_for_person
+      # this is the proper way to handle hash defaults:
+      # the default value for a person_id not in the hash
+      # is an empty list of submissions
+      person_id_to_submissions[submission.person_id] ||= []
+      person_id_to_submissions[submission.person_id] << submission
     end
 
     person_submissions_joined = []
