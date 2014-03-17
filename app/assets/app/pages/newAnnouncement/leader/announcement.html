@@ -1,4 +1,20 @@
 <sidebar></sidebar>
 <div class="new_announcement">
-  <p>HI MOM</p>
+	<h3>New announcement: </h3>
+
+	<form name='announcement'>
+		<ul>
+			<li>
+				Subject: <input type='text' required ng-model='subject' ng-trim='true'  />
+			</li>
+			<li>
+				<textarea type='text' required ng-model='body' ng-trim='true'>
+				</textarea>
+			</li>
+		</ul>
+	</form>
+	<p ng-show='formError'>Announcements must have a subject and a body.</p>
+
+	<button ng-click='submit()'>Submit</button>
+	<button ng-click='cancel()'>Cancel</button>
 </div>
