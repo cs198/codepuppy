@@ -14,7 +14,7 @@ codepuppy.config(function($routeProvider) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
-  var role = 'student';
+  var role = 'leader';
   var capRole = upperCaseFirst(role);
 
   // Student-specific routes:
@@ -22,6 +22,14 @@ codepuppy.config(function($routeProvider) {
     $routeProvider.when('/courses/:courseID/assignments/:assignmentID/submit', {
       templateUrl: '/assets/pages/fileUpload/' + role + '/upload.html',
       controller: 'FileUploadCtrl'
+    });
+  }
+
+  // Leader-specific routes:
+  if (role === 'leader') {
+    $routeProvider.when('/courses/:courseID/newAnnouncement', {
+      templateUrl: '/assets/pages/newAnnouncement/' + role + '/announcement.html',
+      controller: 'NewAnnouncementCtrl'
     });
   }
 
