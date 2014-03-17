@@ -1,6 +1,10 @@
 <div class="announcement_list" ng-controller="AnnouncementListCtrl">
 	<button ng-if='addPermissions'>Add an announcement!</button>
-	<p>Course Announcements: </p>
-
-	
+	<h2>Course Announcements: </h2>
+	<ul ng-repeat='announcement in announcements | orderBy:sortByField:reverse' >
+		<li ng-click='announcementSelected(announcement)'>
+			<p>{{announcement.subject}}</p>
+		</li>
+	</ul>
+	<announcement-holder announcement='selectedAnnouncement'></announcement-holder>
 </div>
