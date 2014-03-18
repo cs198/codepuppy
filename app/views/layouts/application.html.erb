@@ -7,9 +7,15 @@
 </head>
 <body>
 
-
-<div ng-view class="page">
+<div class="page">
+    <header></header>
+    <div class="site-content clearfix">
+        <sidebar></sidebar>
+        <div ng-view class="content">
+        </div>
+    </div>
 </div>
+<footer></footer>
 
 <%= javascript_include_tag 'application' %>
 <%= javascript_include_tag 'app' %>

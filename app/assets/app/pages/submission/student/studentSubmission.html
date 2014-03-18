@@ -1,15 +1,10 @@
-<header></header>
-<div class="content">
-  <sidebar></sidebar>
-  <div class="submission" >
-    <h1>Submission Page</h1>
-    <p>{{ message }}</p>
+<div class="page-submission">
+  <h1>Submission Page</h1>
+  <p>{{ message }}</p>
 
-    <submission-file-selector files='files'></submission-file-selector>
+  <submission-file-selector files='files'></submission-file-selector>
 
-    <submission-file file='selectedFile',
-        commentsReleased='commentsReleased',
-        commentPermissions='commentPermissions'></submission-file>
-  </div>
+  <submission-file file='selectedFile',
+                   commentsReleased='commentsReleased',
+                   commentPermissions='commentPermissions'></submission-file>
 </div>
-<footer></footer>

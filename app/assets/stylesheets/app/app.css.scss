@@ -12,6 +12,7 @@ body, html {
     overflow: hidden;
     margin: 0;
     background: $off_white;
+    box-sizing: border-box;
 }
 
 * {
@@ -20,16 +21,20 @@ body, html {
 
 .page {
     overflow: auto;
-    width: $page_width;
+    width: $page_width + 2;
     height: 100%;
     margin: 0 auto;
     border-left: 1px solid;
     border-right: 1px solid;
     border-color: $light_grey;
+    padding-bottom: -$footer_height;
 }
 
 .content {
-    width: 100%;
+    float: right;
+    width: 3 * $page_width / 4;
     height: 100%;
-    padding-bottom: -$footer_height;
+    margin: 0;
+    padding: 0;
+    border: 0;
 }
