@@ -26,7 +26,11 @@ class ApiController < ApplicationController
   end
 
   def _authorization_header
-    request.headers['HTTP_AUTHORIZATION']
+    if request.headers['HTTP_AUTHORIZATION'].nil?
+      return cookies[:api_token]
+    else
+      return request.headers['HTTP_AUTHORIZATION']
+    end
   end
 
   def _not_authorized(message = 'Not Authorized')

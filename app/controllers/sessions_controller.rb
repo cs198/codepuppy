@@ -70,10 +70,6 @@ class SessionsController < ApiController
     session
   end
 
-  def _authorization_header
-    request.headers['HTTP_AUTHORIZATION']
-  end
-
   def render_failure(message)
     render json: { valid: false, message: message }, status: 401
   end
