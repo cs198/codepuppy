@@ -1,6 +1,6 @@
 ---
 category: Courses
-path: '/people'
+path: '/courses'
 title: 'Create a person'
 type: 'POST'
 
@@ -15,18 +15,27 @@ Create a new person
 None yet
 
 ### Body
-* `given_name` (`string`, required): The new person's "first" name.
-* `family_name` (`string`, required): The new person's "last" name.
-* `user_system_id` (`string`, required): The new person's system ID (in
-  Stanford, this is the SUnet ID)
+* `course_dept` (`string`, required): The new course's department code (e.g.
+* "CS").
+* `course_code` (`string`, required): The new course's in-department number.
+* `course_name` (`string`, required): The new course's title.
+* `term_name` (`string`, required): The collegiate term for this offering of
+  the course (e.g. "Fall", "Winter" or "Spring").
+* `period` (`string`, required): The academic year for this offering of the
+  course (e.g. "2013-2014").
+* `active` (`boolean`, required): Whether or not this course is actively
+  offered.
 
 Example:
 
 ```
 {
-  given_name: "Omar",
-  family_name: "Diab",
-  user_system_id: "odiab"
+  course_dept: "CS",
+  course_code: "106A",
+  course_name: "Programming Methodology",
+  term_name: "Winter",
+  period: "2013-2014",
+  active: true
 }
 ```
 
@@ -38,10 +47,12 @@ Example:
 ```
 {
   {
-    id: 2,
-    given_name: "Omar",
-    family_name: "Diab",
-    user_system_id: "odiab"
+    course_dept: "CS",
+    course_code: "106A",
+    course_name: "Programming Methodology",
+    term_name: "Winter",
+    period: "2013-2014",
+    active: true
   }
 }
 ```

@@ -1,13 +1,13 @@
 ---
 category: Courses
-path: '/people/[:id]'
-title: 'Get a person'
+path: '/courses/[:id]'
+title: 'Get a course'
 type: 'GET'
 
 layout: nil
 ---
 
-Retrieve an individual user by ID.
+Retrieve an course by ID.
 
 ## Request
 
@@ -15,16 +15,19 @@ Retrieve an individual user by ID.
 
 ## Response
 
-Sends back a person with the given id.
+Sends back a course with the given id.
 
 ```Status: 200 OK```
 ```
 {
   {
     id: 2,
-    given_name: "Omar",
-    family_name: "Diab",
-    user_system_id: "odiab"
+    course_dept: "CS",
+    course_code: "106A",
+    course_name: "Programming Methodology",
+    term_name: "Winter",
+    period: "2013-2014",
+    active: true
   }
 }
 ```
