@@ -1,7 +1,6 @@
 angular.module('codepuppy').directive('submissionFileHolder', ['$timeout', function($timeout) {
   return {
     restrict: 'E',
-
     scope: {
       'file': '=file',
       'commentsReleased': '=commentsreleased', 

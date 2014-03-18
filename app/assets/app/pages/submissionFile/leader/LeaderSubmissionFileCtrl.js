@@ -6,7 +6,6 @@ angular.module('codepuppy').controller('LeaderSubmissionFileCtrl', ['$scope', '$
   $scope.message += ' and assignment ' + $routeParams.assignmentID;
   $scope.message += ' and submission ' + $routeParams.submissionID;
 
-  // Map from line numbers to commentBody objects -- have .comment and .lineNumber fields
   $scope.comments = {};
   $scope.commentsReleased = false;
   $scope.commentPermissions = true;
