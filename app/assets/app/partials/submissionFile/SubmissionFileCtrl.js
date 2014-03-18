@@ -19,7 +19,6 @@ angular.module('codepuppy').controller('SubmissionFileCtrl',
         var newComment = data[i];
         $scope.comments[newComment.line_number] = newComment;      
       }
-      Prism.highlightAll();
     });  
   };
   
