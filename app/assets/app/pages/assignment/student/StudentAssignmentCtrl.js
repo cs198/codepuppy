@@ -9,7 +9,7 @@ angular.module('codepuppy').controller('StudentAssignmentCtrl', ['$scope',
   })
   .success(function(data, status, headers, config) {
     if (data.pdf_url) {
-      $scope.pdfHTML = $sce.trustAsHtml("<embed src='" + data.pdf_url + "' width=1024 height = 768>");
+      $scope.pdfHTML = $sce.trustAsHtml("<embed width=100% type='application/pdf' src='" + data.pdf_url + "' width=1024 height = 768>");
     } else {
       $scope.pdfURL = null;
     }
