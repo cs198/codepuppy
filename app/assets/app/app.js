@@ -25,6 +25,14 @@ codepuppy.config(function($routeProvider) {
     });
   }
 
+  // Leader-specific routes:
+  if (role === 'leader') {
+    $routeProvider.when('/courses/:courseID/newAnnouncement', {
+      templateUrl: '/assets/pages/newAnnouncement/' + role + '/announcement.html',
+      controller: 'NewAnnouncementCtrl'
+    });
+  }
+
   $routeProvider
   .when('/', {
     templateUrl: '/assets/pages/home/' + role + '/' + role + 'Home.html',

@@ -1,6 +1,6 @@
 angular.module('codepuppy').controller('FileUploaderCtrl',
-    ['$scope', '$routeParams', '$fileUploader', '$http', '$location',
-     function($scope, $routeParams, $fileUploader, $http, $location)
+    ['$scope', '$routeParams', '$fileUploader', '$http', '$location', '$cacheFactory',
+     function($scope, $routeParams, $fileUploader, $http, $location, $cacheFactory)
 {
 
   $scope.uploader = $fileUploader.create({
@@ -10,24 +10,26 @@ angular.module('codepuppy').controller('FileUploaderCtrl',
 
 
   $scope.uploader.bind('completeall', function(event, items) {
-      var path = '/courses/' + $routeParams.courseID + '/assignments' +
+      var path = '/courses/' + $routeParams.courseID + '/assignments/' +
           $routeParams.assignmentID;
+      var $httpDefaultCache = $cacheFactory.get('$http');
+
       $location.path(path);
       $scope.$apply();
   });
 
   $scope.submitAll = function()
   {
-    var createSubmission = function() {
-      //TODO: Fix ID to be student ID when logged in.
-      var date = new Date();
+    $http({
+      method: 'GET',
+      url: '/sessions/current_person.json'
+    }).success(function(data, status, headers, config) {
       var urlParams = {
-        person_id: 1,
+        person_id: data.id,
         assignment_id: $routeParams.assignmentID,
         feedback_released: false,
-        date_submitted: date.toJSON()
+        date_submitted: (new Date()).toJSON()
       };
-
 
       // 4 URL params: assignment_id, person_id, date_submited,
       // feedback_released
@@ -36,7 +38,6 @@ angular.module('codepuppy').controller('FileUploaderCtrl',
         url: '/submissions.json',
         data: urlParams
       }).success(function(data, status, headers, config) {
-
         // For each item we upload, we send off a POST request to
         // submission_files#create. data is response from the POST
         // request to submissions#create, which contains the
@@ -53,8 +54,6 @@ angular.module('codepuppy').controller('FileUploaderCtrl',
         // Submit each member of the queue
         $scope.uploader.uploadAll();
       });
-
-    };
-    createSubmission();
+    });
   };
 }]);

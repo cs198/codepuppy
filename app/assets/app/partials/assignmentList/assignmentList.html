@@ -1,0 +1,8 @@
+<div class="assignment_list" ng-controller="AssignmentListCtrl">
+	<h2>{{assignments.title}}</h2>
+	<ul ng-repeat='assignment in assignments.elements | orderBy:sortByField:reverse' >
+		<li>
+			<a href="{{assignment.url}}">{{assignment.name}}</a> due {{assignment.date_due_formatted}}
+		</li>
+	</ul>
+</div>

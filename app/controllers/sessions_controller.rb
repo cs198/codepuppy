@@ -2,10 +2,14 @@ require 'hmac-sha2'
 require 'securerandom'
 require 'time'
 
-class SessionsController < ApplicationController
+class SessionsController < ApiController
   respond_to :json
   skip_before_filter :verify_authenticity_token
   skip_before_filter :api_session_authenticate!
+
+  def current_person
+    respond_with(current_user)
+  end
 
   def generate
     session = Session.create(token: generate_token)
@@ -64,10 +68,6 @@ class SessionsController < ApplicationController
     session = Session.find_by(token: _authorization_header)
     fail 'Session not found' if session.nil?
     session
-  end
-
-  def _authorization_header
-    request.headers['HTTP_AUTHORIZATION']
   end
 
   def render_failure(message)

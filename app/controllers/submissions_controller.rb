@@ -4,7 +4,9 @@ class SubmissionsController < ApiController
 
   def index
     begin
-      submissions = Submission.find_all_by_assignment_id(params[:assignment_id])
+      students = Section.where(leader_id:current_user.id).map(&:people).flatten
+      submissions = Submission.where(assignment_id: params[:assignment_id],
+                                     person_id:students)
     rescue ActiveRecord::RecordNotFound
       raise "No submissions with assignment id #{params[:assignment_id]} found"
     end

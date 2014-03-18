@@ -75,7 +75,7 @@ angular.module('codepuppy').controller('NavigationCtrl',
   /* SUBMISSION HANDLING */
   var getSubmissions = function(courseID, assignmentID) {
     $http({method: 'GET', url: '/assignments/' + assignmentID +
-          '/submissions.json', cache:true})
+          '/submissions.json'})
     .success(function(data, status, headers, config) {
       var submissions = [];
       for (var i = 0; i < data.length; ++i) {
