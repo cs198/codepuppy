@@ -1,4 +1,5 @@
 @import "app/lib/colors";
+@import "app/lib/fonts";
 @import "app/lib/sizes";
 
 .footer {
@@ -10,7 +11,7 @@
     text-align: center;
     color: white;
 
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-family: $standard_font;
 
     div {
         vertical-align: middle;

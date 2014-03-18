@@ -1,4 +1,5 @@
 @import "app/lib/colors";
+@import "app/lib/fonts";
 @import "app/lib/sizes";
 
 .header {
@@ -8,7 +9,7 @@
     height: $header_height;
     padding: 20px;
 
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-family: $header_font;
     font-size: 1.25em;
 
     div {
@@ -16,6 +17,7 @@
     }
 
     a {
+        font-family: $header_font;
         color: #ffffff;
 
         &:visited {
