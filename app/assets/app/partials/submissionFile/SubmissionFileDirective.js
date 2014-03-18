@@ -11,6 +11,7 @@ angular.module('codepuppy').directive('submissionFile', function() {
     link: function($scope) {
      $scope.$watch('file', function() {
       if($scope.file === undefined) return;
+      Prism.highlightAll();
       if($scope.$$childHead.getComments === undefined) return;
       $scope.$$childHead.getComments();
      });
