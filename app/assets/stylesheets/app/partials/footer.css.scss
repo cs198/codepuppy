@@ -1,15 +1,16 @@
 @import "app/lib/colors";
 @import "app/lib/sizes";
 
-.header {
+.footer {
     background-color: $cardinal_red;
     width: 100%;
-    margin-top: $header_margin_top;
-    height: $header_height;
-    padding: 20px;
+    height: $footer_height;
+    margin: -$footer_height auto;
+    padding: 10px;
+    text-align: center;
+    color: white;
 
     font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-    font-size: 1.25em;
 
     div {
         vertical-align: middle;

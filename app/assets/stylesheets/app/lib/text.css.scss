@@ -10,11 +10,14 @@ a {
     text-decoration: none;
     font-weight: 700;
 
+    &:visited {
+        text-decoration: none;
+        color: $darker_red;
+    }
+
     &:hover {
         text-decoration: none;
+        color: $bright_red;
     }
 
-    &:visited {
-
-    }
 }
