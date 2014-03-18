@@ -7,7 +7,7 @@ type: 'POST'
 layout: nil
 ---
 
-Create a new person
+Create a new course
 
 ## Request
 
@@ -41,7 +41,7 @@ Example:
 
 ## Response
 
-**If succeeds**, returns the created person.
+**If succeeds**, returns the created course.
 
 ```Status: 201 Created```
 ```

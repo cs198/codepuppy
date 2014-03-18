@@ -1,13 +1,13 @@
 ---
 category: Assignments
-path: '/people/[:id]'
-title: 'Get a person'
+path: '/assignments/[:id]'
+title: 'Get an assignment'
 type: 'GET'
 
 layout: nil
 ---
 
-Retrieve an individual user by ID.
+Retrieve an assignment by ID.
 
 ## Request
 
@@ -15,16 +15,20 @@ Retrieve an individual user by ID.
 
 ## Response
 
-Sends back a person with the given id.
+Sends back an assignment with the given id.
 
 ```Status: 200 OK```
 ```
 {
   {
-    id: 2,
-    given_name: "Omar",
-    family_name: "Diab",
-    user_system_id: "odiab"
+    course_id: 3,
+    number: 6,
+    date_assigned: "2014-2-27",
+    date_due: "2014-03-6",
+    name: "Name Surfer",
+    description: "Some string containing wiki markup for Name Surfer"
+    released: true,
+    pdf_url: "http://cs106b.stanford.edu/handouts/namesurfer.pdf"
   }
 }
 ```
