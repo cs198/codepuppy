@@ -1,6 +1,6 @@
 ---
 category: Assignments
-path: '/assigments'
+path: '/assignments'
 title: 'Create an assignment'
 type: 'POST'
 
@@ -15,10 +15,10 @@ Create a new assignment
 None yet
 
 ### Body
-* `course_id` (`integer``, required): The DB-generated ID for the course for
+* `course_id` (`integer`, required): The DB-generated ID for the course for
   which this is an assignment.
 * `number` (`integer`, required): The ordered number of this assignment (i.e.
-  3) (think "assignment #3").
+  3) (think assignment #3).
 * `date_assigned` (`datetime`, required): The day on which the assignment is
   released.
 * `date_due` (`datetime`, required): The day on which the assignment is due.
@@ -39,7 +39,7 @@ Example:
   date_assigned: "2014-2-27",
   date_due: "2014-03-6",
   name: "Name Surfer",
-  description: "Some string containing wiki markup for Name Surfer"
+  description: "Some string containing wiki markup for Name Surfer",
   released: true,
   pdf_url: "http://cs106b.stanford.edu/handouts/namesurfer.pdf"
 }
