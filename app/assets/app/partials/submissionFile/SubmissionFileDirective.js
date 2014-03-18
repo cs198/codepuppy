@@ -14,7 +14,7 @@ angular.module('codepuppy').directive('submissionFile', function() {
       Prism.highlightAll();
       if($scope.$$childHead.getComments === undefined) return;
       $scope.$$childHead.getComments();
-     });
+    });
      $scope.$watch('comments', function() {
       $scope.$$childHead.getComments();
      });
