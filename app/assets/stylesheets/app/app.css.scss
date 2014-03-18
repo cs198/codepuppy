@@ -9,10 +9,9 @@
 body, html {
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    min-width: $page_width + 2;
     margin: 0;
     background: $off_white;
-    box-sizing: border-box;
 }
 
 * {
