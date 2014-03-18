@@ -1,6 +1,6 @@
 angular.module('codepuppy').controller('FileUploaderCtrl',
-    ['$scope', '$routeParams', '$fileUploader', '$http', '$location',
-     function($scope, $routeParams, $fileUploader, $http, $location)
+    ['$scope', '$routeParams', '$fileUploader', '$http', '$location', '$cacheFactory',
+     function($scope, $routeParams, $fileUploader, $http, $location, $cacheFactory)
 {
 
   $scope.uploader = $fileUploader.create({
@@ -10,22 +10,20 @@ angular.module('codepuppy').controller('FileUploaderCtrl',
 
 
   $scope.uploader.bind('completeall', function(event, items) {
-    console.log("ALL COMPLETED, REDIRECTING");
       var path = '/courses/' + $routeParams.courseID + '/assignments/' +
           $routeParams.assignmentID;
+      var $httpDefaultCache = $cacheFactory.get('$http');
+
       $location.path(path);
       $scope.$apply();
   });
 
   $scope.submitAll = function()
   {
-    //TODO: Fix ID to be student ID when logged in.
     $http({
       method: 'GET',
       url: '/sessions/current_person.json'
     }).success(function(data, status, headers, config) {
-      console.log("SUCCESSFULLY GOT MY ID");
-      console.log(data);
       var urlParams = {
         person_id: data.id,
         assignment_id: $routeParams.assignmentID,
@@ -40,9 +38,6 @@ angular.module('codepuppy').controller('FileUploaderCtrl',
         url: '/submissions.json',
         data: urlParams
       }).success(function(data, status, headers, config) {
-        console.log("SUCCESSFULLY POSTED A SUBMISSION");
-        console.log(data);
-
         // For each item we upload, we send off a POST request to
         // submission_files#create. data is response from the POST
         // request to submissions#create, which contains the
