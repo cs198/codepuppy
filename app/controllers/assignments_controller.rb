@@ -52,7 +52,8 @@ class AssignmentsController < ApiController
       :date_assigned,
       :date_due,
       :name,
-      :description
+      :description,
+      :pdf_url
     )
   end
 end
