@@ -12,6 +12,16 @@
     font-family: $header_font;
     font-size: 1.25em;
 
+    .textlogo {
+        display: block;
+        float: left;
+        height: 100%;
+
+        img {
+            height: 100%;
+        }
+    }
+
     div {
         vertical-align: middle;
     }
