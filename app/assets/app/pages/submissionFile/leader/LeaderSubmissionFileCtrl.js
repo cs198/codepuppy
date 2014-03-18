@@ -28,8 +28,6 @@ angular.module('codepuppy').controller('LeaderSubmissionFileCtrl', ['$scope', '$
           $scope.selectedFile = data[i];
         }
       }
-      console.log('reached');
-      Prism.highlightAll();
     });
   };
 

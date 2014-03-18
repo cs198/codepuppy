@@ -1,4 +1,4 @@
-angular.module('codepuppy').directive('submissionFileHolder', function() {
+angular.module('codepuppy').directive('submissionFileHolder', ['$timeout', function($timeout) {
   return {
     restrict: 'E',
 
@@ -9,6 +9,11 @@ angular.module('codepuppy').directive('submissionFileHolder', function() {
     },
 
     link: function($scope) {
+      var highlight = function() {
+        $scope.rendered = true;
+        Prism.highlightAll();
+      };
+      $timeout(highlight, 1000);
      $scope.$watch('comments', function() {
       $scope.$$childHead.getComments();
      });
@@ -16,4 +21,4 @@ angular.module('codepuppy').directive('submissionFileHolder', function() {
 
     templateUrl: '/assets/partials/submissionFileHolder/submissionFileHolder.html'
   };
-});
+}]);
