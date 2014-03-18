@@ -14,7 +14,7 @@ codepuppy.config(function($routeProvider) {
     return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
-  var role = 'leader';
+  var role = 'student';
   var capRole = upperCaseFirst(role);
 
   // Student-specific routes:
