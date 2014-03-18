@@ -1,9 +1,13 @@
 <div class="navigation-selector" ng-controller="NavigationSelectorCtrl" ng-click="onClicked()">
   <div class="section-title">
     <div class="highlight"></div>
-    <h1>{{title}}</h1>
+    <span ng-if="!selected">
+      <h3>{{title}}</h3>
+    </span>
+    <span ng-if="selected">
+      <h3 class="selected">{{selected}}</h3>
+    </span>
   </div>
-  <h2>{{selected}}</h2>
 
   <ul class="selector" ng-show="expanded">
     <a href="{{element['url']}}" ng-repeat="element in elements">

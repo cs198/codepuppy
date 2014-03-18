@@ -6,7 +6,7 @@
     background-color: $cardinal_red;
     width: 100%;
     height: $footer_height;
-    margin: -$footer_height auto;
+
     padding: 10px;
     text-align: center;
     color: white;
@@ -28,4 +28,8 @@
             color: $light_grey;
         }
     }
+}
+
+.push {
+    height: $footer_height;
 }

@@ -8,14 +8,17 @@
 <body>
 
 <div class="page">
-    <header></header>
-    <div class="site-content clearfix">
-        <sidebar></sidebar>
-        <div ng-view class="content">
+    <div class="page-wrapper">
+        <header></header>
+        <div class="site-content clearfix">
+            <sidebar></sidebar>
+            <div ng-view class="content">
+            </div>
         </div>
+        <div class="push"></div>
     </div>
+    <footer></footer>
 </div>
-<footer></footer>
 
 <%= javascript_include_tag 'application' %>
 <%= javascript_include_tag 'app' %>
