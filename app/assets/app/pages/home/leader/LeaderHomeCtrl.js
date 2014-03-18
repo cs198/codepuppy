@@ -1,4 +1,4 @@
-angular.module('codepuppy').controller('StudentHomeCtrl', ['$scope', '$http', '$location', function($scope, $http, $location) {
+angular.module('codepuppy').controller('LeaderHomeCtrl', ['$scope', function($scope) {
     $http({method: 'GET', url: '/courses/active.json', cache:true})
     .success(function(data, status, headers, config) {
 		if(data.length > 0) {
