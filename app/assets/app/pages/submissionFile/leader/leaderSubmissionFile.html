@@ -1,0 +1,17 @@
+<header></header>
+<sidebar></sidebar>
+<div class="submission" >
+  <h1>Submission Page</h1>
+  <p>{{ message }}</p>
+
+	<submission-file-selector files='files'></submission-file-selector>
+	<div><input type="checkbox" ng-model='commentsReleased' ng-changed='toggleCommentsReleased'> Comments Released</div>
+
+
+
+
+	<submission-file-holder file='selectedFile',
+	  commentsReleased='commentsReleased',
+	  commentPermissions='commentPermissions'></submission-file>
+
+</div>
