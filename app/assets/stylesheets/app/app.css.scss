@@ -2,6 +2,7 @@
 
 @import "pages/**/*";
 @import "partials/**/*";
+@import "elements/**/*";
 @import "lib/fonts";
 @import "lib/text";
 @import "lib/sizes";
@@ -36,4 +37,8 @@ body, html {
     margin: 0;
     padding: 0;
     border: 0;
+}
+
+.pane-wrapper {
+    padding: 10px;
 }

@@ -1,0 +1,31 @@
+@import "app/lib/colors";
+
+.navigation-selector {
+    .section-title {
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+
+        h1 {
+            padding: 0;
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .highlight {
+            background-color: $cardinal_red;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            width: 10px;
+        }
+    }
+
+    .selector {
+        padding-left: 10px;
+
+        li {
+            padding: 10px;
+        }
+    }
+}

@@ -1,7 +1,15 @@
-<div class="navigation_selector" ng-controller="NavigationSelectorCtrl" ng-click="onClicked()">
-  <h1>{{title}}</h1>
+<div class="navigation-selector" ng-controller="NavigationSelectorCtrl" ng-click="onClicked()">
+  <div class="section-title">
+    <div class="highlight"></div>
+    <h1>{{title}}</h1>
+  </div>
   <h2>{{selected}}</h2>
-  <ul ng-repeat="element in elements" ng-show="expanded">
-    <li><a href="{{element['url']}}">{{element['name']}}</a></li>
+
+  <ul class="selector" ng-show="expanded">
+    <a href="{{element['url']}}" ng-repeat="element in elements">
+      <li>
+      {{element['name']}}
+      </li>
+    </a>
   </ul>
 </div>
