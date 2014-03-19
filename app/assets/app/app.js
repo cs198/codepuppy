@@ -55,6 +55,13 @@ codepuppy.config(function($routeProvider) {
         'Submission.html',
     controller: capRole + 'SubmissionCtrl'
   })
+  .when('/courses/:courseID/assignments/:assignmentID/' +
+        'submissions/:submissionID/files/:submissionFileID',
+  {
+    templateUrl: '/assets/pages/submissionFile/' + role + '/' + role +
+        'SubmissionFile.html',
+    controller: capRole + 'SubmissionFileCtrl'
+  })
   .otherwise({
     templateUrl: '/assets/errorPages/404/404.html',
     controller: '404Ctrl'

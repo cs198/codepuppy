@@ -1,4 +1,4 @@
-angular.module('codepuppy').controller('SubmissionFileCtrl',
+angular.module('codepuppy').controller('SubmissionFileHolderCtrl',
 ['$scope', '$routeParams', '$fileUploader', '$http', '$modal', function($scope, $routeParams, $fileUploader, $http, $modal) {
   $scope.comments = {};
 
