@@ -1,5 +1,5 @@
-angular.module('codepuppy').controller('StudentCourseCtrl', ['$scope', '$routeParams', '$http', function($scope, $routeParams, $http) {
-    $scope.message = 'Look! I am a course page for ' + $routeParams.courseID;
+angular.module('codepuppy').controller('StudentCourseCtrl', ['$scope', '$stateParams', '$http', function($scope, $stateParams, $http) {
+    $scope.message = 'Look! I am a course page for ' + $stateParams.courseID;
     $scope.upcomingAssignments = {'title': 'Upcoming Assignments', 'elements': []};
     $scope.recentAssignments = {'title': 'Recent Assignments', 'elements': []};
 
@@ -10,16 +10,16 @@ angular.module('codepuppy').controller('StudentCourseCtrl', ['$scope', '$routePa
 		for (var i = 0; i < data.length; ++i) {
 			var dueTime = moment(data[i].date_due);
 			data[i].date_due_formatted = dueTime.format('MMM DD, YYYY, hh:mm A');
-			data[i].url = '/#/courses/' + $routeParams.courseID + '/assignments/' + data[i].id;
+			data[i].url = '/#/courses/' + $stateParams.courseID + '/assignments/' + data[i].id;
 			if(dueTime < now) {
 				$scope.recentAssignments.elements.push(data[i]);
 			} else {
 				$scope.upcomingAssignments.elements.push(data[i]);
 			}
-		}		
+		}
     });
 	};
 
-	getAssignments($routeParams.courseID);
+	getAssignments($stateParams.courseID);
 
 }]);

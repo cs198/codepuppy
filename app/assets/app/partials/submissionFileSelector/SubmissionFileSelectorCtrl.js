@@ -1,6 +1,6 @@
 angular.module('codepuppy').controller('SubmissionFileSelectorCtrl',
-['$scope', '$routeParams', '$fileUploader', '$http', '$modal', function($scope, $routeParams, $fileUploader, $http, $modal) {
-  
+['$scope', '$stateParams', '$fileUploader', '$http', '$modal', function($scope, $stateParams, $fileUploader, $http, $modal) {
+
   $scope.fileClicked = function(file) {
     $scope.$parent.$parent.selectedFile = file;
   };

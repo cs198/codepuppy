@@ -1,9 +1,9 @@
-angular.module('codepuppy').controller('StudentSubmissionCtrl', ['$scope', '$routeParams', '$modal', '$http',
-                                       function($scope, $routeParams, $modal, $http) {
+angular.module('codepuppy').controller('StudentSubmissionCtrl', ['$scope', '$stateParams', '$modal', '$http',
+                                       function($scope, $stateParams, $modal, $http) {
   $scope.message = 'I\'m a submission page for the course ' +
-    $routeParams.courseID;
-  $scope.message += ' and assignment ' + $routeParams.assignmentID;
-  $scope.message += ' and submission ' + $routeParams.submissionID;
+    $stateParams.courseID;
+  $scope.message += ' and assignment ' + $stateParams.assignmentID;
+  $scope.message += ' and submission ' + $stateParams.submissionID;
 
   // Map from line numbers to commentBody objects -- have .comment and .lineNumber fields
   $scope.comments = {};
@@ -12,14 +12,14 @@ angular.module('codepuppy').controller('StudentSubmissionCtrl', ['$scope', '$rou
   $scope.files = [];
 
   var getSubmission = function() {
-    $http({method: 'GET', url: '/submissions/' + $routeParams.submissionID + '.json'})
+    $http({method: 'GET', url: '/submissions/' + $stateParams.submissionID + '.json'})
     .success(function(data, status, headers, config) {
       $scope.commentsReleased = data.submission.feedback_released;
     });
   };
 
   var getFiles = function() {
-    $http({method: 'GET', url: '/submissions/' + $routeParams.submissionID + '/submission_files.json'})
+    $http({method: 'GET', url: '/submissions/' + $stateParams.submissionID + '/submission_files.json'})
     .success(function(data, status, headers, config) {
       for(var i = 0; i < data.length; ++i) {
         $scope.files.push(data[i]);

@@ -1,5 +1,5 @@
 angular.module('codepuppy').controller('SubmissionFileCtrl',
-['$scope', '$routeParams', '$fileUploader', '$http', '$modal', function($scope, $routeParams, $fileUploader, $http, $modal) {
+['$scope', '$stateParams', '$fileUploader', '$http', '$modal', function($scope, $stateParams, $fileUploader, $http, $modal) {
   $scope.comments = {};
 
   $scope.getComments = function() {
@@ -17,11 +17,11 @@ angular.module('codepuppy').controller('SubmissionFileCtrl',
       $scope.comments = {};
       for(var i = 0; i < data.length; ++i) {
         var newComment = data[i];
-        $scope.comments[newComment.line_number] = newComment;      
+        $scope.comments[newComment.line_number] = newComment;
       }
-    });  
+    });
   };
-  
+
   $scope.submissionClicked = function(index) {
     if($scope.commentPermissions) {
       $scope.commentBody = {};
@@ -60,10 +60,10 @@ angular.module('codepuppy').controller('SubmissionFileCtrl',
             // Set commentBody equal to data so it becomes associated with id.
             $scope.commentBody = data;
             $scope.comments[$scope.commentBody.line_number] = $scope.commentBody;
-          });  
+          });
         };
         if(comment !== "") {
-          createComment();  
+          createComment();
         }
       });
     }

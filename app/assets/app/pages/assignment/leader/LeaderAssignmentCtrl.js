@@ -1,12 +1,12 @@
 angular.module('codepuppy').controller('LeaderAssignmentCtrl', ['$scope',
-    '$routeParams', '$fileUploader', '$http', '$sce',
-    function($scope, $routeParams, $fileUploader, $http, $sce)
+    '$stateParams', '$fileUploader', '$http', '$sce',
+    function($scope, $stateParams, $fileUploader, $http, $sce)
 {
   var getAssignment = function() {
     $http({
         method: 'GET',
         url: '/assignments/' +
-        $routeParams.assignmentID + '.json'
+        $stateParams.assignmentID + '.json'
     })
     .success(function(data, status, headers, config) {
       if (data.name) {
@@ -31,6 +31,6 @@ angular.module('codepuppy').controller('LeaderAssignmentCtrl', ['$scope',
   getAssignment();
 
   $scope.message = 'I\'m an assignment page for the course ' +
-      $routeParams.courseID;
-  $scope.message += ' and assignment ' + $routeParams.assignmentID;
+      $stateParams.courseID;
+  $scope.message += ' and assignment ' + $stateParams.assignmentID;
 }]);

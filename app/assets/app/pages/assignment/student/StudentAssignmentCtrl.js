@@ -1,11 +1,11 @@
 angular.module('codepuppy').controller('StudentAssignmentCtrl', ['$scope',
-    '$routeParams', '$fileUploader', '$http', '$sce',
-    function($scope, $routeParams, $fileUploader, $http, $sce)
+    '$stateParams', '$fileUploader', '$http', '$sce',
+    function($scope, $stateParams, $fileUploader, $http, $sce)
 {
   $http({
     method: 'GET',
     url: '/assignments/' +
-    $routeParams.assignmentID + '.json'
+    $stateParams.assignmentID + '.json'
   })
   .success(function(data, status, headers, config) {
     if (data.pdf_url) {
@@ -16,8 +16,8 @@ angular.module('codepuppy').controller('StudentAssignmentCtrl', ['$scope',
   });
 
   $scope.message = 'I\'m an assignment page for the course ' +
-      $routeParams.courseID;
-  $scope.message += ' and assignment ' + $routeParams.assignmentID;
-  $scope.uploadPath = '/#/courses/' + $routeParams.courseID + '/assignments/' +
-      $routeParams.assignmentID + '/submit';
+      $stateParams.courseID;
+  $scope.message += ' and assignment ' + $stateParams.assignmentID;
+  $scope.uploadPath = '/#/courses/' + $stateParams.courseID + '/assignments/' +
+      $stateParams.assignmentID + '/submit';
 }]);

@@ -1,64 +1,73 @@
 //= require_self
 //= require_tree .
 
-codepuppy = angular.module('codepuppy', ['ngRoute', 'ngCookies', 'ui.bootstrap',
-  'angularFileUpload']);
+codepuppy = angular.module('codepuppy', ['ui.router', 'ngCookies',
+                           'ui.bootstrap', 'angularFileUpload']);
 
-codepuppy.config(function($routeProvider) {
-  // TODO: use session information to determine role.  Should be one of
-  // 'student', 'leader'
-  var upperCaseFirst = function(str) {
-    if (str.length === 0) {
-        return str;
+codepuppy.config(function($stateProvider, $urlRouterProvider) {
+    // TODO: use session information to determine role.  Should be one of
+    // 'student', 'leader'
+    var upperCaseFirst = function(str) {
+        if (str.length === 0) {
+            return str;
+        }
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    };
+
+    var role = 'leader';
+    var capRole = upperCaseFirst(role);
+
+    // Student-specific routes:
+    if (role === 'student') {
+        $stateProvider.state('submit', {
+            url: '/courses/:courseID/assignments/:assignmentID/submit',
+            templateUrl: '/assets/pages/fileUpload/' + role +
+                '/upload.html',
+            controller: 'FileUploadCtrl'
+        });
     }
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  };
 
-  var role = 'leader';
-  var capRole = upperCaseFirst(role);
+    // Leader-specific routes:
+    if (role === 'leader') {
+        $stateProvider.state('newAnnouncement', {
+            url: '/courses/:courseID/newAnnouncement',
+            templateUrl: '/assets/pages/newAnnouncement/' + role +
+                '/announcement.html',
+            controller: 'NewAnnouncementCtrl'
+        });
+    }
 
-  // Student-specific routes:
-  if (role === 'student') {
-    $routeProvider.when('/courses/:courseID/assignments/:assignmentID/submit', {
-      templateUrl: '/assets/pages/fileUpload/' + role + '/upload.html',
-      controller: 'FileUploadCtrl'
+    $stateProvider.state('home', {
+        url: '/',
+        templateUrl: '/assets/pages/home/' + role + '/' + role + 'Home.html',
+        controller: capRole + 'HomeCtrl'
+    })
+    .state('course', {
+        url: '/courses/:courseID',
+        templateUrl: '/assets/pages/course/' + role + '/' + role +
+            'Course.html',
+        controller: capRole + 'CourseCtrl'
+    })
+    .state('assignment', {
+        url: '/courses/:courseID/assignments/:assignmentID',
+        templateUrl: '/assets/pages/assignment/' + role + '/' + role +
+            'Assignment.html',
+        controller: capRole + 'AssignmentCtrl'
+    })
+    .state('submission', {
+        url: '/courses/:courseID/assignments/:assignmentID/' +
+             'submissions/:submissionID',
+        templateUrl: '/assets/pages/submission/' + role + '/' + role +
+            'Submission.html',
+        controller: capRole + 'SubmissionCtrl'
+    })
+    .state('404', {
+        url: '/404',
+        templateUrl: '/assets/errorPages/404/404.html',
+        controller: '404Ctrl'
     });
-  }
 
-  // Leader-specific routes:
-  if (role === 'leader') {
-    $routeProvider.when('/courses/:courseID/newAnnouncement', {
-      templateUrl: '/assets/pages/newAnnouncement/' + role + '/announcement.html',
-      controller: 'NewAnnouncementCtrl'
-    });
-  }
-
-  $routeProvider
-  .when('/', {
-    templateUrl: '/assets/pages/home/' + role + '/' + role + 'Home.html',
-    controller: capRole + 'HomeCtrl'
-  })
-  .when('/courses/:courseID', {
-    templateUrl: '/assets/pages/course/' + role + '/' + role +
-        'Course.html',
-    controller: capRole + 'CourseCtrl'
-  })
-  .when('/courses/:courseID/assignments/:assignmentID', {
-    templateUrl: '/assets/pages/assignment/' + role + '/' + role +
-        'Assignment.html',
-    controller: capRole + 'AssignmentCtrl'
-  })
-  .when('/courses/:courseID/assignments/:assignmentID/' +
-        'submissions/:submissionID',
-  {
-    templateUrl: '/assets/pages/submission/' + role + '/' + role +
-        'Submission.html',
-    controller: capRole + 'SubmissionCtrl'
-  })
-  .otherwise({
-    templateUrl: '/assets/errorPages/404/404.html',
-    controller: '404Ctrl'
-  });
+    $urlRouterProvider.otherwise('/404');
 }).run(['session', function(session) {
     session.checkAuthenticated(function() {
         // no-op, success, continue to site
