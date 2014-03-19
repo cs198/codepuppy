@@ -4,6 +4,7 @@
 
 .header {
     background-color: $cardinal_red;
+    color: #ffffff;
     width: 100%;
     margin-top: $header_margin_top;
     margin-bottom: 10px;
@@ -13,14 +14,31 @@
     font-family: $header_font;
     font-size: 1.25em;
 
-    .textlogo {
-        display: block;
+    .left-col {
+        width: $page_width / 4 - 20; // accommodate for padding
+        height: 100%;
         float: left;
+    }
+
+    .textlogo {
         height: 100%;
 
         img {
             height: 100%;
         }
+    }
+
+    .content-col {
+        padding-left: 10px;
+        float: left;
+        width: 3 * $page_width / 4 - 20;
+    }
+
+    h3 {
+        display: block;
+        float: left;
+        padding-right: 10px;
+        margin: 0;
     }
 
     div {

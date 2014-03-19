@@ -1,4 +1,9 @@
 <div class="header" ng-controller="HeaderCtrl">
-  <a class="textlogo" href="/"><img src="/assets/textlogo.svg" /></a>
-  <login-pane />
+  <div class="left-col">
+    <a class="textlogo" href="/"><img src="/assets/textlogo.svg" /></a>
+  </div>
+  <div class="content-col">
+    <h3>{{ title }}</h3>
+    <login-pane />
+  </div>
 </div>
