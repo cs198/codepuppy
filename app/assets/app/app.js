@@ -28,7 +28,7 @@ codepuppy.config(function($stateProvider, $urlRouterProvider) {
                     controller: 'FileUploadCtrl'
                 },
                 'sidebar': { template: '<sidebar />' },
-                'header': { template: '<header />' }
+                'header': { controller: 'HeaderCtrl' }
             }
         });
     }
@@ -44,7 +44,7 @@ codepuppy.config(function($stateProvider, $urlRouterProvider) {
                     controller: 'NewAnnouncementCtrl'
                 },
                 'sidebar': { template: '<sidebar />' },
-                'header': { template: '<header />' }
+                'header': { controller: 'HeaderCtrl' }
             }
         });
     }
@@ -58,7 +58,7 @@ codepuppy.config(function($stateProvider, $urlRouterProvider) {
                 controller: capRole + 'HomeCtrl'
             },
             'sidebar': { template: '<sidebar />' },
-            'header': { template: '<header />' }
+            'header': { controller: 'HeaderCtrl' }
         }
     })
     .state('course', {
@@ -70,7 +70,7 @@ codepuppy.config(function($stateProvider, $urlRouterProvider) {
                 controller: capRole + 'CourseCtrl'
             },
             'sidebar': { template: '<sidebar />' },
-            'header': { template: '<header />' }
+            'header': { controller: 'HeaderCtrl' }
         }
     })
     .state('assignment', {
@@ -82,7 +82,7 @@ codepuppy.config(function($stateProvider, $urlRouterProvider) {
                 controller: capRole + 'AssignmentCtrl'
             },
             'sidebar': { template: '<sidebar />' },
-            'header': { template: '<header />' }
+            'header': { controller: 'HeaderCtrl' }
         }
     })
     .state('submission', {
@@ -95,7 +95,7 @@ codepuppy.config(function($stateProvider, $urlRouterProvider) {
                 controller: capRole + 'SubmissionCtrl'
             },
             'sidebar': { template: '<sidebar />' },
-            'header': { template: '<header />' }
+            'header': { controller: 'HeaderCtrl' }
         }
     })
     .state('submissionFile', {
@@ -108,7 +108,7 @@ codepuppy.config(function($stateProvider, $urlRouterProvider) {
                 controller: capRole + 'SubmissionFileCtrl'
             },
             'sidebar': { template: '<sidebar />' },
-            'header': { template: '<header />' }
+            'header': { controller: 'HeaderCtrl' }
         }
     })
     .state('404', {
@@ -119,7 +119,7 @@ codepuppy.config(function($stateProvider, $urlRouterProvider) {
                 controller: '404Ctrl'
             },
             'sidebar': { template: '<sidebar />' },
-            'header': { template: '<header />' }
+            'header': { controller: 'HeaderCtrl' }
         }
     });
 
