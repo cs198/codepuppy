@@ -1,0 +1,9 @@
+@import 'app/lib/colors';
+
+.comment-holder {
+    width: 80%;
+    padding: 10px;
+    background-color: $light_grey;
+    border: 1px solid $black;
+    margin: 10px;
+}
