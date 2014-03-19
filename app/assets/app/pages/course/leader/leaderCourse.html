@@ -1,14 +1,7 @@
 <div class="page-course">
-  <h1>Course Page</h1>
-  <p>{{ message }}</p>
+  <p ng-if="message">{{ message }}</p>
 
-  <ul class="course_content_list">
-    <li>
-      <assignment-list assignments='upcomingAssignments'></assignment-list>
-      <assignment-list assignments='recentAssignments'></assignment-list>
-    </li>
-    <li>
-      <announcement-list addPermissions='true'></announcement-list>
-    </li>
-  </ul>
+  <assignment-list assignments='upcomingAssignments' />
+  <assignment-list assignments='recentAssignments' />
+  <announcement-list addPermissions='true' />
 </div>

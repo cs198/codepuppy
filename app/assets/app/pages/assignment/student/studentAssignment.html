@@ -1,6 +1,6 @@
 <div class="page-assignment">
-  <h1>Assignment Page</h1>
-  <p>{{ message }}</p>
+  <h1>{{ assignmentName }}</h1>
+  <p ng-if="message">{{ message }}</p>
   <a href="{{uploadPath}}">Upload a submission</a>
   <div class="assignment-pdf" ng-bind-html="pdfHTML"></div>
 </div>

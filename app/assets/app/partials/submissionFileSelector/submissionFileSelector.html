@@ -1,5 +1,5 @@
-<div ng-controller="SubmissionFileSelectorCtrl">
-  <span ng-repeat='file in files' > 
+<div class="submission-file-selector" ng-controller="SubmissionFileSelectorCtrl">
+  <span ng-repeat='file in files' >
   	<a href="{{urlBuilder(file)}}"><button>{{file.original_filename}}</button></a>
   </span>
 </div>

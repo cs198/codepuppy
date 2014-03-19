@@ -1,11 +1,6 @@
 angular.module('codepuppy').controller('LeaderSubmissionFileCtrl', ['$scope', '$stateParams', '$modal', '$http',
   function($scope, $stateParams, $modal, $http) {
 
-  $scope.message = 'I\'m a submission page for the course ' +
-    $stateParams.courseID;
-  $scope.message += ' and assignment ' + $stateParams.assignmentID;
-  $scope.message += ' and submission ' + $stateParams.submissionID;
-
   $scope.comments = {};
   $scope.commentsReleased = false;
   $scope.commentPermissions = true;

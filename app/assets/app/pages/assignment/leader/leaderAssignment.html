@@ -1,6 +1,5 @@
 <div class="page-assignment">
-  <h1>Assignment Page</h1>
-  <p>{{ message }}</p>
-  <p>{{ assignmentName }}</p>
-  <div ng-bind-html="assignmentDescription" ></div>
+  <h1>{{ assignmentName }}</h1>
+  <p ng-if="message">{{ message }}</p>
+  <div ng-bind-html="assignmentDescription"></div>
 </div>

@@ -1,6 +1,4 @@
 angular.module('codepuppy').controller('LeaderCourseCtrl', ['$scope', '$stateParams', '$http', function($scope, $stateParams, $http) {
-    $scope.message = 'Look! I am a course page for ' + $stateParams.courseID;
-
 	$scope.upcomingAssignments = {'title': 'Upcoming Assignments', 'elements': []};
     $scope.recentAssignments = {'title': 'Recent Assignments', 'elements': []};
 
