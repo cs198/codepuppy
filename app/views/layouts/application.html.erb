@@ -9,10 +9,10 @@
 
 <div class="page">
     <div class="page-wrapper">
-        <header></header>
+        <div ui-view="header"></div>
         <div class="site-content clearfix">
-            <div ui-view class="content">
-            </div>
+            <div ui-view="sidebar"></div>
+            <div ui-view="content" class="content"></div>
         </div>
         <div class="push"></div>
     </div>
