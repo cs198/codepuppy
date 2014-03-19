@@ -13,9 +13,12 @@ angular.module('codepuppy').directive('submissionFileHolder', ['$timeout', funct
         Prism.highlightAll();
       };
       $timeout(highlight, 1000);
-     $scope.$watch('comments', function() {
-      $scope.$$childHead.getComments();
-     });
+      $scope.$watch('comments', function() {
+        $scope.$$childHead.getComments();
+      });
+      $scope.$watch('file', function() {
+        $scope.$$childHead.getComments();
+      });
     },
 
     templateUrl: '/assets/partials/submissionFileHolder/submissionFileHolder.html'
