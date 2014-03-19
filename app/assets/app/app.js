@@ -98,6 +98,19 @@ codepuppy.config(function($stateProvider, $urlRouterProvider) {
             'header': { template: '<header />' }
         }
     })
+    .state('submissionFile', {
+        url: '/courses/:courseID/assignments/:assignmentID/' +
+            'submissions/:submissionID/files/:submissionFileID',
+        views: {
+            'content': {
+                templateUrl: '/assets/pages/submissionFile/' + role + '/' +
+                    role + 'SubmissionFile.html',
+                controller: capRole + 'SubmissionFileCtrl'
+            },
+            'sidebar': { template: '<sidebar />' },
+            'header': { template: '<header />' }
+        }
+    })
     .state('404', {
         url: '^/404',
         views: {
