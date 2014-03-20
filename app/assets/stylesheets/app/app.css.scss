@@ -1,0 +1,58 @@
+@import "boot/webfonts";
+
+@import "pages/**/*";
+@import "partials/**/*";
+@import "elements/**/*";
+@import "lib/fonts";
+@import "lib/text";
+@import "lib/sizes";
+@import "app/vendor/rem";
+
+/* apply a natural box layout model to all elements */
+*, *:before, *:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    @include rem('min-width', $page_width);
+    margin: 0;
+    background: $off_white;
+    font-family: $standard_font;
+}
+
+.page {
+    overflow: auto;
+    @include rem('min-width', $page_width);
+    height: 100%;
+    margin: 0 auto;
+
+    border-left: 1px solid;
+    border-right: 1px solid;
+    border-color: $light_grey;
+}
+
+.page-wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto;
+    @include rem('margin-bottom', -$footer_height);
+}
+
+.content {
+    float: right;
+    width: 75%;
+    height: 100%;
+    margin: 0;
+    padding: 10px;
+    border: 0;
+}
+
+.pane-wrapper {
+    padding: 10px;
+}

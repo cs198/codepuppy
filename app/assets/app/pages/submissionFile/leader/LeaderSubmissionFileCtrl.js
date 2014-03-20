@@ -1,10 +1,5 @@
-angular.module('codepuppy').controller('LeaderSubmissionFileCtrl', ['$scope', '$routeParams', '$modal', '$http', 
-  function($scope, $routeParams, $modal, $http) {
-    
-  $scope.message = 'I\'m a submission page for the course ' +
-    $routeParams.courseID;
-  $scope.message += ' and assignment ' + $routeParams.assignmentID;
-  $scope.message += ' and submission ' + $routeParams.submissionID;
+angular.module('codepuppy').controller('LeaderSubmissionFileCtrl', ['$scope', '$stateParams', '$modal', '$http',
+  function($scope, $stateParams, $modal, $http) {
 
   $scope.comments = {};
   $scope.commentsReleased = false;
@@ -12,18 +7,18 @@ angular.module('codepuppy').controller('LeaderSubmissionFileCtrl', ['$scope', '$
   $scope.files = [];
 
   var getSubmission = function() {
-    $http({method: 'GET', url: '/submissions/' + $routeParams.submissionID + '.json'})
+    $http({method: 'GET', url: '/submissions/' + $stateParams.submissionID + '.json'})
     .success(function(data, status, headers, config) {
       $scope.commentsReleased = data.submission.feedback_released;
     });
   };
 
   var getFiles = function() {
-    $http({method: 'GET', url: '/submissions/' + $routeParams.submissionID + '/submission_files.json'})
+    $http({method: 'GET', url: '/submissions/' + $stateParams.submissionID + '/submission_files.json'})
     .success(function(data, status, headers, config) {
       for(var i = 0; i < data.length; ++i) {
         $scope.files.push(data[i]);
-        if(data[i].id == $routeParams.submissionFileID) {
+        if(data[i].id == $stateParams.submissionFileID) {
           $scope.selectedFile = data[i];
         }
       }
@@ -40,8 +35,8 @@ angular.module('codepuppy').controller('LeaderSubmissionFileCtrl', ['$scope', '$
       };
 
       var toggleFeedbackReleased = function() {
-        $http({method: 'PUT', 
-          url: '/submissions/' + $routeParams.submissionID + '/update_feedback_released.json',
+        $http({method: 'PUT',
+          url: '/submissions/' + $stateParams.submissionID + '/update_feedback_released.json',
           data: urlParams })
         .success(function(data, status, headers, config) {
         });

@@ -1,0 +1,5 @@
+@import "app/vendor/rem";
+
+.comments-release {
+    @include rem('margin-bottom', 10px);
+}

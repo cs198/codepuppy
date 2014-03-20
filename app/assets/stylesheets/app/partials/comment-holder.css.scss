@@ -1,0 +1,10 @@
+@import 'app/lib/colors';
+@import "app/vendor/rem";
+
+.comment-holder {
+    width: 80%;
+    @include rem('padding', 10px);
+    @include rem('margin', 10px);
+    background-color: $light_grey;
+    border: 1px solid $black;
+}

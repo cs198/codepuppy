@@ -1,6 +1,6 @@
 angular.module('codepuppy').controller('FileUploaderCtrl',
-    ['$scope', '$routeParams', '$fileUploader', '$http', '$location', '$cacheFactory',
-     function($scope, $routeParams, $fileUploader, $http, $location, $cacheFactory)
+    ['$scope', '$stateParams', '$fileUploader', '$http', '$location', '$cacheFactory',
+     function($scope, $stateParams, $fileUploader, $http, $location, $cacheFactory)
 {
 
   $scope.uploader = $fileUploader.create({
@@ -10,8 +10,8 @@ angular.module('codepuppy').controller('FileUploaderCtrl',
 
 
   $scope.uploader.bind('completeall', function(event, items) {
-      var path = '/courses/' + $routeParams.courseID + '/assignments/' +
-          $routeParams.assignmentID;
+      var path = '/courses/' + $stateParams.courseID + '/assignments/' +
+          $stateParams.assignmentID;
       var $httpDefaultCache = $cacheFactory.get('$http');
 
       $location.path(path);
@@ -26,7 +26,7 @@ angular.module('codepuppy').controller('FileUploaderCtrl',
     }).success(function(data, status, headers, config) {
       var urlParams = {
         person_id: data.id,
-        assignment_id: $routeParams.assignmentID,
+        assignment_id: $stateParams.assignmentID,
         feedback_released: false,
         date_submitted: (new Date()).toJSON()
       };

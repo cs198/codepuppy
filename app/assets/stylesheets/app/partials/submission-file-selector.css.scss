@@ -1,0 +1,5 @@
+@import 'app/vendor/rem';
+
+.submission-file-selector {
+    @include rem('margin-bottom', 10px);
+}

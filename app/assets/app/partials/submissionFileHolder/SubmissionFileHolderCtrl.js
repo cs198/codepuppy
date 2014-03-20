@@ -1,12 +1,14 @@
 angular.module('codepuppy').controller('SubmissionFileHolderCtrl',
-['$scope', '$routeParams', '$fileUploader', '$http', '$modal', function($scope, $routeParams, $fileUploader, $http, $modal) {
+['$scope', '$stateParams', '$fileUploader', '$http', '$modal',
+function($scope, $stateParams, $fileUploader, $http, $modal)
+{
   $scope.comments = {};
 
   $scope.getComments = function() {
-    if($scope.file === undefined) return;
+    if ($scope.file === undefined) return;
 
     var urlParams = {
-      submission_file_id: $scope.file.id,
+      submission_file_id: $scope.file.id
     };
 
     $http({
@@ -15,21 +17,27 @@ angular.module('codepuppy').controller('SubmissionFileHolderCtrl',
       data: urlParams
     }).success(function(data, status, headers, config) {
       $scope.comments = {};
-      for(var i = 0; i < data.length; ++i) {
+      for (var i = 0; i < data.length; ++i) {
         var newComment = data[i];
-        $scope.comments[newComment.line_number] = newComment;      
+        $scope.comments[newComment.line_number] = newComment;
       }
-    });  
+    });
   };
-  
+
+  $scope.lineLoaded = function(index, line) {
+    if(index === $scope.fileLines.length - 1) {
+      Prism.highlightAll();
+    }
+  };
+
   $scope.submissionClicked = function(index) {
-    if($scope.commentPermissions) {
+    if ($scope.commentPermissions) {
       $scope.commentBody = {};
-      if($scope.comments[index] !== undefined) {
+      if ($scope.comments[index] !== undefined) {
         return;
       } else {
         $scope.commentBody.line_number = index;
-        $scope.commentBody.comment = "";
+        $scope.commentBody.comment = '';
       }
 
       var commentModal = $modal.open({
@@ -48,7 +56,7 @@ angular.module('codepuppy').controller('SubmissionFileHolderCtrl',
             submission_file_id: $scope.file.id,
             line_number: $scope.commentBody.line_number,
             num_lines: 1,
-            comment: $scope.commentBody.comment,
+            comment: $scope.commentBody.comment
           };
 
           $http({
@@ -59,11 +67,12 @@ angular.module('codepuppy').controller('SubmissionFileHolderCtrl',
             // data returned should have commentBody's line number and content.
             // Set commentBody equal to data so it becomes associated with id.
             $scope.commentBody = data;
-            $scope.comments[$scope.commentBody.line_number] = $scope.commentBody;
-          });  
+            $scope.comments[$scope.commentBody.line_number] =
+                $scope.commentBody;
+          });
         };
-        if(comment !== "") {
-          createComment();  
+        if (comment !== '') {
+          createComment();
         }
       });
     }

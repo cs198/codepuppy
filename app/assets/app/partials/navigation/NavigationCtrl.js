@@ -1,5 +1,5 @@
 angular.module('codepuppy').controller('NavigationCtrl',
-['$scope', '$routeParams', '$http', function($scope, $routeParams, $http) {
+['$scope', '$stateParams', '$http', function($scope, $stateParams, $http) {
 
   $scope.navigationSelectors = [];
 
@@ -33,8 +33,8 @@ angular.module('codepuppy').controller('NavigationCtrl',
       }
       var courseNav = {'title': 'Courses', 'elements': courses,
         'selected': null};
-      if ($routeParams.courseID !== undefined) {
-        computeSelected(courseNav, $routeParams.courseID);
+      if ($stateParams.courseID !== undefined) {
+        computeSelected(courseNav, $stateParams.courseID);
       }
       $scope.navigationSelectors[0] = courseNav;
     });
@@ -44,7 +44,7 @@ angular.module('codepuppy').controller('NavigationCtrl',
   getCourses();
 
   // If they haven't selected a course, this is all we need to render
-  if ($routeParams.courseID === undefined)
+  if ($stateParams.courseID === undefined)
     return;
 
   /* ASSIGNMENT HANDLING */
@@ -60,16 +60,16 @@ angular.module('codepuppy').controller('NavigationCtrl',
       }
       var assignmentNav = {'title': 'Assignments', 'elements': assignments,
         'selected': null};
-      if ($routeParams.assigmentID !== undefined)
-        computeSelected(assignmentNav, $routeParams.assignmentID);
+      if ($stateParams.assignmentID !== undefined)
+        computeSelected(assignmentNav, $stateParams.assignmentID);
       $scope.navigationSelectors[1] = assignmentNav;
     });
   };
 
-  getAssignments($routeParams.courseID);
+  getAssignments($stateParams.courseID);
 
   // If they haven't selected an assignment, this is all we need to render
-  if ($routeParams.assignmentID === undefined)
+  if ($stateParams.assignmentID === undefined)
     return;
 
   /* SUBMISSION HANDLING */
@@ -87,11 +87,11 @@ angular.module('codepuppy').controller('NavigationCtrl',
       }
       var submissionNav = {'title': 'Submissions', 'elements': submissions,
         'selected': null};
-      if ($routeParams.submissionID !== undefined)
-        computeSelected(submissionNav, $routeParams.submissionID);
+      if ($stateParams.submissionID !== undefined)
+        computeSelected(submissionNav, $stateParams.submissionID);
       $scope.navigationSelectors[2] = submissionNav;
     });
   };
 
-  getSubmissions($routeParams.courseID, $routeParams.assignmentID);
+  getSubmissions($stateParams.courseID, $stateParams.assignmentID);
 }]);

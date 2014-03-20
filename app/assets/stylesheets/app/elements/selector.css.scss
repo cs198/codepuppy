@@ -1,0 +1,31 @@
+@import "app/lib/colors";
+
+ul.selector {
+    list-style-type: none;
+    padding: 0;
+
+    a {
+        li {
+            width: 100%;
+        }
+
+        &:nth-child(odd) {
+            li {
+                background: $light_grey;
+            }
+        }
+
+        &:hover {
+            li {
+                background: $dark_red;
+                color: #ffffff;
+            }
+        }
+    }
+
+    @include rem('padding-left', 10px);
+
+    li {
+        @include rem('padding', 10px);
+    }
+}

@@ -1,3 +1,11 @@
 <div class="header" ng-controller="HeaderCtrl">
-  <login-pane />
+  <div class="left-col">
+    <a class="textlogo" href="/"><img src="/assets/textlogo.svg" /></a>
+  </div>
+  <div class="content-col">
+    <div ui-view="header" class="course-dropdown">
+      <h3>{{ title }}</h3>
+    </div>
+    <login-pane />
+  </div>
 </div>

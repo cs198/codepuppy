@@ -1,0 +1,33 @@
+@import "app/lib/colors";
+@import "app/lib/fonts";
+@import "app/vendor/rem";
+
+h1, h2, h3, h4, h5, p {
+    @include rem('margin-bottom', 20px);
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: $header_font;
+    font-weight: 700;
+    margin-top: 0;
+}
+
+a {
+    color: $dark_red;
+    text-decoration: none;
+    font-weight: 600;
+
+    &:visited {
+        text-decoration: none;
+        color: $darker_red;
+    }
+
+    &:hover {
+        text-decoration: none;
+        color: $bright_red;
+    }
+}
+
+p {
+    line-height: 1.5em;
+}

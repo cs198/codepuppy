@@ -1,0 +1,15 @@
+@import "app/vendor/rem";
+
+.modal-content {
+    @include rem('padding', 10px);
+    width: 80%;
+
+    textarea {
+        width: 100%;
+    }
+
+    .comment-modal-buttons {
+        text-align: right;
+        width: 100%;
+    }
+}

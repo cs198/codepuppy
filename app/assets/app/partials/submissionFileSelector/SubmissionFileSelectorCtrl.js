@@ -1,8 +1,10 @@
 angular.module('codepuppy').controller('SubmissionFileSelectorCtrl',
-['$scope', '$routeParams', '$fileUploader', '$http', '$modal', function($scope, $routeParams, $fileUploader, $http, $modal) {
-  
+['$scope', '$stateParams', '$fileUploader', '$http', '$modal',
+function($scope, $stateParams, $fileUploader, $http, $modal)
+{
   $scope.urlBuilder = function(file) {
-    return '/#/courses/' + $routeParams.courseID + '/assignments/' + $routeParams.assignmentID + '/submissions/' + $routeParams.submissionID + '/files/' + file.id; 
+    return '/#/courses/' + $stateParams.courseID + '/assignments/' +
+        $stateParams.assignmentID + '/submissions/' +
+        $stateParams.submissionID + '/files/' + file.id;
   };
-
 }]);
