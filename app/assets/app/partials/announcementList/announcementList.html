@@ -1,10 +1,18 @@
-<div class="announcement_list" ng-controller="AnnouncementListCtrl">
-	<h2>Course Announcements: </h2>
-	<ul ng-repeat='announcement in announcements | orderBy:sortByField:reverse' >
-		<li ng-click='announcementSelected(announcement)'>
-			<p>{{announcement.subject}}</p>
-		</li>
+<div class="announcement-list page-module" ng-controller="AnnouncementListCtrl">
+	<h2>Course Announcements</h2>
+	<ul class="selector">
+    <a ng-repeat='announcement in announcements | orderBy:sortByField:reverse'
+        href="" ng-click='announcementSelected(announcement)'>
+      <li>
+        {{announcement.subject}}
+      </li>
+    </a>
 	</ul>
-	<a ng-if='addPermissions' href='{{newAnnouncementPath}}'>Add an announcement</a>
+
+  <p>
+    <a class="announcement-list-add" ng-if='addPermissions'
+      href='{{newAnnouncementPath}}'>Add an announcement</a>
+  </p>
+
 	<announcement-holder announcement='selectedAnnouncement'></announcement-holder>
 </div>

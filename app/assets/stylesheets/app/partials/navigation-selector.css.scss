@@ -30,12 +30,4 @@
 
         @include rem('margin-bottom', 10px);
     }
-
-    .selector {
-        @include rem('padding-left', 10px);
-
-        li {
-            @include rem('padding', 10px);
-        }
-    }
 }

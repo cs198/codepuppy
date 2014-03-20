@@ -1,8 +1,8 @@
 @import "app/vendor/rem";
 
 .modal-content {
-    width: 80%;
     @include rem('padding', 10px);
+    width: 80%;
 
     textarea {
         width: 100%;
