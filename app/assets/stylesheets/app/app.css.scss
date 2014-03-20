@@ -40,7 +40,8 @@ body, html {
     min-height: 100%;
     height: auto !important;
     height: 100%;
-    @include rem('margin', 0 auto -$footer_height);
+    margin: 0 auto;
+    @include rem('margin-bottom', -$footer_height);
 }
 
 .content {
