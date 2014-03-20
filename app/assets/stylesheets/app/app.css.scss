@@ -30,10 +30,6 @@ body, html {
     @include rem('min-width', $page_width);
     height: 100%;
     margin: 0 auto;
-
-    border-left: 1px solid;
-    border-right: 1px solid;
-    border-color: $light_grey;
 }
 
 .page-wrapper {
