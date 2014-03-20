@@ -60,7 +60,7 @@ angular.module('codepuppy').controller('NavigationCtrl',
       }
       var assignmentNav = {'title': 'Assignments', 'elements': assignments,
         'selected': null};
-      if ($stateParams.assigmentID !== undefined)
+      if ($stateParams.assignmentID !== undefined)
         computeSelected(assignmentNav, $stateParams.assignmentID);
       $scope.navigationSelectors[1] = assignmentNav;
     });
