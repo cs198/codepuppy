@@ -76,7 +76,7 @@ ActiveRecord::Base.transaction do
                                  date_assigned:'2014-02-24',
                                  date_due:'2014-03-05 14:00:00',
                                  description: description)
-  assignments[6] = Assignment.create(course:cs106b, number:7, name:'Huffman',
+  assignments[6] = Assignment.create(course:cs106b, number:7, name:'Trailblazer',
                                  date_assigned:'2014-03-05',
                                  date_due:'2014-03-17 14:00:00',
                                  description: description)
