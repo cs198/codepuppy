@@ -1,8 +1,10 @@
 <div class="assignment-list page-module" ng-controller="AssignmentListCtrl">
 	<h2>{{assignments.title}}</h2>
-	<ul ng-repeat='assignment in assignments.elements | orderBy:sortByField:reverse' >
+	<ul ng-if="assignments.elements.length !== 0"
+      ng-repeat='assignment in assignments.elements | orderBy:sortByField:reverse' >
 		<li>
 			<a href="{{assignment.url}}">{{assignment.name}}</a> due {{assignment.date_due_formatted}}
 		</li>
 	</ul>
+  <p ng-if="assignments.elements.length === 0">No assignments.</p>
 </div>
