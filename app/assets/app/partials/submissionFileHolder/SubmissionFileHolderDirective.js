@@ -8,16 +8,14 @@ angular.module('codepuppy').directive('submissionFileHolder', ['$timeout', funct
     },
 
     link: function($scope) {
-      var highlight = function() {
-        $scope.rendered = true;
-        Prism.highlightAll();
-      };
-      $timeout(highlight, 1000);
       $scope.$watch('comments', function() {
         $scope.$$childHead.getComments();
       });
       $scope.$watch('file', function() {
         $scope.$$childHead.getComments();
+        if($scope.$$childHead.file !== undefined) {
+          $scope.$$childHead.fileLines = $scope.$$childHead.file.data.split('\n');
+        }
       });
     },
 

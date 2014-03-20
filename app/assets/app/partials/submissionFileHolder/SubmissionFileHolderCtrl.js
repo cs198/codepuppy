@@ -24,6 +24,12 @@ function($scope, $stateParams, $fileUploader, $http, $modal)
     });
   };
 
+  $scope.lineLoaded = function(index, line) {
+    if(index === $scope.fileLines.length - 1) {
+      Prism.highlightAll();
+    }
+  };
+
   $scope.submissionClicked = function(index) {
     if ($scope.commentPermissions) {
       $scope.commentBody = {};
