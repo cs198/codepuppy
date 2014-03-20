@@ -1,8 +1,9 @@
 @import "app/lib/colors";
 @import "app/lib/fonts";
+@import "app/vendor/rem";
 
 h1, h2, h3, h4, h5, p {
-    margin-bottom: 20px;
+    @include rem('margin-bottom', 20px);
 }
 
 h1, h2, h3, h4, h5 {

@@ -1,13 +1,14 @@
 @import "app/lib/colors";
 @import "app/lib/fonts";
 @import "app/lib/sizes";
+@import "app/vendor/rem";
 
 .footer {
     background-color: $cardinal_red;
     width: 100%;
     height: $footer_height;
 
-    padding: 10px;
+    @include rem('padding', 10px);
     text-align: center;
     color: white;
 
