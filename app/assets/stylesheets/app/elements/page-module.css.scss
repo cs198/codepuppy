@@ -1,3 +1,9 @@
+@import "app/vendor/rem";
+
 .page-module {
-    width: 33%;
+    width: 30%;
+    float: left;
+    border: 1px $light-grey solid;
+    @include rem('margin', 20px);
+    @include rem('padding', 10px);
 }
