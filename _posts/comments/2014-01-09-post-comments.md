@@ -1,13 +1,13 @@
 ---
 category: Comments
-path: '/people'
-title: 'Create a person'
+path: '/submission_files/:submission_file_id/file_comments'
+title: 'Create a comment'
 type: 'POST'
 
 layout: nil
 ---
 
-Create a new person
+Create a new comment for a submission file
 
 ## Request
 
@@ -15,18 +15,22 @@ Create a new person
 None yet
 
 ### Body
-* `given_name` (`string`, required): The new person's "first" name.
-* `family_name` (`string`, required): The new person's "last" name.
-* `user_system_id` (`string`, required): The new person's system ID (in
-  Stanford, this is the SUnet ID)
+* `submission_file_id` (`integer`, required): Given in URI. The DB-given ID for
+  the submission file to which this comment will be added.
+* `line_number` (`integer`, required): The starting line number for the comment..
+* `num_lines` (`integer`, required): The number of lines this comment spans.
+  Currently, only supports a single line, so use '1' for num_lines until this
+  issue is resolved.
+* `comment` (`string`, required): The actual text of the comment.
 
 Example:
 
 ```
 {
-  given_name: "Omar",
-  family_name: "Diab",
-  user_system_id: "odiab"
+  submission_file_id: "43",
+  line_number: "12",
+  num_lines: "1",
+  comment: "You should consider not using a GOTO statement here."
 }
 ```
 
@@ -38,10 +42,11 @@ Example:
 ```
 {
   {
-    id: 2,
-    given_name: "Omar",
-    family_name: "Diab",
-    user_system_id: "odiab"
+    id: "15",
+    submission_file_id: "43",
+    line_number: "12",
+    num_lines: "1",
+    comment: "You should consider not using a GOTO statement here."
   }
 }
 ```

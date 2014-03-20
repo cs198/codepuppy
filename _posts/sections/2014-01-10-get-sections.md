@@ -1,30 +1,29 @@
 ---
 category: Sections
-path: '/people/[:id]'
-title: 'Get a person'
+path: '/section/[:id]'
+title: 'Get a section'
 type: 'GET'
 
 layout: nil
 ---
 
-Retrieve an individual user by ID.
+Retrieve a section by ID.
 
 ## Request
 
-* Valid ID in URL.
+* Valid section ID in URL.
 
 ## Response
 
-Sends back a person with the given id.
+Sends back a section with the given id.
 
 ```Status: 200 OK```
 ```
 {
   {
     id: 2,
-    given_name: "Omar",
-    family_name: "Diab",
-    user_system_id: "odiab"
+    course_id: "3",
+    leader_id: "26"
   }
 }
 ```

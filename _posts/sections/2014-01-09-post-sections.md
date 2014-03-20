@@ -1,13 +1,13 @@
 ---
 category: Sections
-path: '/people'
-title: 'Create a person'
+path: '/sections'
+title: 'Create a section'
 type: 'POST'
 
 layout: nil
 ---
 
-Create a new person
+Create a new section
 
 ## Request
 
@@ -15,34 +15,32 @@ Create a new person
 None yet
 
 ### Body
-* `given_name` (`string`, required): The new person's "first" name.
-* `family_name` (`string`, required): The new person's "last" name.
-* `user_system_id` (`string`, required): The new person's system ID (in
-  Stanford, this is the SUnet ID)
+* `course_id` (`integer`, required): The DB-given ID for the course for which
+  this is a section..
+* `leader_id` (`integer`, required): The DB-given ID for the person who leads
+* this section.
 
 Example:
 
 ```
 {
-  given_name: "Omar",
-  family_name: "Diab",
-  user_system_id: "odiab"
+  course_id: "3",
+  leader_id: "26"
 }
 ```
 
 ## Response
 
-**If succeeds**, returns the created person.
+**If succeeds**, returns the created section.
 
 ```Status: 201 Created```
 ```
 {
   {
     id: 2,
-    given_name: "Omar",
-    family_name: "Diab",
-    user_system_id: "odiab"
-  }
+    course_id: "3",
+    leader_id: "26"
+ }
 }
 ```
 

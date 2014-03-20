@@ -1,7 +1,7 @@
 ---
 category: Courses
 path: '/courses'
-title: 'Create a person'
+title: 'Create a course'
 type: 'POST'
 
 layout: nil
