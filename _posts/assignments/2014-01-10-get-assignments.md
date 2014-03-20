@@ -1,7 +1,7 @@
 ---
 category: Assignments
 path: '/assignments/[:id]'
-title: 'Get an assignment'
+title: 'Get an assignment by id'
 type: 'GET'
 
 layout: nil

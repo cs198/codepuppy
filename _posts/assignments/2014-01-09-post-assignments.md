@@ -1,6 +1,6 @@
 ---
 category: Assignments
-path: '/assignments'
+path: '/courses/[:course_id]/assignments'
 title: 'Create an assignment'
 type: 'POST'
 
@@ -15,7 +15,7 @@ Create a new assignment
 None yet
 
 ### Body
-* `course_id` (`integer`, required): The DB-generated ID for the course for
+* `course_id` (`integer`, required): Given in URI. The DB-generated ID for the course for
   which this is an assignment.
 * `number` (`integer`, required): The ordered number of this assignment (i.e.
   3) (think assignment #3).
@@ -53,6 +53,7 @@ Example:
 ```
 {
   {
+    id: 20,
     course_id: 3,
     number: 6,
     date_assigned: "2014-2-27",

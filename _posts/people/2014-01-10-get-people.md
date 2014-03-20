@@ -1,7 +1,7 @@
 ---
 category: People
 path: '/people/:id'
-title: 'Get a person'
+title: 'Get a person by id'
 type: 'GET'
 
 layout: nil

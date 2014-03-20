@@ -1,7 +1,7 @@
 ---
 category: Courses
 path: '/courses/[:id]'
-title: 'Get a course'
+title: 'Get a course by id'
 type: 'GET'
 
 layout: nil
