@@ -1,6 +1,6 @@
 ---
 category: Comments
-path: '/submission_files/:submission_file_id/file_comments'
+path: '/submission_files/[:submission_file_id]/file_comments'
 title: 'Create a comment'
 type: 'POST'
 

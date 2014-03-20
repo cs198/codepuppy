@@ -26,7 +26,7 @@ Sends back a course with the given id.
     course_code: "106A",
     course_name: "Programming Methodology",
     term_name: "Winter",
-    period: "2013-2014",
+    period: "13-14",
     active: true
   }
 }
