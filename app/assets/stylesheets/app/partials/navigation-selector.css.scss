@@ -17,6 +17,11 @@
                 color: $dark_red;
                 cursor: pointer;
                 cursor: hand;
+
+                &:hover {
+                    color: #ffffff;
+                    background-color: $cardinal_red;
+                }
             }
         }
 
