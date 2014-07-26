@@ -8,3 +8,11 @@ development:
   password: nsClsGzKJ3eL4FFaB688vOHxEn
   host: ec2-54-235-246-73.compute-1.amazonaws.com
   port: 5432
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: test
+  pool: 5
+  host: localhost
+  port: 5432
