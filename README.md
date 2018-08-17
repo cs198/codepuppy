@@ -1,5 +1,7 @@
 #  Codepuppy
 
+## Dead project, not maintained.
+
 The next generation of the CS198 program's website.
 
 ## Setup and running the server.
